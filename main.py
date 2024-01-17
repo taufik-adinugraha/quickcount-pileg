@@ -218,6 +218,7 @@ for port in range(1, num_endpoints + 1):
                                 'Vote15': vote15,
                                 'Vote16': vote16,
                                 'Vote17': vote17,
+                                'Total Votes': total_votes,
                                 'Complete': scto,
                                 'Status': status,
                                 'Delta Time': delta_time_hours,

@@ -29,9 +29,4 @@ sudo docker system prune -a
 sudo find / -name "core" -exec rm -f {} \;
 
 
-
-http://4.194.114.42:8008/docs
-http://4.194.114.42:8008/receive
-http://4.194.114.42:8008/read
-
 ssh -i ~/Downloads/dev-iot_key.pem PipelineSecret@4.194.114.42
