@@ -29,6 +29,7 @@ app = FastAPI()
 # Global Variables
 url_send_sms = os.environ.get('url_send_sms')
 url_bubble = os.environ.get('url_bubble')
+local_disk = os.environ.get('local_disk')
 BUBBLE_API_KEY = os.environ.get('BUBBLE_API_KEY')
 SCTO_SERVER_NAME = os.environ.get('SCTO_SERVER_NAME')
 SCTO_USER_NAME = os.environ.get('SCTO_USER_NAME')
@@ -43,10 +44,10 @@ headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
 
 # ================================================================================================================
 # Endpoint to read the "inbox.txt" file
-@app.get("/read")
+@app.get("/sms_inbox")
 async def read_inbox():
     try:
-        with open("inbox.json", "r") as json_file:
+        with open(f"{local_disk}/inbox.json", "r") as json_file:
             data = [json.loads(line) for line in json_file]
         return {"inbox_data": data}
     except FileNotFoundError:
@@ -58,7 +59,7 @@ async def read_inbox():
 # Endpoint to receive SMS message, to validate, and to forward the pre-processed data
 
 # Define the number of endpoints
-num_endpoints = 32
+num_endpoints = 16
 
 # Endpoint to receive SMS message, to validate, and to forward the pre-processed data
 for port in range(1, num_endpoints + 1):
@@ -79,14 +80,14 @@ for port in range(1, num_endpoints + 1):
         raw_data = {
             "ID": id,
             "Gateway Port": port,
-            "Gateway Number": gateway_number,
+            "Gateway ID": gateway_number,
             "Sender": originator,
             "Message": msg,
             "Receive Date": receive_date
         }
 
         # Log the received data to a JSON file
-        with open("inbox.json", "a") as json_file:
+        with open(f"{local_disk}/inbox.json", "a") as json_file:
             json.dump(raw_data, json_file)
             json_file.write('\n')  # Add a newline to separate the JSON objects
 
@@ -96,61 +97,68 @@ for port in range(1, num_endpoints + 1):
         # Default Values
         error_type = None
         raw_sms_status = 'Rejected'
+        format = 'KK#UID#capres1*capres2*capres3#partai1*partai2*...*partai17'
 
         # Check Error Type 1 (prefix)
         if info[0] == 'kk':
 
             try:
                 uid = info[1].lower()
-                event = info[2]
+                capres = info[2].split('*')
+                partai = info[3].split('*')
 
-                # Number of parpol
-                number_parpol = 17
-
-                format = 'KK#UID#EventID#' + '#'.join([f'P{i+1}' for i in range(number_parpol)]) + '#Rusak'
                 template_error_msg = 'cek & kirim ulang dgn format:\n' + format
 
-                tmp = pd.read_excel(f'target_{event}.xlsx', usecols=['UID'])
+                tmp = pd.read_excel(f'{local_disk}/target.xlsx', usecols=['UID'])
 
                 # Check Error Type 2 (UID)
                 if uid not in tmp['UID'].str.lower().tolist():
                     message = f'UID "{uid.upper()}" tidak terdaftar, ' + template_error_msg
                     error_type = 2
                 else:
-                    # Check Error Type 3 (data completeness)
-                    if len(info) != number_parpol + 4:
-                        message = 'Data tidak lengkap, ' + template_error_msg
+                    # Check Error Type 3 & 4 (data completeness)
+                    if len(capres) != 3:
+                        message = 'Data pilpres tidak lengkap, ' + template_error_msg
                         error_type = 3
+                    elif len(partai) != 17:
+                        message = 'Data pileg tidak lengkap, ' + template_error_msg
+                        error_type = 4
                     else:
-                        # Get votes
-                        votes = np.array(info[3:-1]).astype(int)
-                        vote1 = votes[0]
-                        vote2 = votes[1]
-                        vote3 = votes[2]
-                        vote4 = votes[3]
-                        vote5 = votes[4]
-                        vote6 = votes[5]
-                        vote7 = votes[6]
-                        vote8 = votes[7]
-                        vote9 = votes[8]
-                        vote10 = votes[9]
-                        vote11 = votes[10]
-                        vote12 = votes[11]
-                        vote13 = votes[12]
-                        vote14 = votes[13]
-                        vote15 = votes[14]
-                        vote16 = votes[15]
-                        vote17 = votes[16]
-                        # Get invalid votes
-                        invalid = info[-1]
+                        # Get capres votes
+                        votes_capres = np.array(capres).astype(int)
+                        vote_capres_1 = votes_capres[0]
+                        vote_capres_2 = votes_capres[1]
+                        vote_capres_3 = votes_capres[2]
+                        # Get parpol votes
+                        votes_parpol = np.array(partai).astype(int)
+                        vote_parpol_1 = votes_parpol[0]
+                        vote_parpol_2 = votes_parpol[1]
+                        vote_parpol_3 = votes_parpol[2]
+                        vote_parpol_4 = votes_parpol[3]
+                        vote_parpol_5 = votes_parpol[4]
+                        vote_parpol_6 = votes_parpol[5]
+                        vote_parpol_7 = votes_parpol[6]
+                        vote_parpol_8 = votes_parpol[7]
+                        vote_parpol_9 = votes_parpol[8]
+                        vote_parpol_10 = votes_parpol[9]
+                        vote_parpol_11 = votes_parpol[10]
+                        vote_parpol_12 = votes_parpol[11]
+                        vote_parpol_13 = votes_parpol[12]
+                        vote_parpol_14 = votes_parpol[13]
+                        vote_parpol_15 = votes_parpol[14]
+                        vote_parpol_16 = votes_parpol[15]
+                        vote_parpol_17 = votes_parpol[16]
                         # Get total votes
-                        total_valid = np.array(votes).astype(int).sum()
-                        total_votes = total_valid + int(invalid)
-                        summary = f'EventID: {event}' + f'\nTotal Sah:{total_valid}' + f'\nRusak:{invalid}' + f'\nTotal Suara:{total_votes}\n'
-                        # Check Error Type 4 (maximum votes)
-                        if total_votes > 300:
-                            message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
-                            error_type = 4
+                        total_valid_capres = np.array(votes_capres).astype(int).sum()
+                        total_valid_parpol = np.array(votes_parpol).astype(int).sum()
+                        summary = f'Suara Sah Pilpres: {total_valid_capres}' + f'\nSuara Sah Pileg: {total_valid_parpol}'
+                        # Check Error Type 5 & 6 (maximum votes for pilpres)
+                        if total_valid_capres > 300:
+                            message = summary + 'Jumlah suara pilpres melebihi 300, ' + template_error_msg
+                            error_type = 5
+                        elif total_valid_parpol > 300:
+                            message = summary + 'Jumlah suara pileg melebihi 300, ' + template_error_msg
+                            error_type = 6
                         else:
                             message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama:\n' + format
 
@@ -182,11 +190,6 @@ for port in range(1, num_endpoints + 1):
                             else:
                                 delta_time_hours = None
 
-                            # Total Votes
-                            total_votes = 0
-                            for v in votes:
-                                total_votes += int(v) if v is not None else 0
-
                             # Payload
                             payload = {
                                 'Active': True,
@@ -194,31 +197,32 @@ for port in range(1, num_endpoints + 1):
                                 'SMS Int': 1,
                                 'UID': uid.upper(),
                                 'SMS Gateway Port': port,
-                                'SMS Gateway Number': gateway_number,
+                                'SMS Gateway ID': gateway_number,
                                 'SMS Sender': originator,
                                 'SMS Timestamp': receive_date,
                                 'SMS Hour': hour,
-                                'Event ID': event,
-                                'SMS Votes': votes,
-                                'SMS Invalid': invalid,
-                                'Vote1': vote1,
-                                'Vote2': vote2,
-                                'Vote3': vote3,
-                                'Vote4': vote4,
-                                'Vote5': vote5,
-                                'Vote6': vote6,
-                                'Vote7': vote7,
-                                'Vote8': vote8,
-                                'Vote9': vote9,
-                                'Vote10': vote10,
-                                'Vote11': vote11,
-                                'Vote12': vote12,
-                                'Vote13': vote13,
-                                'Vote14': vote14,
-                                'Vote15': vote15,
-                                'Vote16': vote16,
-                                'Vote17': vote17,
-                                'Total Votes': total_votes,
+                                'SMS Votes Parpol': votes_parpol,
+                                'SMS Votes Capres': votes_capres,
+                                'Vote Parpol 1': vote_parpol_1,
+                                'Vote Parpol 2': vote_parpol_2,
+                                'Vote Parpol 3': vote_parpol_3,
+                                'Vote Parpol 4': vote_parpol_4,
+                                'Vote Parpol 5': vote_parpol_5,
+                                'Vote Parpol 6': vote_parpol_6,
+                                'Vote Parpol 7': vote_parpol_7,
+                                'Vote Parpol 8': vote_parpol_8,
+                                'Vote Parpol 9': vote_parpol_9,
+                                'Vote Parpol 10': vote_parpol_10,
+                                'Vote Parpol 11': vote_parpol_11,
+                                'Vote Parpol 12': vote_parpol_12,
+                                'Vote Parpol 13': vote_parpol_13,
+                                'Vote Parpol 14': vote_parpol_14,
+                                'Vote Parpol 15': vote_parpol_15,
+                                'Vote Parpol 16': vote_parpol_16,
+                                'Vote Parpol 17': vote_parpol_17,
+                                'Vote Capres 1': vote_capres_1,
+                                'Vote Capres 2': vote_capres_2,
+                                'Vote Capres 3': vote_capres_3,
                                 'Complete': scto,
                                 'Status': status,
                                 'Delta Time': delta_time_hours,
@@ -227,7 +231,7 @@ for port in range(1, num_endpoints + 1):
                             raw_sms_status = 'Accepted'
 
                             # Load the JSON file into a dictionary
-                            with open(f'uid_{event}.json', 'r') as json_file:
+                            with open(f'{local_disk}/uid.json', 'r') as json_file:
                                 uid_dict = json.load(json_file)
 
                             # Forward data to Bubble database
@@ -237,7 +241,7 @@ for port in range(1, num_endpoints + 1):
 
             except Exception as e:
                 error_type = 1
-                message = 'Format tidak dikenali. Kirim ulang dengan format berikut:\nKK#UID#EventID#P1#P2#P3#P4#P5#P6#P7#P8#P9#P10#P11#P12#P13#P14#P15#P16#P17#Rusak'
+                message = f'Format tidak dikenali. Kirim ulang dengan format berikut:\n{format}'
                 print(f'Error Location: SMS - Error Type 1, keyword: {e}')
 
             # Return the message to the sender via SMS Masking
@@ -258,8 +262,18 @@ for port in range(1, num_endpoints + 1):
                 'Last Check': receive_date,
             }
 
-            # Forward data to Bubble database (Raw SMS)
-            requests.post(f'{url_bubble}/GatewayCheck', headers=headers, data=payload_status)         
+            # Retrieve data with this SIM Number from Bubble database (GatewayCheck)
+            filter_params = [{"key": "Gateway ID", "constraint_type": "text contains", "value": gateway_number}]
+            filter_json = json.dumps(filter_params)
+            params = {"constraints": filter_json}
+            res = requests.get(f'{url_bubble}/GatewayCheck', headers=headers, params=params)
+            data = res.json()
+            data = data['response']['results'][0]
+            # Forward data to Bubble database (Check Gateway)
+            _id = data['_id']
+            requests.patch(f'{url_bubble}/GatewayCheck/{_id}', headers=headers, data=payload_status)
+            # Set SMS status
+            raw_sms_status = 'Check Gateway'        
         
         else:
             error_type = 0
@@ -270,14 +284,17 @@ for port in range(1, num_endpoints + 1):
             'Receive Date': receive_date,
             'Sender': originator,
             'Gateway Port': port, 
-            'Gateway Number': gateway_number,
+            'Gateway ID': gateway_number,
             'Message': msg,
             'Error Type': error_type,
             'Status': raw_sms_status
         }
 
         # Forward data to Bubble database (Raw SMS)
-        requests.post(f'{url_bubble}/RAW_SMS', headers=headers, data=payload_raw)
+        # requests.post(f'{url_bubble}/RAW_SMS', headers=headers, data=payload_raw)
+
+        ###############
+        print(payload_raw)
 
 
 
@@ -343,22 +360,21 @@ async def check_gateway_status(
 # Endpoint to generate UID
 @app.post("/getUID")
 async def get_uid(
-    event: str = Form(...),
     N_TPS: int = Form(...)
     ):
 
     # Generate target file
-    tools.create_target(event, N_TPS)
+    tools.create_target(N_TPS)
     
     # Forward file to Bubble database
-    excel_file_path = f'target_{event}.xlsx'
+    excel_file_path = f'{local_disk}/target.xlsx'
     
     def file_generator():
         with open(excel_file_path, 'rb') as file_content:
             yield from file_content
 
     response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response.headers["Content-Disposition"] = f"attachment; filename={excel_file_path}"
+    response.headers["Content-Disposition"] = f"attachment; filename=target.xlsx"
 
     # Return response
     return response
@@ -371,18 +387,15 @@ async def get_uid(
 async def generate_xlsform(
     form_title: str = Form(...),
     form_id: str = Form(...),
-    target_file_name: str = Form(...),
     target_file: UploadFile = Form(...)
     ):
 
-    event = target_file_name.split('_')[-1].split('.')[0]
-
     # Save the target file to a temporary location
-    with open(target_file_name, 'wb') as target_file_content:
+    with open(f'{local_disk}/target.xlsx', 'wb') as target_file_content:
         target_file_content.write(target_file.file.read())
 
     # Get UIDs from the target file
-    df = pd.read_excel(target_file_name)
+    df = pd.read_excel(f'{local_disk}/target.xlsx')
 
     # Rename regions
     df['Provinsi Ori'] = df['Provinsi'].copy()
@@ -398,7 +411,7 @@ async def generate_xlsform(
         df.loc[index, 'Kelurahan'] = output_regions[3]
 
     # Save the target file after renaming regions
-    df.to_excel(target_file_name, index=False)
+    df.to_excel(f'{local_disk}/target.xlsx', index=False)
 
     # Generate Text for API input
     data = '\n'.join([
@@ -410,7 +423,6 @@ async def generate_xlsform(
         f'"SMS Int": 0, '
         f'"SCTO Int": 0, '
         f'"Status": "Empty", '
-        f'"Event ID": "{event}", '
         f'"Korprov": "{korprov}", '
         f'"Korwil": "{korwil}", '
         f'"Provinsi": "{provinsi}", '
@@ -444,25 +456,22 @@ async def generate_xlsform(
     requests.post(f'{url_bubble}/Votes/bulk', headers=headers, data=data)
 
     # Get UIDs and store as json
-    filter_params = [{"key": "Event ID", "constraint_type": "text contains", "value": event}]
-    filter_json = json.dumps(filter_params)
-    params = {"constraints": filter_json}
     headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
-    res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
+    res = requests.get(f'{url_bubble}/Votes', headers=headers)
     uid_dict = {i['UID']:i['_id'] for i in res.json()['response']['results']}
-    with open(f'uid_{event}.json', 'w') as json_file:
+    with open(f'{local_disk}/uid.json', 'w') as json_file:
         json.dump(uid_dict, json_file)
 
     # Generate xlsform logic using the target file
-    tools.create_xlsform_template(target_file_name, form_title, form_id, event)
-    xlsform_path = f'xlsform_{form_id}.xlsx'
+    tools.create_xlsform_template(form_title, form_id)
+    xlsform_path = f'{local_disk}/xlsform_{form_id}.xlsx'
 
     def file_generator():
         with open(xlsform_path, 'rb') as file_content:
             yield from file_content
 
     response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response.headers["Content-Disposition"] = f"attachment; filename={xlsform_path}"
+    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_{form_id}.xlsx"
 
     return response
 
@@ -472,11 +481,8 @@ async def generate_xlsform(
 # Endpoint to delete event
 @app.post("/delete_event")
 async def delete_event(
-    event: str = Form(...),
-    form_id: str = Form(...)
     ):
-    os.system(f'rm -f *_{event}.*')
-    os.system(f'rm -f *_{form_id}.*')
+    os.system(f'rm -f uid.json target.xlsx xlsform*')
 
 
 
@@ -484,13 +490,12 @@ async def delete_event(
 # Endpoint to trigger SCTO data processing
 @app.post("/scto_data")
 def scto_data(
-    event: str = Form(...), 
     form_id: str = Form(...), 
     input_time: datetime = Form(...), 
     ):
 
     #####################
-    print(f'\nEvent: {event}\t Input Time: {input_time}')
+    print(f'\nInput Time: {input_time}')
     #####################
 
     try:
@@ -509,7 +514,7 @@ def scto_data(
             for data in list_data:
                 # Run 'scto_process' function asynchronously
                 with concurrent.futures.ThreadPoolExecutor() as executor:
-                    executor.submit(tools.scto_process, data, event)
+                    executor.submit(tools.scto_process, data)
     
     except Exception as e:
         print(f'Process: scto_data endpoint\t Keyword: {e}\n')

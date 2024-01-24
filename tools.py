@@ -9,6 +9,8 @@ import geopandas as gpd
 from fuzzywuzzy import process
 from dotenv import load_dotenv
 from shapely.geometry import Point
+from google.cloud import documentai
+from pysurveycto import SurveyCTOObject
 from datetime import datetime, timedelta
 
 
@@ -34,6 +36,7 @@ print_lock = threading.Lock()
 # Global Variables
 url_send_sms = os.environ.get('url_send_sms')
 url_bubble = os.environ.get('url_bubble')
+local_disk = os.environ.get('local_disk')
 BUBBLE_API_KEY = os.environ.get('BUBBLE_API_KEY')
 SCTO_SERVER_NAME = os.environ.get('SCTO_SERVER_NAME')
 SCTO_USER_NAME = os.environ.get('SCTO_USER_NAME')
@@ -80,6 +83,55 @@ def get_location(coordinate):
     }
     return out
 
+# Document inference
+def read_form(scto, attachment_url):
+    project_id = "quick-count-410523"
+    processor_id = "3ae5a6c7afc5a8dd"
+    location = "us"
+
+    # Initialize the DocumentProcessorServiceClient
+    client = documentai.DocumentProcessorServiceClient.from_service_account_file('document-ai.json')
+    
+    # Construct the processor path
+    name = f'projects/{project_id}/locations/{location}/processors/{processor_id}'
+        
+    # Convert the attachment URL content to a byte array
+    file_content = scto.get_attachment(attachment_url)
+    
+    # Load binary data
+    raw_document = documentai.RawDocument(content=file_content, mime_type='image/jpeg')
+
+    # Configure the process request
+    request = documentai.ProcessRequest(
+        name=name,
+        raw_document=raw_document,
+    )
+
+    # Process Document
+    out = client.process_document(request)
+    entities = out.document.entities
+    output = {}
+    # votes
+    for entity in entities[0].properties:
+        output.update({entity.type_: entity.normalized_value.text})
+
+    # Post-processing
+    ai_votes = [0] * 3
+    for var_ in range(3):
+        try:
+            ai_votes[var_] = remove_non_numbers_and_convert_to_int(output[f'suara{var_+1}'])
+        except:
+            ai_votes[var_] = 0
+    return ai_votes
+
+
+def remove_non_numbers_and_convert_to_int(input_string):
+    # Use a list comprehension to create a string containing only digits
+    digits_only = ''.join(char for char in input_string if char.isdigit())
+    # Convert the string of digits to an integer
+    result_integer = int(digits_only)
+    return result_integer
+
 
 
 # ================================================================================================================
@@ -98,12 +150,12 @@ def generate_unique_codes(N):
             codes.append(code)
     return codes
 
-def create_target(event, N):
+def create_target(N):
     df = pd.DataFrame(columns=['UID', 'Korprov', 'Korwil', 'Provinsi', 'Kab/Kota', 'Kecamatan', 'Kelurahan'])
     # Generate unique IDs
     df['UID'] = generate_unique_codes(N)
     # Save excel file
-    with pd.ExcelWriter(f'target_{event}.xlsx', engine='openpyxl') as writer:
+    with pd.ExcelWriter(f'{local_disk}/target.xlsx', engine='openpyxl') as writer:
         df.to_excel(writer, index=False, sheet_name='survey')
 
 
@@ -111,10 +163,10 @@ def create_target(event, N):
 # ================================================================================================================
 # Function to generate SCTO xlsform
 
-def create_xlsform_template(target_file, form_title, form_id, event):
+def create_xlsform_template(form_title, form_id):
 
     # Load target data from Excel
-    target_data = pd.read_excel(target_file)
+    target_data = pd.read_excel(f'{local_disk}/target.xlsx')
 
     # List UID
     list_uid = '|'.join(target_data['UID'].tolist())
@@ -127,7 +179,7 @@ def create_xlsform_template(target_file, form_title, form_id, event):
     # default fields
     survey_df['type'] = ['start', 'end', 'deviceid', 'phonenumber', 'username', 'calculate', 'calculate', 'caseid', 'calculate']
     survey_df['name'] = ['starttime', 'endtime', 'deviceid', 'devicephonenum', 'username', 'device_info', 'duration', 'caseid', 'event']
-    survey_df['calculation'] = ['', '', '', '', '', 'device-info()', 'duration()', '', event]
+    survey_df['calculation'] = ['', '', '', '', '', 'device-info()', 'duration()', '', 'Pilpres & Pileg - PKS Jawa Barat']
     
     # UID
     survey_df = survey_df.append({'type': 'text',
@@ -171,12 +223,19 @@ def create_xlsform_template(target_file, form_title, form_id, event):
                                       'required': 'yes',
                                      }, ignore_index=True) 
 
+    # Caleg DPR RI
+    
+
+    # Caleg DPRD Jawa Barat
+
+
+
     # Upload images
     survey_df = survey_df.append({'type': 'begin_group',
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip(['formulir_c1_a4', 'formulir_c1_plano'], ['Foto Formulir C1-A4', 'Foto Formulir C1-Plano']):
+    for (n, l) in zip(['pilpres_c1_a4', 'pilpres_c1_plano', 'parpol_c1_a4', 'parpol_c1_plano'], ['Foto Formulir C1-A4 Pemilihan Presiden', 'Foto Formulir C1-Plano Pemilihan Presiden', 'Foto Formulir C1-A4 Pemilihan Legislatif', 'Foto Formulir C1-Plano Pemilihan Legislatif']):
         survey_df = survey_df.append({'type': 'image',
                                       'name': n,
                                       'label': l,
@@ -203,7 +262,7 @@ def create_xlsform_template(target_file, form_title, form_id, event):
                                     }, ignore_index=True)
 
     # Save choices to an Excel file
-    with pd.ExcelWriter(f'xlsform_{form_id}.xlsx', engine='openpyxl') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl') as writer:
         survey_df.to_excel(writer, index=False, sheet_name='survey')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -265,7 +324,7 @@ def create_xlsform_template(target_file, form_title, form_id, event):
                                                             }))
 
     # Save choices to an Excel file
-    with pd.ExcelWriter(f'xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
         choices_df.to_excel(writer, index=False, sheet_name='choices')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -278,7 +337,7 @@ def create_xlsform_template(target_file, form_title, form_id, event):
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     # Save settings to an Excel file
-    with pd.ExcelWriter(f'xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
         settings_df.to_excel(writer, index=False, sheet_name='settings')
             
 
@@ -286,7 +345,7 @@ def create_xlsform_template(target_file, form_title, form_id, event):
 # ================================================================================================================
 # Functions to process SCTO data
 
-def scto_process(data, event):
+def scto_process(data):
 
     try:
 
@@ -304,6 +363,19 @@ def scto_process(data, event):
         res_bubble = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
         data_bubble = res_bubble.json()
         data_bubble = data_bubble['response']['results'][0]
+
+        # C1-Form attachments
+        formulir_c1_a4 = data['formulir_c1_a4']
+
+        # OCR C1-Form
+        try:
+            attachment_url = data['formulir_c1_a4']
+            # Build SCTO connection
+            scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
+            ai_votes = read_form(scto, attachment_url)
+        except Exception as e:
+            print(f'Process: scto_process endpoint\t Keyword: {e}\n')
+            ai_votes = [0] * 3
 
         # Check if SMS data exists
         sms = data_bubble['SMS']
@@ -367,7 +439,7 @@ def scto_process(data, event):
         }
 
         # Load the JSON file into a dictionary
-        with open(f'uid_{event}.json', 'r') as json_file:
+        with open(f'{local_disk}/uid.json', 'r') as json_file:
             uid_dict = json.load(json_file)
 
         # Forward data to Bubble Votes database
