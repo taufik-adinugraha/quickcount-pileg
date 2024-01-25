@@ -482,7 +482,7 @@ async def generate_xlsform(
 @app.post("/delete_event")
 async def delete_event(
     ):
-    os.system(f'rm -f uid.json target.xlsx xlsform*')
+    os.system(f'rm -f {local_disk}/uid.json {local_disk}/target.xlsx {local_disk}/*xlsform*')
 
 
 

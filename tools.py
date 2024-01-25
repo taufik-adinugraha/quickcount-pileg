@@ -9,8 +9,8 @@ import geopandas as gpd
 from fuzzywuzzy import process
 from dotenv import load_dotenv
 from shapely.geometry import Point
-from google.cloud import documentai
-from pysurveycto import SurveyCTOObject
+# from google.cloud import documentai
+# from pysurveycto import SurveyCTOObject
 from datetime import datetime, timedelta
 
 
@@ -83,54 +83,54 @@ def get_location(coordinate):
     }
     return out
 
-# Document inference
-def read_form(scto, attachment_url):
-    project_id = "quick-count-410523"
-    processor_id = "3ae5a6c7afc5a8dd"
-    location = "us"
+# # Document inference
+# def read_form(scto, attachment_url):
+#     project_id = "quick-count-410523"
+#     processor_id = "3ae5a6c7afc5a8dd"
+#     location = "us"
 
-    # Initialize the DocumentProcessorServiceClient
-    client = documentai.DocumentProcessorServiceClient.from_service_account_file('document-ai.json')
+#     # Initialize the DocumentProcessorServiceClient
+#     client = documentai.DocumentProcessorServiceClient.from_service_account_file('document-ai.json')
     
-    # Construct the processor path
-    name = f'projects/{project_id}/locations/{location}/processors/{processor_id}'
+#     # Construct the processor path
+#     name = f'projects/{project_id}/locations/{location}/processors/{processor_id}'
         
-    # Convert the attachment URL content to a byte array
-    file_content = scto.get_attachment(attachment_url)
+#     # Convert the attachment URL content to a byte array
+#     file_content = scto.get_attachment(attachment_url)
     
-    # Load binary data
-    raw_document = documentai.RawDocument(content=file_content, mime_type='image/jpeg')
+#     # Load binary data
+#     raw_document = documentai.RawDocument(content=file_content, mime_type='image/jpeg')
 
-    # Configure the process request
-    request = documentai.ProcessRequest(
-        name=name,
-        raw_document=raw_document,
-    )
+#     # Configure the process request
+#     request = documentai.ProcessRequest(
+#         name=name,
+#         raw_document=raw_document,
+#     )
 
-    # Process Document
-    out = client.process_document(request)
-    entities = out.document.entities
-    output = {}
-    # votes
-    for entity in entities[0].properties:
-        output.update({entity.type_: entity.normalized_value.text})
+#     # Process Document
+#     out = client.process_document(request)
+#     entities = out.document.entities
+#     output = {}
+#     # votes
+#     for entity in entities[0].properties:
+#         output.update({entity.type_: entity.normalized_value.text})
 
-    # Post-processing
-    ai_votes = [0] * 3
-    for var_ in range(3):
-        try:
-            ai_votes[var_] = remove_non_numbers_and_convert_to_int(output[f'suara{var_+1}'])
-        except:
-            ai_votes[var_] = 0
-    return ai_votes
+#     # Post-processing
+#     ai_votes = [0] * 3
+#     for var_ in range(3):
+#         try:
+#             ai_votes[var_] = remove_non_numbers_and_convert_to_int(output[f'suara{var_+1}'])
+#         except:
+#             ai_votes[var_] = 0
+#     return ai_votes
 
 
-def remove_non_numbers_and_convert_to_int(input_string):
-    # Use a list comprehension to create a string containing only digits
-    digits_only = ''.join(char for char in input_string if char.isdigit())
-    # Convert the string of digits to an integer
-    result_integer = int(digits_only)
-    return result_integer
+# def remove_non_numbers_and_convert_to_int(input_string):
+#     # Use a list comprehension to create a string containing only digits
+#     digits_only = ''.join(char for char in input_string if char.isdigit())
+#     # Convert the string of digits to an integer
+#     result_integer = int(digits_only)
+#     return result_integer
 
 
 
@@ -262,7 +262,7 @@ def create_xlsform_template(form_title, form_id):
                                     }, ignore_index=True)
 
     # Save choices to an Excel file
-    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform.xlsx', engine='openpyxl') as writer:
         survey_df.to_excel(writer, index=False, sheet_name='survey')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -324,7 +324,7 @@ def create_xlsform_template(form_title, form_id):
                                                             }))
 
     # Save choices to an Excel file
-    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform.xlsx', engine='openpyxl', mode='a') as writer:
         choices_df.to_excel(writer, index=False, sheet_name='choices')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -337,7 +337,7 @@ def create_xlsform_template(form_title, form_id):
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     # Save settings to an Excel file
-    with pd.ExcelWriter(f'{local_disk}/xlsform_{form_id}.xlsx', engine='openpyxl', mode='a') as writer:
+    with pd.ExcelWriter(f'{local_disk}/xlsform.xlsx', engine='openpyxl', mode='a') as writer:
         settings_df.to_excel(writer, index=False, sheet_name='settings')
             
 
@@ -364,18 +364,18 @@ def scto_process(data):
         data_bubble = res_bubble.json()
         data_bubble = data_bubble['response']['results'][0]
 
-        # C1-Form attachments
-        formulir_c1_a4 = data['formulir_c1_a4']
+        # # C1-Form attachments
+        # formulir_c1_a4 = data['formulir_c1_a4']
 
-        # OCR C1-Form
-        try:
-            attachment_url = data['formulir_c1_a4']
-            # Build SCTO connection
-            scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
-            ai_votes = read_form(scto, attachment_url)
-        except Exception as e:
-            print(f'Process: scto_process endpoint\t Keyword: {e}\n')
-            ai_votes = [0] * 3
+        # # OCR C1-Form
+        # try:
+        #     attachment_url = data['formulir_c1_a4']
+        #     # Build SCTO connection
+        #     scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
+        #     ai_votes = read_form(scto, attachment_url)
+        # except Exception as e:
+        #     print(f'Process: scto_process endpoint\t Keyword: {e}\n')
+        #     ai_votes = [0] * 3
 
         # Check if SMS data exists
         sms = data_bubble['SMS']
