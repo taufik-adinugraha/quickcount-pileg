@@ -1,6 +1,6 @@
 {
   "Jawa Barat": {
-    "Sukabumi": {
+    "Kab. Sukabumi": {
       "Cidadap": [
         "Cidadap",
         "Hegarmulya",
@@ -482,7 +482,7 @@
         "Sukajaya"
       ]
     },
-    "Garut": {
+    "Kab. Garut": {
       "Cisurupan": [
         "Cidatar",
         "Cintaasih",
@@ -1010,7 +1010,7 @@
         "Toblong"
       ]
     },
-    "Tasikmalaya": {
+    "Kab. Tasikmalaya": {
       "Cigalontang": [
         "Cidugaleun",
         "Cigalontang",
@@ -1441,7 +1441,7 @@
         "Wargakerta"
       ]
     },
-    "Majalengka": {
+    "Kab. Majalengka": {
       "Cikijing": [
         "Cidulang",
         "Cikijing",
@@ -1838,7 +1838,7 @@
         "Kutamanggu"
       ]
     },
-    "Pangandaran": {
+    "Kab. Pangandaran": {
       "Padaherang": [
         "Ciganjeng",
         "Karangmulya",
@@ -2044,7 +2044,7 @@
         "Sukanagara"
       ]
     },
-    "Bandung Barat": {
+    "Kab. Bandung Barat": {
       "Cipongkor": [
         "Cijenuk",
         "Girimukti",
@@ -2243,7 +2243,7 @@
         "Sumurbandung"
       ]
     },
-    "Sumedang": {
+    "Kab. Sumedang": {
       "Wado": [
         "Cikareo Selatan",
         "Cikareo Utara",
@@ -2871,7 +2871,7 @@
         "Bojongkantong"
       ]
     },
-    "Kuningan": {
+    "Kab. Kuningan": {
       "Kuningan": [
         "Ancaran",
         "Cibinuang",
@@ -3313,7 +3313,7 @@
         "Tenjolayar"
       ]
     },
-    "Cianjur": {
+    "Kab. Cianjur": {
       "Cidaun": [
         "Cidamar",
         "Sukapura",
@@ -3739,7 +3739,7 @@
         "Cigunungherang"
       ]
     },
-    "Bandung": {
+    "Kab. Bandung": {
       "Kertasari": [
         "Neglawangi",
         "Santosa",
@@ -4083,7 +4083,7 @@
         "Cileunyi Wetan"
       ]
     },
-    "Ciamis": {
+    "Kab. Ciamis": {
       "Rajadesa": [
         "Andapraja",
         "Purwaraja",
@@ -4404,7 +4404,7 @@
         "Mekarsari"
       ]
     },
-    "Indramayu": {
+    "Kab. Indramayu": {
       "Jatibarang": [
         "Lobener Lor",
         "Malangsemirang",
@@ -4785,7 +4785,7 @@
         "Kedokanbunder Wetan"
       ]
     },
-    "Cirebon": {
+    "Kab. Cirebon": {
       "Losari": [
         "Losari Kidul",
         "Losari Lor",
@@ -5412,7 +5412,7 @@
         "Maruyung"
       ]
     },
-    "Karawang": {
+    "Kab. Karawang": {
       "Karawang Barat": [
         "Adiarsa Barat",
         "Karawang Kulon",
@@ -5783,7 +5783,7 @@
         "Telukjaya"
       ]
     },
-    "Purwakarta": {
+    "Kab. Purwakarta": {
       "Plered": [
         "Anjun",
         "Babakansari",
@@ -6011,7 +6011,7 @@
         "Sukasari"
       ]
     },
-    "Bogor": {
+    "Kab. Bogor": {
       "Tanjungsari": [
         "Antajaya",
         "Buanajaya",
@@ -6715,7 +6715,7 @@
         "Tanah Sareal"
       ]
     },
-    "Subang": {
+    "Kab. Subang": {
       "Ciater": [
         "Cibeusi",
         "Nagrak",
@@ -7030,7 +7030,7 @@
         "Pangarengan"
       ]
     },
-    "Bekasi": {
+    "Kab. Bekasi": {
       "Bojongmangu": [
         "Karangindah",
         "Karangmulya",
@@ -7267,7 +7267,7 @@
     }
   },
   "Bali": {
-    "Klungkung": {
+    "Kab. Klungkung": {
       "Banjarangkan": [
         "Aan",
         "Bakas",
@@ -7336,7 +7336,7 @@
         "Sulang"
       ]
     },
-    "Karangasem": {
+    "Kab. Karangasem": {
       "Abang": [
         "Ababi",
         "Abang",
@@ -7432,7 +7432,7 @@
         "Tangkup"
       ]
     },
-    "Bangli": {
+    "Kab. Bangli": {
       "Kintamani": [
         "Abangsongan",
         "Abuan",
@@ -7514,7 +7514,7 @@
         "Tamanbali"
       ]
     },
-    "Tabanan": {
+    "Kab. Tabanan": {
       "Kediri": [
         "Abian Tuwung",
         "Banjar Anyar",
@@ -7669,7 +7669,7 @@
         "Wanasari"
       ]
     },
-    "Badung": {
+    "Kab. Badung": {
       "Mengwi": [
         "Abianbase",
         "Baha",
@@ -7745,7 +7745,7 @@
         "Tuban"
       ]
     },
-    "Gianyar": {
+    "Kab. Gianyar": {
       "Gianyar": [
         "Abianbase",
         "Bakbakan",
@@ -7831,7 +7831,7 @@
         "Tampaksiring"
       ]
     },
-    "Jembrana": {
+    "Kab. Jembrana": {
       "Jembrana": [
         "Air Kuning",
         "Batu Agung",
@@ -7894,7 +7894,7 @@
         "Yehembang Kauh"
       ]
     },
-    "Buleleng": {
+    "Kab. Buleleng": {
       "Buleleng": [
         "Alasangker",
         "Anturan",
@@ -8181,7 +8181,7 @@
         "Punia"
       ]
     },
-    "Sumbawa Barat": {
+    "Kab. Sumbawa Barat": {
       "Sekongkang": [
         "Ai Kangkung",
         "Kemuning",
@@ -8263,7 +8263,7 @@
         "UPT Tambak Sari"
       ]
     },
-    "Sumbawa": {
+    "Kab. Sumbawa": {
       "Lantung": [
         "Ai Mual",
         "Lantung",
@@ -8478,7 +8478,7 @@
         "Labuhan Jambu"
       ]
     },
-    "Lombok Tengah": {
+    "Kab. Lombok Tengah": {
       "Batukliang Utara": [
         "Aik Berik",
         "Aik Bukaq",
@@ -8643,7 +8643,7 @@
         "Batu Jangkih"
       ]
     },
-    "Lombok Timur": {
+    "Kab. Lombok Timur": {
       "Pringgasela": [
         "Aik Dewa",
         "Jurit",
@@ -8941,7 +8941,7 @@
         "Suntalangu"
       ]
     },
-    "Lombok Utara": {
+    "Kab. Lombok Utara": {
       "Bayan": [
         "Andalan",
         "Anyar",
@@ -8996,7 +8996,7 @@
         "Jenggala"
       ]
     },
-    "Lombok Barat": {
+    "Kab. Lombok Barat": {
       "Gerung": [
         "Babussalam",
         "Banyu Urip",
@@ -9140,7 +9140,7 @@
         "Kuripan Utara"
       ]
     },
-    "Dompu": {
+    "Kab. Dompu": {
       "Pekat": [
         "Beringin Jaya",
         "Calabai",
@@ -9239,7 +9239,7 @@
         "Taropo"
       ]
     },
-    "Bima": {
+    "Kab. Bima": {
       "Tambora": [
         "Kawinda Nae",
         "Labuhan Kenanga",
@@ -9468,7 +9468,7 @@
         "Tolowata"
       ]
     },
-    "Sumbawa/Sumbawa Barat": {
+    "Kab. Sumbawa/Sumbawa Barat": {
       "Alas Barat/Poto Tano": [
         "Labuhan Mapin/Senayan"
       ]
@@ -9528,7 +9528,7 @@
     }
   },
   "Jawa Tengah": {
-    "Banyumas": {
+    "Kab. Banyumas": {
       "Kedungbanteng": [
         "Melung",
         "Baseh",
@@ -9915,7 +9915,7 @@
         "Purwojati"
       ]
     },
-    "Magelang": {
+    "Kab. Magelang": {
       "Muntilan": [
         "Menayu",
         "Muntilan",
@@ -10331,7 +10331,7 @@
         "Tugurejo"
       ]
     },
-    "Brebes": {
+    "Kab. Brebes": {
       "Sirampog": [
         "Mendala",
         "Mlayang",
@@ -10664,7 +10664,7 @@
         "Wangandalem"
       ]
     },
-    "Klaten": {
+    "Kab. Klaten": {
       "Kebonarum": [
         "Menden",
         "Ngrundul",
@@ -11119,7 +11119,7 @@
         "Sribit"
       ]
     },
-    "Purworejo": {
+    "Kab. Purworejo": {
       "Ngombol": [
         "Mendiro",
         "Ngentak",
@@ -11647,7 +11647,7 @@
         "Tlogokotes"
       ]
     },
-    "Pekalongan": {
+    "Kab. Pekalongan": {
       "Lebakbarang": [
         "Mendolo",
         "Pamutuh",
@@ -11972,7 +11972,7 @@
         "Wonokertowetan"
       ]
     },
-    "Semarang": {
+    "Kab. Semarang": {
       "Sumowono": [
         "Mendongan",
         "Ngadikerso",
@@ -12247,7 +12247,7 @@
         "Rejosari"
       ]
     },
-    "Kebumen": {
+    "Kab. Kebumen": {
       "Sruweng": [
         "Menganti",
         "Pakuran",
@@ -12761,7 +12761,7 @@
         "Wonosari"
       ]
     },
-    "Temanggung": {
+    "Kab. Temanggung": {
       "Tembarak": [
         "Menggoro",
         "Banaran",
@@ -13092,7 +13092,7 @@
         "Tlogowungu"
       ]
     },
-    "Demak": {
+    "Kab. Demak": {
       "Mranggen": [
         "Menur",
         "Mranggen",
@@ -13371,7 +13371,7 @@
         "Wonosari"
       ]
     },
-    "Kendal": {
+    "Kab. Kendal": {
       "Singorojo": [
         "Merbuh",
         "Ngareanak",
@@ -13699,7 +13699,7 @@
         "Margosari"
       ]
     },
-    "Banjarnegara": {
+    "Kab. Banjarnegara": {
       "Purwanegara": [
         "Merden",
         "Mertasari",
@@ -14019,7 +14019,7 @@
         "Wanakarsa"
       ]
     },
-    "Cilacap": {
+    "Kab. Cilacap": {
       "Kroya": [
         "Mergawati",
         "Mujur",
@@ -14564,7 +14564,7 @@
         "Mangkang Kulon"
       ]
     },
-    "Boyolali": {
+    "Kab. Boyolali": {
       "Mojosongo": [
         "Metuk",
         "Mojosongo",
@@ -14877,7 +14877,7 @@
         "Sobokerto"
       ]
     },
-    "Tegal": {
+    "Kab. Tegal": {
       "Jatinegara": [
         "Mokaha",
         "Padasari",
@@ -15202,7 +15202,7 @@
         "Tanjungharja"
       ]
     },
-    "Grobogan": {
+    "Kab. Grobogan": {
       "Tanggungharjo": [
         "Mrisi",
         "Padang",
@@ -15522,7 +15522,7 @@
         "Wandan Kemiri"
       ]
     },
-    "Wonosobo": {
+    "Kab. Wonosobo": {
       "Sapuran": [
         "Ngadikerso",
         "Banyumudal",
@@ -15877,7 +15877,7 @@
         "Wates"
       ]
     },
-    "Batang": {
+    "Kab. Batang": {
       "Bawang": [
         "Pranten",
         "Kalirejo",
@@ -16157,7 +16157,7 @@
         "Cepokokuning"
       ]
     },
-    "Pemalang": {
+    "Kab. Pemalang": {
       "Bodeh": [
         "Babakan",
         "Bodeh",
@@ -16409,7 +16409,7 @@
         "Mojo"
       ]
     },
-    "Purbalingga": {
+    "Kab. Purbalingga": {
       "Rembang": [
         "Tanalum",
         "Panusupan",
@@ -16686,7 +16686,7 @@
         "Gondang"
       ]
     },
-    "Blora": {
+    "Kab. Blora": {
       "Tunjungan": [
         "Adirejo",
         "Kedungringin",
@@ -17015,7 +17015,7 @@
         "Prantaan"
       ]
     },
-    "Sukoharjo": {
+    "Kab. Sukoharjo": {
       "Weru": [
         "Alasombo",
         "Grogol",
@@ -17208,7 +17208,7 @@
         "Wirogunan"
       ]
     },
-    "Karanganyar": {
+    "Kab. Karanganyar": {
       "Kebakkramat": [
         "Alastuwo",
         "Banjarharjo",
@@ -17421,7 +17421,7 @@
         "Ngepungsari"
       ]
     },
-    "Sragen": {
+    "Kab. Sragen": {
       "Miri": [
         "Bagor",
         "Brojol",
@@ -17671,7 +17671,7 @@
         "Tangkil"
       ]
     },
-    "Wonogiri": {
+    "Kab. Wonogiri": {
       "Purwantoro": [
         "Bakalan",
         "Bangsri",
@@ -18017,7 +18017,7 @@
         "Temboro"
       ]
     },
-    "Pati": {
+    "Kab. Pati": {
       "Sukolilo": [
         "Pakem",
         "Porangparing",
@@ -18533,7 +18533,7 @@
         "Tegalharjo"
       ]
     },
-    "Kudus": {
+    "Kab. Kudus": {
       "Dawe": [
         "Rejosari",
         "Samirejo",
@@ -18685,7 +18685,7 @@
         "Rahtawu"
       ]
     },
-    "Rembang": {
+    "Kab. Rembang": {
       "Sale": [
         "Rendeng",
         "Sale",
@@ -19009,7 +19009,7 @@
         "Punggurharjo"
       ]
     },
-    "Jepara": {
+    "Kab. Jepara": {
       "Pecangaan": [
         "Rengging",
         "Gerdu",
@@ -19314,7 +19314,7 @@
     }
   },
   "DI Yogyakarta": {
-    "Bantul": {
+    "Kab. Bantul": {
       "Sedayu": [
         "Argodadi",
         "Argomulyo",
@@ -19500,7 +19500,7 @@
         "Kelurahan Sosromenduran"
       ]
     },
-    "Kulon Progo": {
+    "Kab. Kulon Progo": {
       "Galur": [
         "Banaran",
         "Brosot",
@@ -19614,7 +19614,7 @@
         "Tawangsari"
       ]
     },
-    "Sleman": {
+    "Kab. Sleman": {
       "Gamping": [
         "Ambarketawang",
         "Balecatur",
@@ -19736,7 +19736,7 @@
         "Sumbersari"
       ]
     },
-    "Gunungkidul": {
+    "Kab. Gunungkidul": {
       "Wonosari": [
         "Baleharjo",
         "Duwet",
@@ -19920,7 +19920,7 @@
     }
   },
   "Jawa Timur": {
-    "Gresik": {
+    "Kab. Gresik": {
       "Bungah": [
         "Abar- abir",
         "Bedanten",
@@ -20314,7 +20314,7 @@
         "Telukjatidawang"
       ]
     },
-    "Kediri": {
+    "Kab. Kediri": {
       "Gurah": [
         "Adan-adan",
         "Bangkok",
@@ -20712,7 +20712,7 @@
         "Wanengpaten"
       ]
     },
-    "Sumenep": {
+    "Kab. Sumenep": {
       "Bluto": [
         "Aeng Baja Kenek",
         "Aeng Baja Raja",
@@ -21102,7 +21102,7 @@
         "Sukajeruk"
       ]
     },
-    "Sampang": {
+    "Kab. Sampang": {
       "Sampang": [
         "Aengsareh",
         "Banyuanyar",
@@ -21318,7 +21318,7 @@
         "Paopale Laok"
       ]
     },
-    "Situbondo": {
+    "Kab. Situbondo": {
       "Jangkar": [
         "Agel",
         "Curah Kalak",
@@ -21708,7 +21708,7 @@
         "Tengilis Mejoyo"
       ]
     },
-    "Jember": {
+    "Kab. Jember": {
       "Ajung": [
         "Ajung",
         "Klompangan",
@@ -22020,7 +22020,7 @@
         "Tamansari"
       ]
     },
-    "Pamekasan": {
+    "Kab. Pamekasan": {
       "Palenggaan": [
         "Akkor",
         "Angsanah",
@@ -22237,7 +22237,7 @@
         "Sana Tengah"
       ]
     },
-    "Jombang": {
+    "Kab. Jombang": {
       "Jogoroto": [
         "Alang-alang Caruban",
         "Sawiji",
@@ -22587,7 +22587,7 @@
         "Kepuhdoko"
       ]
     },
-    "Bangkalan": {
+    "Kab. Bangkalan": {
       "Tragah": [
         "Alang Alang",
         "Bajeman",
@@ -22906,7 +22906,7 @@
         "Tlangoh"
       ]
     },
-    "Banyuwangi": {
+    "Kab. Banyuwangi": {
       "Wongsorejo": [
         "Alas Rejo",
         "Alasbuluh",
@@ -23175,7 +23175,7 @@
         "Wringinpitu"
       ]
     },
-    "Bondowoso": {
+    "Kab. Bondowoso": {
       "Pujer": [
         "Alas Sumur",
         "Kejayan",
@@ -23442,7 +23442,7 @@
         "Tegaljati"
       ]
     },
-    "Pasuruan": {
+    "Kab. Pasuruan": {
       "Lekok": [
         "Alas Tlogo",
         "Balonganyar",
@@ -23857,7 +23857,7 @@
         "Warungdowo"
       ]
     },
-    "Bojonegoro": {
+    "Kab. Bojonegoro": {
       "Sugihwaras": [
         "Alasgung",
         "Balongrejo",
@@ -24345,7 +24345,7 @@
         "Sambongrejo"
       ]
     },
-    "Probolinggo": {
+    "Kab. Probolinggo": {
       "Besuk": [
         "Alaskandang",
         "Alasnyiur",
@@ -24725,7 +24725,7 @@
         "Wringinanom"
       ]
     },
-    "Magetan": {
+    "Kab. Magetan": {
       "Poncol": [
         "Alastuwo",
         "Cileng",
@@ -24998,7 +24998,7 @@
         "Tanjungsepreh"
       ]
     },
-    "Lumajang": {
+    "Kab. Lumajang": {
       "Ranuyoso": [
         "Alun-alun",
         "Jenggrong",
@@ -25247,7 +25247,7 @@
         "Tamanayu"
       ]
     },
-    "Malang": {
+    "Kab. Malang": {
       "Karangploso": [
         "Ampeldento",
         "Bocek",
@@ -25705,7 +25705,7 @@
         "Sumberejo"
       ]
     },
-    "Blitar": {
+    "Kab. Blitar": {
       "Selorejo": [
         "Ampelgading",
         "Banjarsari",
@@ -25999,7 +25999,7 @@
         "Wates"
       ]
     },
-    "Sidoarjo": {
+    "Kab. Sidoarjo": {
       "Sukodono": [
         "Anggaswangi",
         "Bangsri",
@@ -26390,7 +26390,7 @@
         "Tulangan"
       ]
     },
-    "Lamongan": {
+    "Kab. Lamongan": {
       "Sambeng": [
         "Ardirejo",
         "Barurejo",
@@ -26920,7 +26920,7 @@
         "Weru"
       ]
     },
-    "Tulungagung": {
+    "Kab. Tulungagung": {
       "Rejotangan": [
         "Ariyojeding",
         "Banjarejo",
@@ -27231,7 +27231,7 @@
         "Tenggarejo"
       ]
     },
-    "Pacitan": {
+    "Kab. Pacitan": {
       "Arjosari": [
         "Arjosari",
         "Borang",
@@ -27428,7 +27428,7 @@
         "Sumberejo"
       ]
     },
-    "Mojokerto": {
+    "Kab. Mojokerto": {
       "Mojosari": [
         "Awang-awang",
         "Belahantengah",
@@ -27770,7 +27770,7 @@
         "Wonodadi"
       ]
     },
-    "Nganjuk": {
+    "Kab. Nganjuk": {
       "Pace": [
         "Babadan",
         "Banaran",
@@ -28096,7 +28096,7 @@
         "Wilangan"
       ]
     },
-    "Ponorogo": {
+    "Kab. Ponorogo": {
       "Babadan": [
         "Babadan",
         "Bareng",
@@ -28447,7 +28447,7 @@
         "Pupus"
       ]
     },
-    "Ngawi": {
+    "Kab. Ngawi": {
       "Ngrambe": [
         "Babadan",
         "Cepoko",
@@ -28704,7 +28704,7 @@
         "Tambakboyo"
       ]
     },
-    "Madiun": {
+    "Kab. Madiun": {
       "Balerejo": [
         "Babadan Lor",
         "Balerejo",
@@ -29066,7 +29066,7 @@
         "Tamanan"
       ]
     },
-    "Trenggalek": {
+    "Kab. Trenggalek": {
       "Tugu": [
         "Banaran",
         "Dermosari",
@@ -29253,7 +29253,7 @@
         "Tanggaran"
       ]
     },
-    "Tuban": {
+    "Kab. Tuban": {
       "Plumpang": [
         "Bandungrejo",
         "Cangkring",
@@ -29831,7 +29831,7 @@
     }
   },
   "Sulawesi Selatan": {
-    "Pangkajene Kepulauan": {
+    "Kab. Pangkajene Kepulauan": {
       "Liukang Tangaya": [
         "Kapoposan Bali",
         "Poleonro",
@@ -29962,7 +29962,7 @@
         "Mattiro Walie"
       ]
     },
-    "Pinrang": {
+    "Kab. Pinrang": {
       "Lanrisang": [
         "Barang Palie",
         "Lanrisang",
@@ -30096,7 +30096,7 @@
         "Wiringtasi"
       ]
     },
-    "Wajo": {
+    "Kab. Wajo": {
       "Sajoanging": [
         "Barangmamase",
         "Akkajeng",
@@ -30316,7 +30316,7 @@
         "Arajang"
       ]
     },
-    "Takalar": {
+    "Kab. Takalar": {
       "Galesong Selatan": [
         "Barangmamase",
         "Bentang",
@@ -30438,7 +30438,7 @@
         "Laguruda"
       ]
     },
-    "Sinjai": {
+    "Kab. Sinjai": {
       "Sinjai Barat": [
         "Barania",
         "Bonto Salama",
@@ -30538,7 +30538,7 @@
         "Pulau Persatuan"
       ]
     },
-    "Kepulauan Selayar": {
+    "Kab. Kepulauan Selayar": {
       "Bontomatene": [
         "Barat Lambongan",
         "Bontona Saluk",
@@ -30650,7 +30650,7 @@
         "Karumpa"
       ]
     },
-    "Jeneponto": {
+    "Kab. Jeneponto": {
       "Bontoramba": [
         "Baraya",
         "Batujala",
@@ -30787,7 +30787,7 @@
         "Sapanang"
       ]
     },
-    "Gowa": {
+    "Kab. Gowa": {
       "Bontonompo": [
         "Barembeng",
         "Bategulung",
@@ -30992,7 +30992,7 @@
         "Parigi"
       ]
     },
-    "Soppeng": {
+    "Kab. Soppeng": {
       "Lilirilau": [
         "Baringeng",
         "Kebo",
@@ -31080,7 +31080,7 @@
         "Umpungeng"
       ]
     },
-    "Enrekang": {
+    "Kab. Enrekang": {
       "Maiwa": [
         "Baringin",
         "Batu Mila",
@@ -31235,7 +31235,7 @@
         "Taulan"
       ]
     },
-    "Bulukumba": {
+    "Kab. Bulukumba": {
       "Gantorang": [
         "Barombong",
         "Benteng Gattareng",
@@ -31393,7 +31393,7 @@
         "Terang Terang"
       ]
     },
-    "Luwu": {
+    "Kab. Luwu": {
       "Bua": [
         "Barowa",
         "Bukit Harapan",
@@ -31666,7 +31666,7 @@
         "Seppong"
       ]
     },
-    "Bantaeng": {
+    "Kab. Bantaeng": {
       "Eremerasa": [
         "Barua",
         "Kampala",
@@ -31751,7 +31751,7 @@
         "Tappanjeng"
       ]
     },
-    "Maros": {
+    "Kab. Maros": {
       "Bantimurung": [
         "Baruga",
         "Kalabbirang",
@@ -31885,7 +31885,7 @@
         "Turikale"
       ]
     },
-    "Luwu Timur": {
+    "Kab. Luwu Timur": {
       "Towuti": [
         "Baruga",
         "Buangin",
@@ -32036,7 +32036,7 @@
         "Non Blok"
       ]
     },
-    "Luwu Utara": {
+    "Kab. Luwu Utara": {
       "Bone Bone": [
         "Batang Tongka",
         "Bone Bone",
@@ -32240,7 +32240,7 @@
         "Tedeboe"
       ]
     },
-    "Tana Toraja": {
+    "Kab. Tana Toraja": {
       "Saluputi": [
         "Batu Tiakka",
         "Pattan Ulusalu",
@@ -32439,7 +32439,7 @@
         "Tapparan Utara"
       ]
     },
-    "Barru": {
+    "Kab. Barru": {
       "Soppeng Riaja": [
         "Batupute",
         "Kiru Kiru",
@@ -32510,7 +32510,7 @@
         "Mattirowalie"
       ]
     },
-    "Sidenreng Rappang": {
+    "Kab. Sidenreng Rappang": {
       "Pitu Riawa": [
         "Betao",
         "Betao Riase",
@@ -32926,7 +32926,7 @@
         "Batu Walenrang"
       ]
     },
-    "Toraja Utara": {
+    "Kab. Toraja Utara": {
       "Rantebua": [
         "Rantebua Sanggalangi",
         "Rantebua Sumalu",
@@ -33121,7 +33121,7 @@
         "Baruppu Parodo"
       ]
     },
-    "Bone": {
+    "Kab. Bone": {
       "Awangpone": [
         "Abbanuang",
         "Awolagading",
@@ -33551,7 +33551,7 @@
     }
   },
   "Sumatera Barat": {
-    "Kepulauan Mentawai": {
+    "Kab. Kepulauan Mentawai": {
       "Pagai Utara": [
         "Betumonga",
         "Saumanganya",
@@ -33616,7 +33616,7 @@
         "Simatalu"
       ]
     },
-    "Solok Selatan": {
+    "Kab. Solok Selatan": {
       "Sangir Batang Hari": [
         "Abai",
         "Dusun Tangah",
@@ -33671,7 +33671,7 @@
         "Talunan Maju"
       ]
     },
-    "Dharmasraya": {
+    "Kab. Dharmasraya": {
       "Koto Besar": [
         "Abai Siat",
         "Bonjol",
@@ -33747,7 +33747,7 @@
         "Timpeh"
       ]
     },
-    "Pasaman Barat": {
+    "Kab. Pasaman Barat": {
       "Sungai Beremas": [
         "Aia Bangih"
       ],
@@ -33790,7 +33790,7 @@
         "Ujung Gading"
       ]
     },
-    "Pasaman": {
+    "Kab. Pasaman": {
       "Lubuk Sikaping": [
         "Aia Manggih",
         "Durian Tinggi",
@@ -33853,7 +33853,7 @@
         "Panti Timur"
       ]
     },
-    "Sijunjung": {
+    "Kab. Sijunjung": {
       "Kamang Baru": [
         "Aie Amo",
         "Kamang",
@@ -33933,7 +33933,7 @@
         "Timbulun"
       ]
     },
-    "Tanah Datar": {
+    "Kab. Tanah Datar": {
       "X Koto": [
         "Aie Angek",
         "Jaho",
@@ -34038,7 +34038,7 @@
         "Tabek Patah"
       ]
     },
-    "Solok": {
+    "Kab. Solok": {
       "Gunung Talang": [
         "Aie Batumbuak",
         "Batang Barus",
@@ -34270,7 +34270,7 @@
         "Tabiang Banda Gadang"
       ]
     },
-    "Padang Pariaman": {
+    "Kab. Padang Pariaman": {
       "Lubuk Alung": [
         "Aie Tajun Lubuk Alung",
         "Lubuk Alung",
@@ -34409,7 +34409,7 @@
         "Toboh Gadang Timur"
       ]
     },
-    "Pesisir Selatan": {
+    "Kab. Pesisir Selatan": {
       "Linggo Sari Baganti": [
         "Air Haji",
         "Air Haji Barat",
@@ -34811,7 +34811,7 @@
         "Tungka"
       ]
     },
-    "Agam": {
+    "Kab. Agam": {
       "Ampek Angkek": [
         "Ampang Gadang",
         "Balai Gurah",
@@ -35110,7 +35110,7 @@
     }
   },
   "Jambi": {
-    "Sarolangun": {
+    "Kab. Sarolangun": {
       "Singkut": [
         "Argo Sari",
         "Bukit Bumi Raya",
@@ -35292,7 +35292,7 @@
         "Sungai Merah"
       ]
     },
-    "Merangin": {
+    "Kab. Merangin": {
       "Jangkat Timur": [
         "Baru",
         "Beringin Tinggi",
@@ -35557,7 +35557,7 @@
         "Tanjung Benuang"
       ]
     },
-    "Kerinci": {
+    "Kab. Kerinci": {
       "Siulak": [
         "Dusun Baru",
         "Dusun Dalam",
@@ -35882,7 +35882,7 @@
         "Ujung Ladang"
       ]
     },
-    "Tebo": {
+    "Kab. Tebo": {
       "VII Koto": [
         "Dusun Baru",
         "Kuamang",
@@ -36107,7 +36107,7 @@
         "Ulu Air"
       ]
     },
-    "Tanjung Jabung Barat": {
+    "Kab. Tanjung Jabung Barat": {
       "Batang Asam": [
         "Dusun Kebun",
         "Kampung Baru",
@@ -36269,7 +36269,7 @@
         "Terjun Gajah"
       ]
     },
-    "Muaro Jambi": {
+    "Kab. Muaro Jambi": {
       "Taman Rajo": [
         "Dusun Mudo",
         "Kemingking Luar",
@@ -36448,7 +36448,7 @@
         "Ujung Tanjung"
       ]
     },
-    "Bungo": {
+    "Kab. Bungo": {
       "Pelepat": [
         "Dwi Karya Bakti",
         "Gapura Suci",
@@ -36723,7 +36723,7 @@
         "Wijaya Pura"
       ]
     },
-    "Batanghari": {
+    "Kab. Batanghari": {
       "Batin XXIV": [
         "Hajran",
         "Jangga",
@@ -36865,7 +36865,7 @@
         "Sungkai"
       ]
     },
-    "Tanjung Jabung Timur": {
+    "Kab. Tanjung Jabung Timur": {
       "Rantau Rasau": [
         "Harapan Makmur",
         "Karya Bakti",
@@ -36984,7 +36984,7 @@
     }
   },
   "Lampung": {
-    "Way Kanan": {
+    "Kab. Way Kanan": {
       "Pakuan Ratu": [
         "Gunung Waras",
         "Karang Agung",
@@ -37411,7 +37411,7 @@
         "Rajabasa Raya"
       ]
     },
-    "Pesisir Barat": {
+    "Kab. Pesisir Barat": {
       "Way Krui": [
         "Gunungkemala Timur",
         "Labuhan Mandi",
@@ -37553,7 +37553,7 @@
         "Ulok Mukti"
       ]
     },
-    "Lampung Barat": {
+    "Kab. Lampung Barat": {
       "Bandar Negeri Suoh": [
         "Gunungratu",
         "Bandar Agung",
@@ -37721,7 +37721,7 @@
         "Way Petai"
       ]
     },
-    "Tanggamus": {
+    "Kab. Tanggamus": {
       "Pematang Sawa": [
         "Guring",
         "Kampung Baru",
@@ -38065,7 +38065,7 @@
         "Tanjung Sari"
       ]
     },
-    "Mesuji": {
+    "Kab. Mesuji": {
       "Way Serdang": [
         "Hadi Mulyo",
         "Karang Mulya",
@@ -38220,7 +38220,7 @@
         "Mulyosari"
       ]
     },
-    "Lampung Selatan": {
+    "Kab. Lampung Selatan": {
       "Natar": [
         "Haduyang",
         "Hajimena",
@@ -38516,7 +38516,7 @@
         "Sidoreno"
       ]
     },
-    "Lampung Tengah": {
+    "Kab. Lampung Tengah": {
       "Padang Ratu": [
         "Haduyang Ratu",
         "Karang Sari",
@@ -38885,7 +38885,7 @@
         "Suko Binangun"
       ]
     },
-    "Lampung Utara": {
+    "Kab. Lampung Utara": {
       "Bunga Mayang": [
         "Haduyang Ratu",
         "Iso Rejo",
@@ -39180,7 +39180,7 @@
         "Suka Maju"
       ]
     },
-    "Pesawaran": {
+    "Kab. Pesawaran": {
       "Negeri Katon": [
         "Halangan Ratu",
         "Kagungan Ratu",
@@ -39348,7 +39348,7 @@
         "Tanjung Rejo"
       ]
     },
-    "Tulang Bawang": {
+    "Kab. Tulang Bawang": {
       "Rawa Jitu Selatan": [
         "Hargo Mulyo",
         "Hargo Rejo",
@@ -39531,7 +39531,7 @@
         "Bumi Sentosa"
       ]
     },
-    "Lampung Timur": {
+    "Kab. Lampung Timur": {
       "Sekampung": [
         "Hargomulyo",
         "Jadi Mulyo",
@@ -39845,7 +39845,7 @@
         "Toto Harjo"
       ]
     },
-    "Tulang Bawang Barat": {
+    "Kab. Tulang Bawang Barat": {
       "Way Kenanga": [
         "Indraloka I",
         "Indraloka II",
@@ -39961,7 +39961,7 @@
         "Menggala Mas"
       ]
     },
-    "Pringsewu": {
+    "Kab. Pringsewu": {
       "Ambarawa": [
         "Jati Agung",
         "Kresno Mulyo",
@@ -40259,7 +40259,7 @@
         "Sako"
       ]
     },
-    "Lahat": {
+    "Kab. Lahat": {
       "Sukamerindu": [
         "Guru Agung",
         "Gunung liwat",
@@ -40687,7 +40687,7 @@
         "Trans SP II Padang Muara Dua"
       ]
     },
-    "Ogan Komering Ilir": {
+    "Kab. Ogan Komering Ilir": {
       "Cengal": [
         "Adil Makmur",
         "Balam Jeruju",
@@ -41052,7 +41052,7 @@
         "Tanjung Sari II"
       ]
     },
-    "Ogan Komering Ulu Timur": {
+    "Kab. Ogan Komering Ulu Timur": {
       "Semendawai Barat": [
         "Adu manis",
         "Betung",
@@ -41453,7 +41453,7 @@
         "Pelang Kenidai"
       ]
     },
-    "Ogan Komering Ulu Selatan": {
+    "Kab. Ogan Komering Ulu Selatan": {
       "Kisam Tinggi": [
         "Air Alun",
         "Balayan",
@@ -41752,7 +41752,7 @@
         "Watas"
       ]
     },
-    "Muara Enim": {
+    "Kab. Muara Enim": {
       "Lubai": [
         "Air Asam",
         "Aur",
@@ -42053,7 +42053,7 @@
         "Sumber Mulya"
       ]
     },
-    "Musi Banyuasin": {
+    "Kab. Musi Banyuasin": {
       "Sanga Desa": [
         "Air Balui",
         "Air Itam",
@@ -42325,7 +42325,7 @@
         "Wono Rejo"
       ]
     },
-    "Banyuasin": {
+    "Kab. Banyuasin": {
       "Talang Kelapa": [
         "Air Batu",
         "Gasing",
@@ -42674,7 +42674,7 @@
         "Teluk Payo"
       ]
     },
-    "Musi Rawas": {
+    "Kab. Musi Rawas": {
       "Tuah Negeri": [
         "Air Beliti",
         "Bamasco",
@@ -42903,7 +42903,7 @@
         "Sumber Sari"
       ]
     },
-    "Musi Rawas Utara": {
+    "Kab. Musi Rawas Utara": {
       "Rawas Ilir": [
         "Air Bening",
         "Batu Kucing",
@@ -43008,7 +43008,7 @@
         "Teladas"
       ]
     },
-    "Ogan Komering Ulu": {
+    "Kab. Ogan Komering Ulu": {
       "Baturaja Barat": [
         "Air Gading",
         "Batu Kuning",
@@ -43193,7 +43193,7 @@
         "Tanjung Makmur"
       ]
     },
-    "Penukal Abab Lematang Ilir": {
+    "Kab. Penukal Abab Lematang Ilir": {
       "Penukal": [
         "Air Itam",
         "Air Itam Timur",
@@ -43276,7 +43276,7 @@
         "Tempirai Utara"
       ]
     },
-    "Empat Lawang": {
+    "Kab. Empat Lawang": {
       "Pendopo Barat": [
         "Air Kandis",
         "Karang Caya",
@@ -43595,7 +43595,7 @@
         "Tanjung Raman"
       ]
     },
-    "Ogan Ilir": {
+    "Kab. Ogan Ilir": {
       "Rantau Panjang": [
         "Arisan Deras",
         "Jagalano",
@@ -43872,7 +43872,7 @@
     }
   },
   "Bengkulu": {
-    "Muko Muko": {
+    "Kab. Muko Muko": {
       "Teramang Jaya": [
         "Batu Ejung",
         "Brangan Mulya",
@@ -44055,7 +44055,7 @@
         "Tanjung Alai"
       ]
     },
-    "Rejang Lebong": {
+    "Kab. Rejang Lebong": {
       "Curup Tengah": [
         "Batu Galing",
         "Kampung Jawa",
@@ -44243,7 +44243,7 @@
         "Air Putih Baru"
       ]
     },
-    "Kepahiang": {
+    "Kab. Kepahiang": {
       "Muara Kemumu": [
         "Batu Kalung",
         "Limbur Baru",
@@ -44378,7 +44378,7 @@
         "Tertik"
       ]
     },
-    "Bengkulu Selatan": {
+    "Kab. Bengkulu Selatan": {
       "Ulu Manna": [
         "Batu Kuning",
         "Batu Panco",
@@ -44560,7 +44560,7 @@
         "Tanjung Beringin"
       ]
     },
-    "Bengkulu Utara": {
+    "Kab. Bengkulu Utara": {
       "Hulu Palik": [
         "Batu Layang",
         "Batu Raja Kol",
@@ -44820,7 +44820,7 @@
         "Air Napal"
       ]
     },
-    "Kaur": {
+    "Kab. Kaur": {
       "Nasal": [
         "Batu Lungun",
         "Bukit Indah",
@@ -45047,7 +45047,7 @@
         "Tanjung Pandan"
       ]
     },
-    "Bengkulu Tengah": {
+    "Kab. Bengkulu Tengah": {
       "Pondok Kubang": [
         "Batu Raja",
         "Dusun Anyar",
@@ -45214,7 +45214,7 @@
         "Air Sebakul"
       ]
     },
-    "Seluma": {
+    "Kab. Seluma": {
       "Talo": [
         "Batu Tugu",
         "Bunut Tinggi",
@@ -45533,7 +45533,7 @@
         "Tanah Patah"
       ]
     },
-    "Lebong": {
+    "Kab. Lebong": {
       "Pinang Belapis": [
         "Bioa Putiak",
         "Ketenong I",
@@ -45665,7 +45665,7 @@
     }
   },
   "Banten": {
-    "Pandeglang": {
+    "Kab. Pandeglang": {
       "Pagelaran": [
         "Bama",
         "Bulagor",
@@ -46076,7 +46076,7 @@
         "Warasinga"
       ]
     },
-    "Serang": {
+    "Kab. Serang": {
       "Cinangka": [
         "Umbul Tanjung",
         "Pasauran",
@@ -46462,7 +46462,7 @@
         "Salira"
       ]
     },
-    "Lebak": {
+    "Kab. Lebak": {
       "Wanasalam": [
         "Cipedang",
         "Sukatani",
@@ -46865,7 +46865,7 @@
         "Jagabaya"
       ]
     },
-    "Tangerang": {
+    "Kab. Tangerang": {
       "Jambe": [
         "Ancol Pasir",
         "Daru",
@@ -47545,7 +47545,7 @@
     }
   },
   "Kepulauan Bangka Belitung": {
-    "Belitung": {
+    "Kab. Belitung": {
       "Tanjung Pandan": [
         "Aik Ketekok",
         "Aik Pelempang Jaya",
@@ -47606,7 +47606,7 @@
         "Suak Gual"
       ]
     },
-    "Belitung Timur": {
+    "Kab. Belitung Timur": {
       "Simpang Renggiang": [
         "Aik Madu",
         "Lintang",
@@ -47661,7 +47661,7 @@
         "Tanjung Kelumpang"
       ]
     },
-    "Bangka Selatan": {
+    "Kab. Bangka Selatan": {
       "Air Gegas": [
         "Airbara",
         "Airgegas",
@@ -47732,7 +47732,7 @@
         "Tanjungsangkar"
       ]
     },
-    "Bangka Tengah": {
+    "Kab. Bangka Tengah": {
       "Koba": [
         "Arung Dalam",
         "Berok",
@@ -47809,7 +47809,7 @@
         "Munggu"
       ]
     },
-    "Bangka": {
+    "Kab. Bangka": {
       "Belinyu": [
         "Air Asam",
         "Air Jukung",
@@ -47908,7 +47908,7 @@
         "Surya Timur"
       ]
     },
-    "Bangka Barat": {
+    "Kab. Bangka Barat": {
       "Muntok": [
         "Air Belo",
         "Air Limau",
@@ -48401,7 +48401,7 @@
         "Pasar Baru"
       ]
     },
-    "Administrasi Kepulauan Seribu": {
+    "Kab. Administrasi Kepulauan Seribu": {
       "Kepulauan Seribu Selatan": [
         "Pulau Untung Jawa",
         "Pulau Pari",
@@ -48415,7 +48415,7 @@
     }
   },
   "Kalimantan Selatan": {
-    "Tapin": {
+    "Kab. Tapin": {
       "Binuang": [
         "A. Yani Pura",
         "Binuang",
@@ -48576,7 +48576,7 @@
         "Suato Lama"
       ]
     },
-    "Banjar": {
+    "Kab. Banjar": {
       "Karang Intan": [
         "Abirau",
         "Awang Bangkal Barat",
@@ -48908,7 +48908,7 @@
         "Telaga Baru"
       ]
     },
-    "Hulu Sungai Tengah": {
+    "Kab. Hulu Sungai Tengah": {
       "Limpasu": [
         "Abung",
         "Abung Surapati",
@@ -49101,7 +49101,7 @@
         "Tungkup"
       ]
     },
-    "Tanah Bumbu": {
+    "Kab. Tanah Bumbu": {
       "Satui": [
         "Al Kautsar",
         "Jombang",
@@ -49588,7 +49588,7 @@
         "Sengayam"
       ]
     },
-    "Tanah Laut": {
+    "Kab. Tanah Laut": {
       "Jorong": [
         "Alur",
         "Asam-Asam",
@@ -49747,7 +49747,7 @@
         "Sungai Rasau"
       ]
     },
-    "Hulu Sungai Selatan": {
+    "Kab. Hulu Sungai Selatan": {
       "Kandangan": [
         "Amawang Kanan",
         "Amawang Kiri",
@@ -49919,7 +49919,7 @@
         "Ulang"
       ]
     },
-    "Hulu Sungai Utara": {
+    "Kab. Hulu Sungai Utara": {
       "Paminggir": [
         "Ambahai",
         "Paminggir",
@@ -50160,7 +50160,7 @@
         "Teluk Daun"
       ]
     },
-    "Barito Kuala": {
+    "Kab. Barito Kuala": {
       "Anjir Pasar": [
         "Andaman",
         "Andaman II",
@@ -50429,7 +50429,7 @@
         "Landasan Ulin Utara"
       ]
     },
-    "Balangan": {
+    "Kab. Balangan": {
       "Tebing Tinggi": [
         "Kambiyain",
         "Simpang Bumbuan",
@@ -50604,7 +50604,7 @@
         "Telaga Purun"
       ]
     },
-    "Tabalong": {
+    "Kab. Tabalong": {
       "Muara Uya": [
         "Simpung Layung",
         "Sungai Kumap",
@@ -50763,7 +50763,7 @@
     }
   },
   "Kalimantan Barat": {
-    "Ketapang": {
+    "Kab. Ketapang": {
       "Kendawangan": [
         "Air Hitam Besar",
         "Airhitam Hulu",
@@ -51067,7 +51067,7 @@
         "Usaha Baru"
       ]
     },
-    "Kubu Raya": {
+    "Kab. Kubu Raya": {
       "Kubu": [
         "Seruat Dua",
         "Seruat Tiga",
@@ -51204,7 +51204,7 @@
         "Rasau Jaya Umum"
       ]
     },
-    "Sambas": {
+    "Kab. Sambas": {
       "Salatiga": [
         "Serumpun",
         "Serunai",
@@ -51437,7 +51437,7 @@
         "Tempatan"
       ]
     },
-    "Bengkayang": {
+    "Kab. Bengkayang": {
       "Capkala": [
         "Setanduk",
         "Aris",
@@ -51635,7 +51635,7 @@
         "Tengah"
       ]
     },
-    "Sekadau": {
+    "Kab. Sekadau": {
       "Sekadau Hulu": [
         "Setawar",
         "Sungai Sambang",
@@ -51738,7 +51738,7 @@
         "Tembesuk"
       ]
     },
-    "Kapuas Hulu": {
+    "Kab. Kapuas Hulu": {
       "Batang Lupar": [
         "Setulang",
         "Sungai Abau",
@@ -52068,7 +52068,7 @@
         "Tua Abang"
       ]
     },
-    "Sintang": {
+    "Kab. Sintang": {
       "Ketungau Hilir": [
         "Setungkup",
         "Sungai Deras",
@@ -52547,7 +52547,7 @@
         "Bansir Laut"
       ]
     },
-    "Landak": {
+    "Kab. Landak": {
       "Menyuke": [
         "Sidan",
         "Songga",
@@ -52731,7 +52731,7 @@
         "Untang"
       ]
     },
-    "Melawi": {
+    "Kab. Melawi": {
       "Nanga Pinoh": [
         "Sidomulyo",
         "Baru",
@@ -52924,7 +52924,7 @@
         "Ulak Muid"
       ]
     },
-    "Kayong Utara": {
+    "Kab. Kayong Utara": {
       "Sukadana": [
         "Simpang Tiga",
         "Sutera",
@@ -52981,7 +52981,7 @@
         "Tanjungsatai"
       ]
     },
-    "Sanggau": {
+    "Kab. Sanggau": {
       "Tayan Hulu": [
         "Sosok",
         "Berakak",
@@ -53182,7 +53182,7 @@
         "Upe"
       ]
     },
-    "Mempawah": {
+    "Kab. Mempawah": {
       "Sadaniang": [
         "Suak Barangan",
         "Amawang",
@@ -53271,7 +53271,7 @@
     }
   },
   "Kalimantan Tengah": {
-    "Kapuas": {
+    "Kab. Kapuas": {
       "Kapuas Barat": [
         "Anjir Kalampan",
         "Basuta Raya",
@@ -53538,7 +53538,7 @@
         "Tumbang Tihis"
       ]
     },
-    "Pulang Pisau": {
+    "Kab. Pulang Pisau": {
       "Pulang Pisau": [
         "Anjir Pulang Pisau",
         "Bereng",
@@ -53984,7 +53984,7 @@
         "Sambi"
       ]
     },
-    "Seruyan": {
+    "Kab. Seruyan": {
       "Hanau": [
         "Bahaur",
         "Parang Batang",
@@ -54106,7 +54106,7 @@
         "Tumbang Setoli"
       ]
     },
-    "Katingan": {
+    "Kab. Katingan": {
       "Katingan Kuala": [
         "Bakung Raya",
         "Bangun Jaya",
@@ -54295,7 +54295,7 @@
         "Tumbang Kataei"
       ]
     },
-    "Sukamara": {
+    "Kab. Sukamara": {
       "Sukamara": [
         "Kartamulia",
         "Mendawai",
@@ -54339,7 +54339,7 @@
         "Sembikuan"
       ]
     },
-    "Barito Selatan": {
+    "Kab. Barito Selatan": {
       "Jenamas": [
         "Tabatan",
         "Rangga Ilung",
@@ -54446,7 +54446,7 @@
         "Sungai Jaya"
       ]
     },
-    "Barito Timur": {
+    "Kab. Barito Timur": {
       "Raren Batuah": [
         "Sibung",
         "Tangkum",
@@ -54571,7 +54571,7 @@
         "Tewah Pupuh"
       ]
     },
-    "Barito Utara": {
+    "Kab. Barito Utara": {
       "Montallat": [
         "Sikan",
         "Kamawen",
@@ -54694,7 +54694,7 @@
         "Trinsing"
       ]
     },
-    "Lamandau": {
+    "Kab. Lamandau": {
       "Lamandau": [
         "Suja",
         "Sungai Tuat",
@@ -54800,7 +54800,7 @@
         "Sepoyu"
       ]
     },
-    "Gunung Mas": {
+    "Kab. Gunung Mas": {
       "Tewah": [
         "Sumur Mas",
         "Taja Urap",
@@ -54953,7 +54953,7 @@
         "Tumbang Samui"
       ]
     },
-    "Murung Raya": {
+    "Kab. Murung Raya": {
       "Permata Intan": [
         "Sungai Bakanon",
         "Sungai Batang",
@@ -55144,7 +55144,7 @@
     }
   },
   "Nusa Tenggara Timur": {
-    "Alor": {
+    "Kab. Alor": {
       "Alor Selatan": [
         "Silaipui",
         "Subo",
@@ -55357,7 +55357,7 @@
         "Pura Utara"
       ]
     },
-    "Belu": {
+    "Kab. Belu": {
       "TasifetoTimur": [
         "Silawan",
         "Takirin",
@@ -55464,7 +55464,7 @@
         "Rinbesi"
       ]
     },
-    "Kupang": {
+    "Kab. Kupang": {
       "Fatuleu": [
         "Sillu",
         "Tolnaku",
@@ -55691,7 +55691,7 @@
         "Passi"
       ]
     },
-    "Timor Tengah Selatan": {
+    "Kab. Timor Tengah Selatan": {
       "Fautmolo": [
         "Sillu",
         "Tunis",
@@ -56035,7 +56035,7 @@
         "Santian"
       ]
     },
-    "Flores Timur": {
+    "Kab. Flores Timur": {
       "Tanjung Bunga": [
         "Sinamalaka",
         "Sinarhadigala",
@@ -56325,7 +56325,7 @@
         "Riangbura"
       ]
     },
-    "Rote Ndao": {
+    "Kab. Rote Ndao": {
       "Rote Tengah": [
         "Siomeda",
         "Suebela",
@@ -56468,7 +56468,7 @@
         "Sedeoen"
       ]
     },
-    "Manggarai Timur": {
+    "Kab. Manggarai Timur": {
       "Elar Selatan": [
         "Sipi",
         "Teno Mese",
@@ -56670,7 +56670,7 @@
         "Rana Mbeling"
       ]
     },
-    "Ende": {
+    "Kab. Ende": {
       "Detusoko": [
         "Sipijena",
         "Turunalu",
@@ -56992,7 +56992,7 @@
         "Potulando"
       ]
     },
-    "Manggarai Barat": {
+    "Kab. Manggarai Barat": {
       "Lembor": [
         "Siru",
         "Tangge",
@@ -57187,7 +57187,7 @@
         "Wewa"
       ]
     },
-    "Malaka": {
+    "Kab. Malaka": {
       "Kobalima": [
         "Sisi",
         "Babulu",
@@ -57340,7 +57340,7 @@
         "Wemeda"
       ]
     },
-    "Sumba Barat": {
+    "Kab. Sumba Barat": {
       "Kota Waikabubak": [
         "Soba Rade",
         "Tebara",
@@ -57428,7 +57428,7 @@
         "Wee Tana"
       ]
     },
-    "Ngada": {
+    "Kab. Ngada": {
       "Golewa Barat": [
         "Sobo",
         "Sobo Satu",
@@ -57605,7 +57605,7 @@
         "Lanamai I"
       ]
     },
-    "Nagekeo": {
+    "Kab. Nagekeo": {
       "Boawae": [
         "Solo",
         "Alorawe",
@@ -57799,7 +57799,7 @@
         "Oesapa Selatan"
       ]
     },
-    "Timor Tengah Utara": {
+    "Kab. Timor Tengah Utara": {
       "Insana Tengah": [
         "Sone",
         "Tainsala",
@@ -58041,7 +58041,7 @@
         "Naob"
       ]
     },
-    "Sumba Tengah": {
+    "Kab. Sumba Tengah": {
       "Umbu Ratu Nggay": [
         "Soru",
         "Tana Mbanas",
@@ -58120,7 +58120,7 @@
         "Weluk Praimemang"
       ]
     },
-    "Sabu Raijua": {
+    "Kab. Sabu Raijua": {
       "Sabu Tengah": [
         "Tada",
         "Bebae",
@@ -58197,7 +58197,7 @@
         "Loborai"
       ]
     },
-    "Manggarai": {
+    "Kab. Manggarai": {
       "Satar Mese": [
         "Tado",
         "Tal",
@@ -58394,7 +58394,7 @@
         "Wudi"
       ]
     },
-    "Lembata": {
+    "Kab. Lembata": {
       "Ile Ape": [
         "Tagawiti",
         "Tanjung Batu",
@@ -58565,7 +58565,7 @@
         "Wowong"
       ]
     },
-    "Sikka": {
+    "Kab. Sikka": {
       "Nita": [
         "Takaplager",
         "Tebuk",
@@ -58769,7 +58769,7 @@
         "Nelle Wutung"
       ]
     },
-    "Sumba Timur": {
+    "Kab. Sumba Timur": {
       "Rindi": [
         "Tamburi",
         "Tanaraing",
@@ -58971,7 +58971,7 @@
         "Praibakul"
       ]
     },
-    "Sumba Barat Daya": {
+    "Kab. Sumba Barat Daya": {
       "Kodi Bangedo": [
         "Tana Mete",
         "Umbu Ngedo",
@@ -59172,7 +59172,7 @@
     }
   },
   "Maluku": {
-    "Maluku Barat Daya": {
+    "Kab. Maluku Barat Daya": {
       "Pulau-pulau Terselatan": [
         "Abusur",
         "Kota Lama",
@@ -59326,7 +59326,7 @@
         "Purpura"
       ]
     },
-    "Kepulauan Tanimbar": {
+    "Kab. Kepulauan Tanimbar": {
       "Wuar Labobar": [
         "Abat",
         "Awear Rumngeur",
@@ -59430,7 +59430,7 @@
         "Wulmasa"
       ]
     },
-    "Seram Bagian Barat": {
+    "Kab. Seram Bagian Barat": {
       "Elpaputih": [
         "Abio Ahiolo",
         "Elpaputih",
@@ -59546,7 +59546,7 @@
         "Waisarisa"
       ]
     },
-    "Maluku Tengah": {
+    "Kab. Maluku Tengah": {
       "Pulau Haruku": [
         "Aboru",
         "Haruku",
@@ -59776,7 +59776,7 @@
         "Waraka"
       ]
     },
-    "Seram Bagian Timur": {
+    "Kab. Seram Bagian Timur": {
       "Siwalalat": [
         "Abulate",
         "Adabai",
@@ -60006,7 +60006,7 @@
         "Teor"
       ]
     },
-    "Buru": {
+    "Kab. Buru": {
       "Air Buaya": [
         "Air Buaya",
         "Awilinan",
@@ -60110,7 +60110,7 @@
         "Waelapia"
       ]
     },
-    "Buru Selatan": {
+    "Kab. Buru Selatan": {
       "Kepala Madan": [
         "Air Ternate",
         "Bala-bala",
@@ -60265,7 +60265,7 @@
         "Wayame"
       ]
     },
-    "Maluku Tenggara": {
+    "Kab. Maluku Tenggara": {
       "Kei Kecil Timur": [
         "Abean",
         "Denwet",
@@ -60480,7 +60480,7 @@
         "Yatwav"
       ]
     },
-    "Kepulauan Aru": {
+    "Kab. Kepulauan Aru": {
       "Aru Tengah": [
         "Algadang",
         "Benjina",
@@ -60665,7 +60665,7 @@
     }
   },
   "Papua Selatan": {
-    "Merauke": {
+    "Kab. Merauke": {
       "Okaba": [
         "Alaku",
         "Alatep",
@@ -60901,7 +60901,7 @@
         "Yomop"
       ]
     },
-    "Mappi": {
+    "Kab. Mappi": {
       "Yakomi": [
         "Amk",
         "Borohaba",
@@ -61097,7 +61097,7 @@
         "Yeloba"
       ]
     },
-    "Asmat": {
+    "Kab. Asmat": {
       "Koroway Buluanop": [
         "Amakot",
         "Ayak",
@@ -61366,7 +61366,7 @@
         "Yerfum"
       ]
     },
-    "Boven Digoel": {
+    "Kab. Boven Digoel": {
       "Sesnuk": [
         "Amboran",
         "Anggamburan",
@@ -61522,7 +61522,7 @@
     }
   },
   "Sulawesi Barat": {
-    "Majene": {
+    "Kab. Majene": {
       "Pamboang": [
         "Adolang",
         "Adolang Dhua",
@@ -61622,7 +61622,7 @@
         "Pamboborang"
       ]
     },
-    "Mamuju": {
+    "Kab. Mamuju": {
       "Tapalang Barat": [
         "Ahu",
         "Dungkait",
@@ -61747,7 +61747,7 @@
         "Tarailu"
       ]
     },
-    "Polewali Mandar": {
+    "Kab. Polewali Mandar": {
       "Binuang": [
         "Amola",
         "Batetangnga",
@@ -61948,7 +61948,7 @@
         "Patambanua"
       ]
     },
-    "Mamasa": {
+    "Kab. Mamasa": {
       "Aralle": [
         "Aralle Selatan",
         "Aralle Utara",
@@ -62165,7 +62165,7 @@
         "Satenetean"
       ]
     },
-    "Pasangkayu": {
+    "Kab. Pasangkayu": {
       "Pasangkayu": [
         "Ako",
         "Gunung Sari",
@@ -62254,7 +62254,7 @@
         "Taranggi"
       ]
     },
-    "Mamuju Tengah": {
+    "Kab. Mamuju Tengah": {
       "Budong-Budong": [
         "Babana",
         "Barakkang",
@@ -62322,7 +62322,7 @@
     }
   },
   "Papua Tengah": {
-    "Mimika": {
+    "Kab. Mimika": {
       "Mimika Timur Jauh": [
         "Amamapare",
         "Ayuka",
@@ -62512,7 +62512,7 @@
         "Limau Asri Timur"
       ]
     },
-    "Puncak Jaya": {
+    "Kab. Puncak Jaya": {
       "Yamoneri": [
         "Amberiambut",
         "Moulo",
@@ -62868,7 +62868,7 @@
         "Yonggi"
       ]
     },
-    "Puncak": {
+    "Kab. Puncak": {
       "Beoga": [
         "Ambobera",
         "Milawak",
@@ -63126,7 +63126,7 @@
         "Wuyunggame"
       ]
     },
-    "Paniai": {
+    "Kab. Paniai": {
       "Muye": [
         "Amopa",
         "Bebiyai",
@@ -63394,7 +63394,7 @@
         "Kito"
       ]
     },
-    "Intan Jaya": {
+    "Kab. Intan Jaya": {
       "Biandoga": [
         "Aneya",
         "Biandoga",
@@ -63509,7 +63509,7 @@
         "Jae"
       ]
     },
-    "Dogiyai": {
+    "Kab. Dogiyai": {
       "Piyaiye": [
         "Apogomakida",
         "Tibaugi",
@@ -63610,7 +63610,7 @@
         "Wigoumakida"
       ]
     },
-    "Nabire": {
+    "Kab. Nabire": {
       "Uwapa": [
         "Argo Mulyo",
         "Marga Jaya",
@@ -63727,7 +63727,7 @@
         "Jigikebo"
       ]
     },
-    "Deiyai": {
+    "Kab. Deiyai": {
       "Tigi": [
         "Atouda",
         "Bamou II",
@@ -63809,7 +63809,7 @@
     }
   },
   "Papua Pegunungan": {
-    "Lanny Jaya": {
+    "Kab. Lanny Jaya": {
       "Kolawa": [
         "Ambena",
         "Timotius",
@@ -64244,7 +64244,7 @@
         "Yubumabur"
       ]
     },
-    "Tolikara": {
+    "Kab. Tolikara": {
       "Danime": [
         "Ambena",
         "Bumbu",
@@ -64883,7 +64883,7 @@
         "Yandono"
       ]
     },
-    "Yalimo": {
+    "Kab. Yalimo": {
       "Welarek": [
         "Ambiliki",
         "Ampolongsili",
@@ -65195,7 +65195,7 @@
         "Yakikma"
       ]
     },
-    "Yahukimo": {
+    "Kab. Yahukimo": {
       "Korupun": [
         "Amdua",
         "Basal",
@@ -65810,7 +65810,7 @@
         "Yetehup"
       ]
     },
-    "Jayawijaya": {
+    "Kab. Jayawijaya": {
       "Musatfak": [
         "Anegera",
         "Abulukmo",
@@ -66224,7 +66224,7 @@
         "Yanenggame"
       ]
     },
-    "Nduga": {
+    "Kab. Nduga": {
       "Moba": [
         "Anggulpa",
         "Moba",
@@ -66538,7 +66538,7 @@
         "Kosolpem"
       ]
     },
-    "Pegunungan Bintang": {
+    "Kab. Pegunungan Bintang": {
       "Ok Aom": [
         "Aplim",
         "Bulangkop",
@@ -66885,7 +66885,7 @@
         "Ehipten"
       ]
     },
-    "Mamberamo Tengah": {
+    "Kab. Mamberamo Tengah": {
       "Eragayam": [
         "Arsbol",
         "Ayeki",
@@ -66958,7 +66958,7 @@
     }
   },
   "Papua Barat": {
-    "Teluk Wondama": {
+    "Kab. Teluk Wondama": {
       "Kuri Wamesa": [
         "Ambumi",
         "Nanimori",
@@ -67062,7 +67062,7 @@
         "Yomber"
       ]
     },
-    "Fak Fak": {
+    "Kab. Fak Fak": {
       "Arguni": [
         "Andamata",
         "Arguni",
@@ -67247,7 +67247,7 @@
         "Kwama"
       ]
     },
-    "Teluk Bintuni": {
+    "Kab. Teluk Bintuni": {
       "Aroba": [
         "Aroba",
         "Sangguar",
@@ -67414,7 +67414,7 @@
         "Weriagar Utara"
       ]
     },
-    "Kaimana": {
+    "Kab. Kaimana": {
       "Kambrau": [
         "Bahumia",
         "Rauna",
@@ -67516,7 +67516,7 @@
         "Wosokuno"
       ]
     },
-    "Manokwari Selatan": {
+    "Kab. Manokwari Selatan": {
       "Ransiki": [
         "Abreso",
         "Bamaha",
@@ -67587,7 +67587,7 @@
         "Yarmatum"
       ]
     },
-    "Manokwari": {
+    "Kab. Manokwari": {
       "Manokwari Selatan": [
         "Acemo",
         "Anday",
@@ -67780,7 +67780,7 @@
         "Womnowi"
       ]
     },
-    "Pegunungan Arfak": {
+    "Kab. Pegunungan Arfak": {
       "Minyambaouw": [
         "Aduer",
         "Andang",
@@ -67970,7 +67970,7 @@
     }
   },
   "Papua": {
-    "Keerom": {
+    "Kab. Keerom": {
       "Yaffi": [
         "Amgotro",
         "Akarinda",
@@ -68136,7 +68136,7 @@
         "Yoka"
       ]
     },
-    "Waropen": {
+    "Kab. Waropen": {
       "Kirihi": [
         "Aru Antu",
         "Sooh",
@@ -68278,7 +68278,7 @@
         "Woinui"
       ]
     },
-    "Jayapura": {
+    "Kab. Jayapura": {
       "Sentani Timur": [
         "Asei Besar",
         "Asei Kecil",
@@ -68462,7 +68462,7 @@
         "Yougapsa"
       ]
     },
-    "Mamberamo Raya": {
+    "Kab. Mamberamo Raya": {
       "Rufaer": [
         "Bareri",
         "Sikari",
@@ -68540,7 +68540,7 @@
         "Yoke"
       ]
     },
-    "Sarmi": {
+    "Kab. Sarmi": {
       "Pantai Timur": [
         "Ansudu Dua",
         "Betaf",
@@ -68655,7 +68655,7 @@
         "Waskey"
       ]
     },
-    "Biak Numfor": {
+    "Kab. Biak Numfor": {
       "Samofa": [
         "Adainasnosen",
         "Anjareuw",
@@ -68963,7 +68963,7 @@
         "Yenbepon"
       ]
     },
-    "Kepulauan Yapen": {
+    "Kab. Kepulauan Yapen": {
       "Kepulauan Ambai": [
         "Adiwipi",
         "Aiwaraggani",
@@ -69162,7 +69162,7 @@
         "Warioi"
       ]
     },
-    "Supiori": {
+    "Kab. Supiori": {
       "Supiori Barat": [
         "Amyas",
         "Koiryakam",
@@ -69214,7 +69214,7 @@
     }
   },
   "Sulawesi Tengah": {
-    "Morowali": {
+    "Kab. Morowali": {
       "Bahodopi": [
         "Baho Makmur",
         "Makartijaya",
@@ -69367,7 +69367,7 @@
         "Solonsa Jaya"
       ]
     },
-    "Sigi": {
+    "Kab. Sigi": {
       "Marawola": [
         "Tinggede Selatan",
         "Baliase",
@@ -69575,7 +69575,7 @@
         "Sibowi"
       ]
     },
-    "Morowali Utara": {
+    "Kab. Morowali Utara": {
       "Lembo": [
         "Tingkeao",
         "Tinompo",
@@ -69722,7 +69722,7 @@
         "Tanauge"
       ]
     },
-    "Tojo Una Una": {
+    "Kab. Tojo Una Una": {
       "Walea Besar": [
         "Tingki",
         "Tongidon",
@@ -69894,7 +69894,7 @@
         "Sansarino"
       ]
     },
-    "Parigi Moutong": {
+    "Kab. Parigi Moutong": {
       "Tomini": [
         "Tingkulang",
         "Tomini",
@@ -70228,7 +70228,7 @@
         "Taliabo"
       ]
     },
-    "Toli Toli": {
+    "Kab. Toli Toli": {
       "Galang": [
         "Tinigi",
         "Aung",
@@ -70359,7 +70359,7 @@
         "Tinading"
       ]
     },
-    "Banggai": {
+    "Kab. Banggai": {
       "Lamala": [
         "Tinonda",
         "Baruga",
@@ -70744,7 +70744,7 @@
         "Sayambongin"
       ]
     },
-    "Banggai Laut": {
+    "Kab. Banggai Laut": {
       "Banggai Tengah": [
         "Tintingo",
         "Adean",
@@ -70827,7 +70827,7 @@
         "Tinakin Laut"
       ]
     },
-    "Poso": {
+    "Kab. Poso": {
       "Pamona Timur": [
         "Tiu",
         "Didiri",
@@ -71037,7 +71037,7 @@
         "Moengko Lama"
       ]
     },
-    "Donggala": {
+    "Kab. Donggala": {
       "Sindue": [
         "Toaya",
         "Toaya Vunta",
@@ -71238,7 +71238,7 @@
         "Labuan Toposo"
       ]
     },
-    "Banggai Kepulauan": {
+    "Kab. Banggai Kepulauan": {
       "Tinangkung Selatan": [
         "Tobing",
         "Tobungin",
@@ -71408,7 +71408,7 @@
         "Tatendeng"
       ]
     },
-    "Buol": {
+    "Kab. Buol": {
       "Paleleh": [
         "Tolau",
         "Umu",
@@ -71613,7 +71613,7 @@
     }
   },
   "Sulawesi Tenggara": {
-    "Muna Barat": {
+    "Kab. Muna Barat": {
       "Maginti": [
         "Abadi Jaya",
         "Bangko",
@@ -71723,7 +71723,7 @@
         "Wapae Jaya"
       ]
     },
-    "Konawe": {
+    "Kab. Konawe": {
       "Anggalomoare": [
         "Abelisawah",
         "Andobeu Jaya",
@@ -72126,7 +72126,7 @@
         "Walandawe"
       ]
     },
-    "Konawe Selatan": {
+    "Kab. Konawe Selatan": {
       "Landono": [
         "Abenggi",
         "Amotowo",
@@ -72529,7 +72529,7 @@
         "Lalowaru"
       ]
     },
-    "Konawe Utara": {
+    "Kab. Konawe Utara": {
       "Lasolo": [
         "Abola",
         "Andeo",
@@ -72727,7 +72727,7 @@
         "Ulu Sawa"
       ]
     },
-    "Kolaka Timur": {
+    "Kab. Kolaka Timur": {
       "Aere": [
         "Aere",
         "Aladadio",
@@ -72886,7 +72886,7 @@
         "Watupute"
       ]
     },
-    "Kolaka Utara": {
+    "Kab. Kolaka Utara": {
       "Kodeoha": [
         "Ainani Tajriani",
         "Awo",
@@ -73051,7 +73051,7 @@
         "Wawo"
       ]
     },
-    "Buton Tengah": {
+    "Kab. Buton Tengah": {
       "Mawasangka": [
         "Air Bajo",
         "Balobone",
@@ -73144,7 +73144,7 @@
         "Wulu"
       ]
     },
-    "Bombana": {
+    "Kab. Bombana": {
       "Poleang Selatan": [
         "Akacipong",
         "Batu Putih",
@@ -73333,7 +73333,7 @@
         "Watu Melomba"
       ]
     },
-    "Kolaka": {
+    "Kab. Kolaka": {
       "Samaturu": [
         "Amamutu",
         "Awa",
@@ -73494,7 +73494,7 @@
         "Wulonggere"
       ]
     },
-    "Wakatobi": {
+    "Kab. Wakatobi": {
       "Kaledupa": [
         "Ambeua Raya",
         "Balasuna",
@@ -73613,7 +73613,7 @@
         "Wapia-pia"
       ]
     },
-    "Buton": {
+    "Kab. Buton": {
       "Lasalimu Selatan": [
         "Ambuau Indah",
         "Ambuau Togo",
@@ -73724,7 +73724,7 @@
         "Bajo Bahari"
       ]
     },
-    "Konawe Kepulauan": {
+    "Kab. Konawe Kepulauan": {
       "Wawonii Tenggara": [
         "Bahaba",
         "Dompo-dompo Jaya",
@@ -73836,7 +73836,7 @@
         "Waworope"
       ]
     },
-    "Buton Selatan": {
+    "Kab. Buton Selatan": {
       "Sampolawa": [
         "Bahari",
         "Bahari Dua",
@@ -73922,7 +73922,7 @@
         "Watuampara"
       ]
     },
-    "Muna": {
+    "Kab. Muna": {
       "Kontu Kowuna": [
         "Bahutara",
         "Kafo Foo",
@@ -74118,7 +74118,7 @@
         "Tapitapi"
       ]
     },
-    "Buton Utara": {
+    "Kab. Buton Utara": {
       "Kambowa": [
         "Baluara",
         "Bente",
@@ -74463,7 +74463,7 @@
         "Tembesi"
       ]
     },
-    "Bintan": {
+    "Kab. Bintan": {
       "Telok Sebong": [
         "Ekang Anculai",
         "Kota Baru",
@@ -74536,7 +74536,7 @@
         "Pengikik"
       ]
     },
-    "Karimun": {
+    "Kab. Karimun": {
       "Kundur": [
         "Gading Sari",
         "Lubuk",
@@ -74633,7 +74633,7 @@
         "Telaga Tujuh"
       ]
     },
-    "Lingga": {
+    "Kab. Lingga": {
       "Singkep Barat": [
         "Jagoh",
         "Kuala Raya",
@@ -74771,7 +74771,7 @@
         "Kampung Bugis"
       ]
     },
-    "Kepulauan Anambas": {
+    "Kab. Kepulauan Anambas": {
       "Jemaja": [
         "Air Biru",
         "Landak",
@@ -74847,7 +74847,7 @@
         "Terempa Barat"
       ]
     },
-    "Natuna": {
+    "Kab. Natuna": {
       "Suak Midai": [
         "Air Kumpai",
         "Batu Belanak",
@@ -75073,7 +75073,7 @@
         "Tanjung Rhu"
       ]
     },
-    "Indragiri Hilir": {
+    "Kab. Indragiri Hilir": {
       "Kemuning": [
         "Air Balui",
         "Batu Ampar",
@@ -75351,7 +75351,7 @@
         "Telukdalam"
       ]
     },
-    "Kuantan Singingi": {
+    "Kab. Kuantan Singingi": {
       "Kuantan Mudik": [
         "Air Buluh",
         "Aur Duri",
@@ -75612,7 +75612,7 @@
         "Telukpauh"
       ]
     },
-    "Pelalawan": {
+    "Kab. Pelalawan": {
       "Ukui": [
         "Air Emas",
         "Air Hitam",
@@ -75756,7 +75756,7 @@
         "Teluk Dalam"
       ]
     },
-    "Rokan Hilir": {
+    "Kab. Rokan Hilir": {
       "Pujud": [
         "Air Hitam",
         "Babussalam Rokan",
@@ -75979,7 +75979,7 @@
         "Sungai Segajah Jaya"
       ]
     },
-    "Bengkalis": {
+    "Kab. Bengkalis": {
       "Mandau": [
         "Air Jamban",
         "Babussalam",
@@ -76158,7 +76158,7 @@
         "Titi Akar"
       ]
     },
-    "Indragiri Hulu": {
+    "Kab. Indragiri Hulu": {
       "Rengat Barat": [
         "Air Jernih",
         "Alang Kepayang",
@@ -76382,7 +76382,7 @@
         "Teluk Sungkai"
       ]
     },
-    "Rokan Hulu": {
+    "Kab. Rokan Hulu": {
       "Pendalian Iv Koto": [
         "Air Panas",
         "Bengkolan Salak",
@@ -76561,7 +76561,7 @@
         "Ujung Batu Timur"
       ]
     },
-    "Kampar": {
+    "Kab. Kampar": {
       "Tapung": [
         "Air Terbit",
         "Batu Gajah",
@@ -76855,7 +76855,7 @@
         "Sungai Tonang"
       ]
     },
-    "Kepulauan Meranti": {
+    "Kab. Kepulauan Meranti": {
       "Tebing Tinggi": [
         "Alah Air",
         "Alah Air Timur",
@@ -77025,7 +77025,7 @@
         "Pelintung"
       ]
     },
-    "Siak": {
+    "Kab. Siak": {
       "Sabak Auh": [
         "Bandar Pedada",
         "Bandar Sungai",
@@ -77188,7 +77188,7 @@
     }
   },
   "Sumatera Utara": {
-    "Nias Selatan": {
+    "Kab. Nias Selatan": {
       "Onohazumba": [
         "Helefanikha",
         "Hiliweto",
@@ -77836,7 +77836,7 @@
         "Fadoro You"
       ]
     },
-    "Nias": {
+    "Kab. Nias": {
       "Gido": [
         "Heliweto Gido",
         "Hiliotalua",
@@ -78028,7 +78028,7 @@
         "Dekha"
       ]
     },
-    "Nias Barat": {
+    "Kab. Nias Barat": {
       "Mandrehe Utara": [
         "Hiambanua",
         "Hilimayo",
@@ -78151,7 +78151,7 @@
         "Haliadulo"
       ]
     },
-    "Nias Utara": {
+    "Kab. Nias Utara": {
       "Namohalu Esiwa": [
         "Hilibanua",
         "Lasara",
@@ -78288,7 +78288,7 @@
         "Harewakhe"
       ]
     },
-    "Padang Lawas Utara": {
+    "Kab. Padang Lawas Utara": {
       "Halongonan": [
         "Hiteurat",
         "Hutaimbaru",
@@ -78702,7 +78702,7 @@
         "Aek Nauli"
       ]
     },
-    "Tapanuli Tengah": {
+    "Kab. Tapanuli Tengah": {
       "Kolang": [
         "Hodopa Nauli",
         "Hurlang Muara Nauli",
@@ -78959,7 +78959,7 @@
         "Muara Ode"
       ]
     },
-    "Padang Lawas": {
+    "Kab. Padang Lawas": {
       "Ulu Sosa": [
         "Horuon",
         "Mandian",
@@ -79299,7 +79299,7 @@
         "Gading"
       ]
     },
-    "Mandailing Natal": {
+    "Kab. Mandailing Natal": {
       "Naga Juang": [
         "Humbang I",
         "Sayur Matua",
@@ -79751,7 +79751,7 @@
         "Bangun Purba"
       ]
     },
-    "Tapanuli Selatan": {
+    "Kab. Tapanuli Selatan": {
       "Angkola Timur": [
         "Huraba",
         "Huta Ginjang",
@@ -80058,7 +80058,7 @@
         "Aek Parombunan"
       ]
     },
-    "Tapanuli Utara": {
+    "Kab. Tapanuli Utara": {
       "Pahae Julu": [
         "Huta Barat",
         "Janji Natogu",
@@ -80342,7 +80342,7 @@
         "Mariba Ni Aek"
       ]
     },
-    "Labuhanbatu Selatan": {
+    "Kab. Labuhanbatu Selatan": {
       "Sungai Kanan": [
         "Huta Godang",
         "Langga Payung",
@@ -80501,7 +80501,7 @@
         "Gunung Hasahatan"
       ]
     },
-    "Labuhanbatu": {
+    "Kab. Labuhanbatu": {
       "Bilah Hulu": [
         "Kampung Dalam",
         "S-2 Aek Nabara",
@@ -80619,7 +80619,7 @@
         "Kampung Baru"
       ]
     },
-    "Karo": {
+    "Kab. Karo": {
       "Juhar": [
         "Naga",
         "Nageri",
@@ -80924,7 +80924,7 @@
         "Melas"
       ]
     },
-    "Simalungun": {
+    "Kab. Simalungun": {
       "Pamatang Silima Huta": [
         "Naga Bosar",
         "Naga Saribu",
@@ -81474,7 +81474,7 @@
         "Martimbang"
       ]
     },
-    "Serdang Bedagai": {
+    "Kab. Serdang Bedagai": {
       "Tebing Tinggi": [
         "Naga Kesiangan",
         "Paya Bagas",
@@ -81753,7 +81753,7 @@
         "Manggis"
       ]
     },
-    "Deli Serdang": {
+    "Kab. Deli Serdang": {
       "Tanjung Morawa": [
         "Naga Timbul",
         "Pekan Tg Morawa",
@@ -82193,7 +82193,7 @@
         "Mekar Sari"
       ]
     },
-    "Toba": {
+    "Kab. Toba": {
       "Bonatua Lunasi": [
         "Naga Timbul",
         "Nagatimbul Timur",
@@ -82471,7 +82471,7 @@
         "Meat"
       ]
     },
-    "Humbang Hasundutan": {
+    "Kab. Humbang Hasundutan": {
       "Lintong Nihuta": [
         "Nagasaribu I",
         "Nagasaribu Ii",
@@ -82647,7 +82647,7 @@
         "Marbun Toruan"
       ]
     },
-    "Samosir": {
+    "Kab. Samosir": {
       "Nainggolan": [
         "Nainggolan",
         "Pananggangan",
@@ -82801,7 +82801,7 @@
         "Huta Gurgur"
       ]
     },
-    "Langkat": {
+    "Kab. Langkat": {
       "Salapian": [
         "Naman Jahe",
         "Pamah Tambunan",
@@ -83370,7 +83370,7 @@
         "Mencirim"
       ]
     },
-    "Pakpak Bharat": {
+    "Kab. Pakpak Bharat": {
       "Pagindar": [
         "Napatalun Perlambuken",
         "Pagindar",
@@ -83440,7 +83440,7 @@
         "Kecupak Ii"
       ]
     },
-    "Asahan": {
+    "Kab. Asahan": {
       "Pulau Rakyat": [
         "Ofa Padang Mahondang",
         "Orika",
@@ -83696,7 +83696,7 @@
         "Lubuk Palas"
       ]
     },
-    "Dairi": {
+    "Kab. Dairi": {
       "Pegagan Hilir": [
         "Onan Lama",
         "Perrik Mbue",
@@ -83944,7 +83944,7 @@
         "Deblod Sundoro"
       ]
     },
-    "Labuhanbatu Utara": {
+    "Kab. Labuhanbatu Utara": {
       "Aek Kuo": [
         "Padang Maninjau",
         "Perk. Padang Halaban",
@@ -84097,7 +84097,7 @@
         "Matahalasan"
       ]
     },
-    "Batu Bara": {
+    "Kab. Batu Bara": {
       "Medang Deras": [
         "Pangkalan Dodek",
         "Nenas Siam",
@@ -84274,7 +84274,7 @@
     }
   },
   "Kalimantan Timur": {
-    "Penajam Paser Utara": {
+    "Kab. Penajam Paser Utara": {
       "Waru": [
         "Sesulu",
         "Api-api",
@@ -84338,7 +84338,7 @@
         "Wono Sari"
       ]
     },
-    "Berau": {
+    "Kab. Berau": {
       "Kelay": [
         "Sido Bangen",
         "Lesan Dayak",
@@ -84557,7 +84557,7 @@
         "Teluk Lerong Ulu"
       ]
     },
-    "Kutai Kartanegara": {
+    "Kab. Kutai Kartanegara": {
       "Muara Kaman": [
         "Sidomukti",
         "Benua Puhun",
@@ -84836,7 +84836,7 @@
         "Sebelimbingan"
       ]
     },
-    "Kutai Timur": {
+    "Kab. Kutai Timur": {
       "Kombeng": [
         "Sidomulyo",
         "Sri Pantun",
@@ -85015,7 +85015,7 @@
         "Tanjung Mangkaliat"
       ]
     },
-    "Kutai Barat": {
+    "Kab. Kutai Barat": {
       "Barong Tongkok": [
         "Simpang Raya",
         "Sumber Sari",
@@ -85243,7 +85243,7 @@
         "Linggang Tutung"
       ]
     },
-    "Mahakam Ulu": {
+    "Kab. Mahakam Ulu": {
       "Long Hubung": [
         "Sirau",
         "Datah Bilang Baru",
@@ -85305,7 +85305,7 @@
         "Tiong Ohang"
       ]
     },
-    "Paser": {
+    "Kab. Paser": {
       "Batu Sopang": [
         "Songka",
         "Sungai Terik",
@@ -85544,7 +85544,7 @@
     }
   },
   "Kalimantan Utara": {
-    "Malinau": {
+    "Kab. Malinau": {
       "Kayan Selatan": [
         "Sungai Barang",
         "Lidung Payau",
@@ -85685,7 +85685,7 @@
         "Sungai Anai"
       ]
     },
-    "Nunukan": {
+    "Kab. Nunukan": {
       "Sebatik Tengah": [
         "Aji Kuning",
         "Bukit Harapan",
@@ -85969,7 +85969,7 @@
         "Tabur Lestari"
       ]
     },
-    "Bulungan": {
+    "Kab. Bulungan": {
       "Sekatak": [
         "Ambalat",
         "Anjar Arip",
@@ -86072,7 +86072,7 @@
         "Tanjung Buka"
       ]
     },
-    "Tana Tidung": {
+    "Kab. Tana Tidung": {
       "Muruk Rian": [
         "Balayan Ari",
         "Kapuak",
@@ -86148,7 +86148,7 @@
     }
   },
   "Sulawesi Utara": {
-    "Bolaang Mongondow": {
+    "Kab. Bolaang Mongondow": {
       "Lolayan": [
         "Abak",
         "Bakan",
@@ -86382,7 +86382,7 @@
         "Sinsingon Timur"
       ]
     },
-    "Bolaang Mongondow Selatan": {
+    "Kab. Bolaang Mongondow Selatan": {
       "Pinolosian Tengah": [
         "Adow",
         "Adow Selatan",
@@ -86479,7 +86479,7 @@
         "Tolotoyon"
       ]
     },
-    "Kepulauan Sangihe": {
+    "Kab. Kepulauan Sangihe": {
       "Tabukan Selatan Tengah": [
         "Aha Patung",
         "Beeng",
@@ -86678,7 +86678,7 @@
         "Matutuang"
       ]
     },
-    "Minahasa Utara": {
+    "Kab. Minahasa Utara": {
       "Likupang Barat": [
         "Airbanua",
         "Bahoi",
@@ -86831,7 +86831,7 @@
         "Wusa"
       ]
     },
-    "Kepulauan Talaud": {
+    "Kab. Kepulauan Talaud": {
       "Damau": [
         "Akas",
         "Akas Balane",
@@ -87024,7 +87024,7 @@
         "Pulau Miangas"
       ]
     },
-    "Kepulauan Siau Tagulandang Biaro": {
+    "Kab. Kepulauan Siau Tagulandang Biaro": {
       "Siau Timur": [
         "Akesimbeka",
         "Apelawo",
@@ -87250,7 +87250,7 @@
         "Titiwungan Utara"
       ]
     },
-    "Minahasa": {
+    "Kab. Minahasa": {
       "Langowan Timur": [
         "Amongena I",
         "Amongena II",
@@ -87572,7 +87572,7 @@
         "Kalasey Satu"
       ]
     },
-    "Bolaang Mongondow Utara": {
+    "Kab. Bolaang Mongondow Utara": {
       "Sangkub": [
         "Ampeng Sembeka",
         "Busisingo",
@@ -87693,7 +87693,7 @@
         "Wakat"
       ]
     },
-    "Minahasa Tenggara": {
+    "Kab. Minahasa Tenggara": {
       "Touluaan Selatan": [
         "Banga",
         "Bunag",
@@ -87863,7 +87863,7 @@
         "Silian Utara"
       ]
     },
-    "Bolaang Mongondow Timur": {
+    "Kab. Bolaang Mongondow Timur": {
       "Modayag Barat": [
         "Bangkudai Barat",
         "Bangunan Wuwuk",
@@ -87960,7 +87960,7 @@
         "Atoga"
       ]
     },
-    "Minahasa Selatan": {
+    "Kab. Minahasa Selatan": {
       "Maesaan": [
         "Bojonegoro",
         "Kinamang",
@@ -88361,7 +88361,7 @@
     }
   },
   "Aceh": {
-    "Pidie Jaya": {
+    "Kab. Pidie Jaya": {
       "Bandar Baru": [
         "Abah Lueng",
         "Alue",
@@ -88601,7 +88601,7 @@
         "Tunong"
       ]
     },
-    "Simeulue": {
+    "Kab. Simeulue": {
       "Teupah Tengah": [
         "Abail",
         "Batu-Batu",
@@ -88761,7 +88761,7 @@
         "Serafon"
       ]
     },
-    "Bireuen": {
+    "Kab. Bireuen": {
       "Juli": [
         "Abeuk Budi",
         "Alue Rambong",
@@ -89406,7 +89406,7 @@
         "Uteun Raya"
       ]
     },
-    "Aceh Timur": {
+    "Kab. Aceh Timur": {
       "Madat": [
         "Abeuk Geulanteu",
         "Bintah",
@@ -89969,7 +89969,7 @@
         "Ulee Glee"
       ]
     },
-    "Aceh Utara": {
+    "Kab. Aceh Utara": {
       "Lhoksukon": [
         "Abeuk Leupon",
         "Alue Abee",
@@ -90877,7 +90877,7 @@
         "Tanjong Dama"
       ]
     },
-    "Pidie": {
+    "Kab. Pidie": {
       "Pidie": [
         "Abo Teubeng",
         "Alue",
@@ -91657,7 +91657,7 @@
         "Mee"
       ]
     },
-    "Aceh Barat Daya": {
+    "Kab. Aceh Barat Daya": {
       "Tangan-Tangan": [
         "Adan",
         "Bineh Krueng",
@@ -91829,7 +91829,7 @@
         "Ujung Padang"
       ]
     },
-    "Gayo Lues": {
+    "Kab. Gayo Lues": {
       "Blangkejeren": [
         "Agusan",
         "Bacang",
@@ -91989,7 +91989,7 @@
         "Uning Pune"
       ]
     },
-    "Aceh Selatan": {
+    "Kab. Aceh Selatan": {
       "Tapaktuan": [
         "Air Berudang",
         "Air Pinang",
@@ -92287,7 +92287,7 @@
         "Ujong Pulo Rayeuk"
       ]
     },
-    "Aceh Tamiang": {
+    "Kab. Aceh Tamiang": {
       "Seruway": [
         "Air Masin",
         "Alur Alim",
@@ -92526,7 +92526,7 @@
         "Tenggulun"
       ]
     },
-    "Aceh Besar": {
+    "Kab. Aceh Besar": {
       "Ingin Jaya": [
         "Ajee Cut",
         "Ajee Pagar Air",
@@ -93178,7 +93178,7 @@
         "Teuladan"
       ]
     },
-    "Aceh Tenggara": {
+    "Kab. Aceh Tenggara": {
       "Leuser": [
         "Akhih Majile",
         "Bintang Alga Musara",
@@ -93597,7 +93597,7 @@
         "Titi Pasir"
       ]
     },
-    "Bener Meriah": {
+    "Kab. Bener Meriah": {
       "Gajah Putih": [
         "Alam Jaya",
         "Gajah Putih",
@@ -93851,7 +93851,7 @@
         "Pasir Putih"
       ]
     },
-    "Aceh Jaya": {
+    "Kab. Aceh Jaya": {
       "Panga": [
         "Alue Abed",
         "Alue Pande",
@@ -94121,7 +94121,7 @@
         "Ujong Pacu"
       ]
     },
-    "Aceh Barat": {
+    "Kab. Aceh Barat": {
       "Arongan Lambalek": [
         "Alue Bagok",
         "Alue Batee",
@@ -94471,7 +94471,7 @@
         "Batu Jaya"
       ]
     },
-    "Nagan Raya": {
+    "Kab. Nagan Raya": {
       "Tadu Raya": [
         "Alue Bata",
         "Alue Gajah",
@@ -94903,7 +94903,7 @@
         "Peunyerat"
       ]
     },
-    "Aceh Singkil": {
+    "Kab. Aceh Singkil": {
       "Suro Makmur": [
         "Alur Linci",
         "Bulu Ara",
@@ -95068,7 +95068,7 @@
         "Paya Seunara"
       ]
     },
-    "Aceh Tengah": {
+    "Kab. Aceh Tengah": {
       "Linge": [
         "Antara",
         "Delung Sekinel",
@@ -95489,7 +95489,7 @@
     }
   },
   "Maluku Utara": {
-    "Halmahera Barat": {
+    "Kab. Halmahera Barat": {
       "Jailolo": [
         "Acango",
         "Akediri",
@@ -95678,7 +95678,7 @@
         "Worat-worat"
       ]
     },
-    "Pulau Morotai": {
+    "Kab. Pulau Morotai": {
       "Morotai Selatan": [
         "Aha",
         "Daeo",
@@ -95780,7 +95780,7 @@
         "Wewemo"
       ]
     },
-    "Pulau Taliabu": {
+    "Kab. Pulau Taliabu": {
       "Taliabu Utara": [
         "Air Bulan",
         "Air Kalimat",
@@ -95869,7 +95869,7 @@
         "Tubang"
       ]
     },
-    "Halmahera Selatan": {
+    "Kab. Halmahera Selatan": {
       "Obi": [
         "Air Mangga Indah",
         "Akegula",
@@ -96180,7 +96180,7 @@
         "Wayaua"
       ]
     },
-    "Halmahera Tengah": {
+    "Kab. Halmahera Tengah": {
       "Weda Selatan": [
         "Air Salobar",
         "Kluting Jaya",
@@ -96263,7 +96263,7 @@
         "Woekob"
       ]
     },
-    "Halmahera Timur": {
+    "Kab. Halmahera Timur": {
       "Wasile Selatan": [
         "Ake Jawi",
         "Bina Gara",
@@ -96494,7 +96494,7 @@
         "Tuguwaji"
       ]
     },
-    "Halmahera Utara": {
+    "Kab. Halmahera Utara": {
       "Loloda Utara": [
         "Asimiro",
         "Doitia",
@@ -96726,7 +96726,7 @@
         "Wosia"
       ]
     },
-    "Kepulauan Sula": {
+    "Kab. Kepulauan Sula": {
       "Mangoli Selatan": [
         "Auponhia",
         "Buya",
@@ -96927,7 +96927,7 @@
     }
   },
   "Papua Barat Daya": {
-    "Raja Ampat": {
+    "Kab. Raja Ampat": {
       "Salawati Barat": [
         "Kalwal",
         "Kaliam",
@@ -97098,7 +97098,7 @@
         "Yensner"
       ]
     },
-    "Maybrat": {
+    "Kab. Maybrat": {
       "Ayamaru Jaya": [
         "Adoh",
         "Orain",
@@ -97408,7 +97408,7 @@
         "Wormu"
       ]
     },
-    "Sorong Selatan": {
+    "Kab. Sorong Selatan": {
       "Kokoda Utara": [
         "Adona",
         "Atori",
@@ -97562,7 +97562,7 @@
         "Sisir"
       ]
     },
-    "Tambrauw": {
+    "Kab. Tambrauw": {
       "Mawabuan": [
         "Afrawi",
         "Ajokwapi",
@@ -97838,7 +97838,7 @@
         "Weyaf"
       ]
     },
-    "Sorong": {
+    "Kab. Sorong": {
       "Aimas": [
         "Aimas",
         "Aimo",
@@ -98218,7 +98218,7 @@
     }
   },
   "Gorontalo": {
-    "Bone Bolango": {
+    "Kab. Bone Bolango": {
       "Suwawa Tengah": [
         "Alale",
         "Duano",
@@ -98421,7 +98421,7 @@
         "Suka Makmur"
       ]
     },
-    "Gorontalo Utara": {
+    "Kab. Gorontalo Utara": {
       "Kwandang": [
         "Alata Karya",
         "Botungobungo",
@@ -98568,7 +98568,7 @@
         "Tihengo"
       ]
     },
-    "Gorontalo": {
+    "Kab. Gorontalo": {
       "Dungaliyo": [
         "Ambara",
         "Ayuhula",
@@ -98813,7 +98813,7 @@
         "Tilihuwa"
       ]
     },
-    "Boalemo": {
+    "Kab. Boalemo": {
       "Paguyaman Pantai": [
         "Apitalawu",
         "Bangga",
@@ -98916,7 +98916,7 @@
         "Tangga Jaya"
       ]
     },
-    "Pahuwato": {
+    "Kab. Pahuwato": {
       "Lemito": [
         "Area Tidak Terdefinisi",
         "Area Tidak Terdefinisi",
@@ -98928,7 +98928,7 @@
         "Area Tidak Terdefinisi"
       ]
     },
-    "Pohuwato": {
+    "Kab. Pohuwato": {
       "Randangan": [
         "Ayula",
         "Banuroja",

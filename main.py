@@ -2,8 +2,10 @@ import warnings
 warnings.filterwarnings("ignore", module="google.oauth2")
 
 import os
+import io
 import json
 import tools
+import zipfile
 import requests
 import numpy as np
 import pandas as pd
@@ -62,7 +64,7 @@ async def read_inbox():
 num_endpoints = 16
 
 # Endpoint to receive SMS message, to validate, and to forward the pre-processed data
-for port in range(1, num_endpoints + 1):
+for port in range(17, num_endpoints + 17):
     @app.post(f"/receive-{port}")
     async def receive_sms(
         request: Request,
@@ -385,8 +387,6 @@ async def get_uid(
 # Endpoint to generate SCTO xlsform
 @app.post("/generate_xlsform")
 async def generate_xlsform(
-    form_title: str = Form(...),
-    form_id: str = Form(...),
     target_file: UploadFile = Form(...)
     ):
 
@@ -398,17 +398,15 @@ async def generate_xlsform(
     df = pd.read_excel(f'{local_disk}/target.xlsx')
 
     # Rename regions
-    df['Provinsi Ori'] = df['Provinsi'].copy()
     df['Kab/Kota Ori'] = df['Kab/Kota'].copy()
     df['Kecamatan Ori'] = df['Kecamatan'].copy()
     df['Kelurahan Ori'] = df['Kelurahan'].copy()
     for index, row in df.iterrows():
-        input_regions = [row['Provinsi'], row['Kab/Kota'], row['Kecamatan'], row['Kelurahan']]
+        input_regions = [row['Kab/Kota'], row['Kecamatan'], row['Kelurahan']]
         output_regions = tools.rename_region(input_regions)
-        df.loc[index, 'Provinsi'] = output_regions[0]
-        df.loc[index, 'Kab/Kota'] = output_regions[1]
-        df.loc[index, 'Kecamatan'] = output_regions[2]
-        df.loc[index, 'Kelurahan'] = output_regions[3]
+        df.loc[index, 'Kab/Kota'] = output_regions[0]
+        df.loc[index, 'Kecamatan'] = output_regions[1]
+        df.loc[index, 'Kelurahan'] = output_regions[2]
 
     # Save the target file after renaming regions
     df.to_excel(f'{local_disk}/target.xlsx', index=False)
@@ -418,30 +416,31 @@ async def generate_xlsform(
         f'{{"UID": "{uid}", '
         f'"Active": false, '
         f'"Complete": false, '
-        f'"SMS": false, '
-        f'"SCTO": false, '
-        f'"SMS Int": 0, '
-        f'"SCTO Int": 0, '
-        f'"Status": "Empty", '
-        f'"Korprov": "{korprov}", '
+        f'"Dapil DPR RI": "{dapil_dprri}", '
+        f'"Dapil DPRD Jawa Barat": "{dapil_dprd}", '
+        f'"SMS-1": false, '
+        f'"SMS-2": false, '
+        f'"SCTO-1": false, '
+        f'"SCTO-2": false, '        
+        f'"SCTO-3": false, '
+        f'"Status Pilpres": "Empty", '
+        f'"Status DPR RI": "Empty", '
+        f'"Status DPRD Jabar": "Empty", '
         f'"Korwil": "{korwil}", '
-        f'"Provinsi": "{provinsi}", '
         f'"Kab/Kota": "{kab_kota}", '
         f'"Kecamatan": "{kecamatan}", '
         f'"Kelurahan": "{kelurahan}", '
-        f'"Provinsi Ori": "{provinsi_ori}", '
         f'"Kab/Kota Ori": "{kab_kota_ori}", '
         f'"Kecamatan Ori": "{kecamatan_ori}", '
         f'"Kelurahan Ori": "{kelurahan_ori}"}}'
-        for uid, korprov, korwil, provinsi, kab_kota, kecamatan, kelurahan, provinsi_ori, kab_kota_ori, kecamatan_ori, kelurahan_ori in zip(
+        for uid, dapil_dprri, dapil_dprd, korwil, kab_kota, kecamatan, kelurahan, kab_kota_ori, kecamatan_ori, kelurahan_ori in zip(
             df['UID'],
-            df['Korprov'],
+            df['Dapil DPR RI'],
+            df['Dapil DPRD Jawa Barat'],
             df['Korwil'],
-            df['Provinsi'],
             df['Kab/Kota'],
             df['Kecamatan'],
             df['Kelurahan'],
-            df['Provinsi Ori'],
             df['Kab/Kota Ori'],
             df['Kecamatan Ori'],
             df['Kelurahan Ori']
@@ -463,15 +462,25 @@ async def generate_xlsform(
         json.dump(uid_dict, json_file)
 
     # Generate xlsform logic using the target file
-    tools.create_xlsform_template(form_title, form_id)
-    xlsform_path = f'{local_disk}/xlsform_{form_id}.xlsx'
+    tools.create_xlsform_pilpres()
+    tools.create_xlsform_dpr()
+    tools.create_xlsform_jabar()
+    xlsform_paths = [
+        f'{local_disk}/xlsform_pilpres.xlsx',
+        f'{local_disk}/xlsform_dpr.xlsx',
+        f'{local_disk}/xlsform_jabar.xlsx'
+    ]
 
-    def file_generator():
-        with open(xlsform_path, 'rb') as file_content:
-            yield from file_content
+    def file_generator(paths):
+        with io.BytesIO() as buffer:
+            with zipfile.ZipFile(buffer, 'w') as zip_file:
+                for path in paths:
+                    zip_file.write(path, arcname=path.split('/')[-1])
+            buffer.seek(0)
+            yield from buffer
 
-    response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_{form_id}.xlsx"
+    response = StreamingResponse(file_generator(xlsform_paths), media_type='application/zip')
+    response.headers["Content-Disposition"] = "attachment; filename=xlsforms.zip"
 
     return response
 
@@ -490,7 +499,6 @@ async def delete_event(
 # Endpoint to trigger SCTO data processing
 @app.post("/scto_data")
 def scto_data(
-    form_id: str = Form(...), 
     input_time: datetime = Form(...), 
     ):
 
@@ -498,23 +506,47 @@ def scto_data(
     print(f'\nInput Time: {input_time}')
     #####################
 
+    # Calculate the oldest completion date based on the current time
+    date_obj = input_time - timedelta(seconds=301)
+
+    ################# PILPRES #################
     try:
-
-        # Calculate the oldest completion date based on the current time
-        date_obj = input_time - timedelta(seconds=301)
-
-        # Build SCTO connection
-        scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
-
-        # Retrieve data from SCTO
-        list_data = scto.get_form_data(form_id, format='json', shape='wide', oldest_completion_date=date_obj)
-
-        # Loop over data
+        scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)        
+        # Retrieve data from SCTO (Pilpres)
+        list_data = scto.get_form_data('qc_pilpres_pks_jabar', format='json', shape='wide', oldest_completion_date=date_obj)
         if len(list_data) > 0:
             for data in list_data:
                 # Run 'scto_process' function asynchronously
                 with concurrent.futures.ThreadPoolExecutor() as executor:
-                    executor.submit(tools.scto_process, data)
+                    executor.submit(tools.scto_process_pilpres, data)
     
     except Exception as e:
-        print(f'Process: scto_data endpoint\t Keyword: {e}\n')
+        print(f'Process: scto_pilpres endpoint\t Keyword: {e}\n')
+
+    ################# DPR-RI #################
+    try:
+        scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)        
+        # Retrieve data from SCTO (Pilpres)
+        list_data = scto.get_form_data('qc_dprri_pks_jabar', format='json', shape='wide', oldest_completion_date=date_obj)
+        if len(list_data) > 0:
+            for data in list_data:
+                # Run 'scto_process' function asynchronously
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    executor.submit(tools.scto_process_dpr, data)
+    
+    except Exception as e:
+        print(f'Process: scto_dpr endpoint\t Keyword: {e}\n')
+
+    ################# DPRD Provinsi Jawa Barat #################
+    try:
+        scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
+        # Retrieve data from SCTO (Pilpres)
+        list_data = scto.get_form_data('qc_dprdprov_pks_jabar', format='json', shape='wide', oldest_completion_date=date_obj)
+        if len(list_data) > 0:
+            for data in list_data:
+                # Run 'scto_process' function asynchronously
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    executor.submit(tools.scto_process_jabar, data)
+    
+    except Exception as e:
+        print(f'Process: scto_jabar endpoint\t Keyword: {e}\n')
