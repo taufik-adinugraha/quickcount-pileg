@@ -1,12 +1,13 @@
 import os
+import re
 import json
 import random
 import requests
 import threading
 import numpy as np
 import pandas as pd
+from Bio import Align
 import geopandas as gpd
-from fuzzywuzzy import process
 from dotenv import load_dotenv
 from shapely.geometry import Point
 from google.cloud import documentai
@@ -71,18 +72,48 @@ parpol = {'PKB': 'PKB',
 # Auxiliary Functions
 
 # Rename regions
+list_provinsi = list(region_data.keys())
 def rename_region(data):
-    provinsi = 'Jawa Barat'
+    # provinsi
+    reference = list_provinsi
+    provinsi = find_closest_string(data[0], reference)
     # kabupaten/kota
     reference = list(region_data[provinsi].keys())
-    kabkota, _ = process.extractOne(data[0], reference)       
+    kabkota = find_closest_string(data[1], reference)       
     # kecamatan
     reference = list(region_data[provinsi][kabkota].keys())
-    kecamatan, _ = process.extractOne(data[1], reference) 
+    kecamatan = find_closest_string(data[2], reference) 
     # kelurahan
     reference = list(region_data[provinsi][kabkota][kecamatan])
-    kelurahan, _ = process.extractOne(data[2], reference)
-    return kabkota, kecamatan, kelurahan
+    kelurahan = find_closest_string(data[3], reference)
+    return provinsi, kabkota, kecamatan, kelurahan
+
+def preprocess_text(text):
+    # Remove spaces and punctuation, convert to lowercase
+    return re.sub(r'\W+', '', text.lower())
+
+def compare_sequences(seq1, seq2):
+    aligner = Align.PairwiseAligner()
+    alignments = aligner.align(seq1, seq2)
+    best_alignment = alignments[0]  # Assuming you want the best alignment
+    return best_alignment.score
+
+def compare_with_list(string1, string2_list):
+    scores = []
+    for seq2 in string2_list:
+        score = compare_sequences(string1, seq2)
+        scores.append(score)
+    return scores
+
+def find_closest_string(string1, string_list):
+    preprocessed_string_list = [preprocess_text(s) for s in string_list]
+    preprocessed_target = preprocess_text(string1)
+    scores = compare_with_list(preprocessed_target, preprocessed_string_list)
+    ss = [len([i for i in list(s2) if i not in list(preprocessed_target)]) for s2 in preprocessed_string_list]
+    scores = np.array(scores) - np.array(ss)
+    closest_index = np.argmax(scores)
+    return string_list[closest_index]
+
 
 # Get administrative regions from coordinate
 def get_location(coordinate):
@@ -92,11 +123,13 @@ def get_location(coordinate):
     selected_row = gdf[gdf.geometry.contains(point)]
     # Output
     out = {
+        'Provinsi': selected_row['Provinsi'].values[0],
         'Kab/Kota': selected_row['Kab/Kota'].values[0],
         'Kecamatan': selected_row['Kecamatan'].values[0],
         'Kelurahan': selected_row['Kelurahan'].values[0]
     }
     return out
+
 
 # Document inference
 def read_form(scto, attachment_url):
@@ -126,9 +159,22 @@ def read_form(scto, attachment_url):
     out = client.process_document(request)
     entities = out.document.entities
     output = {}
-    # votes
-    for entity in entities[0].properties:
-        output.update({entity.type_: entity.normalized_value.text})
+    if len(entities) > 0:
+        # Valid Votes
+        try:
+            for entity in entities[0].properties:
+                output.update({entity.type_: entity.normalized_value.text})
+        except:
+            pass
+        try:
+            # Invalid votes
+            entity = entities[1]
+            output.update({entity.type_: entity.normalized_value.text})
+        except:
+            pass
+    else:
+        ai_votes = [0] * 3
+        ai_invalid = 0
 
     # Post-processing
     ai_votes = [0] * 3
@@ -137,7 +183,12 @@ def read_form(scto, attachment_url):
             ai_votes[var_] = remove_non_numbers_and_convert_to_int(output[f'suara{var_+1}'])
         except:
             ai_votes[var_] = 0
-    return ai_votes
+    try:
+        ai_invalid = remove_non_numbers_and_convert_to_int(output['suara_rusak'])
+    except:
+        ai_invalid = 0
+            
+    return ai_votes, ai_invalid
 
 
 def remove_non_numbers_and_convert_to_int(input_string):
@@ -388,36 +439,6 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
                                     'calculation': calculation
                                     }, ignore_index=True)
 
-    # survey_dpr = survey_dpr.append({'type': 'begin_group',
-    #                               'name': 'parpol',
-    #                               'label': 'Masukkan total suara masing-masing partai.',
-    #                              }, ignore_index=True) 
-    # for (n, l) in zip([f'PARPOL_{i}' for i in range(1,19)], list_parpol):
-    #     survey_dpr = survey_dpr.append({'type': 'integer',
-    #                                   'name': n,
-    #                                   'label': l,
-    #                                   'required': 'yes',
-    #                                   'default': 0
-    #                                  }, ignore_index=True)
-    # survey_dpr = survey_dpr.append({'type': 'end_group',
-    #                               'name': 'parpol',
-    #                              }, ignore_index=True) 
-
-    # Upload images
-    survey_dpr = survey_dpr.append({'type': 'begin_group',
-                                  'name': 'upload',
-                                  'label': 'Bagian untuk mengunggah/upload foto formulir C1',
-                                 }, ignore_index=True) 
-    for (n, l) in zip([f'p{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano {list_parpol[i-1]}' for i in range(1, 19)]):
-        survey_dpr = survey_dpr.append({'type': 'image',
-                                      'name': n,
-                                      'label': l,
-                                      'required': 'yes',
-                                     }, ignore_index=True)
-    survey_dpr = survey_dpr.append({'type': 'end_group',
-                                  'name': 'upload',
-                                 }, ignore_index=True) 
-
     # Caleg DPR RI
     survey_dpr = survey_dpr.append({'type': 'begin_group',
                                   'name': 'CALEG',
@@ -571,6 +592,21 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
                                   'name': 'CALEG',
                                  }, ignore_index=True) 
 
+    # Upload images
+    survey_dpr = survey_dpr.append({'type': 'begin_group',
+                                  'name': 'upload',
+                                  'label': 'Bagian untuk mengunggah/upload foto formulir C1',
+                                 }, ignore_index=True) 
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 7)]):
+        survey_dpr = survey_dpr.append({'type': 'image',
+                                      'name': n,
+                                      'label': l,
+                                      'required': 'yes',
+                                     }, ignore_index=True)
+    survey_dpr = survey_dpr.append({'type': 'end_group',
+                                  'name': 'upload',
+                                 }, ignore_index=True) 
+
     # Save to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_dpr.xlsx', engine='openpyxl') as writer:
         survey_dpr.to_excel(writer, index=False, sheet_name='survey')
@@ -628,6 +664,168 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
     # Save settings to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_dpr.xlsx', engine='openpyxl', mode='a') as writer:
         settings_df.to_excel(writer, index=False, sheet_name='settings')
+
+
+
+
+# ================================================================================================================
+# Function to generate SCTO xlsform DPR RI
+
+def create_xlsform_dpd():
+
+    # Load target data from Excel
+    target_data = pd.read_excel(f'{local_disk}/target.xlsx')
+
+    # List UID
+    list_uid = '|'.join(target_data['UID'].tolist())
+    
+    # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    
+    # Create a DataFrame for the survey sheet
+    survey_dpr = pd.DataFrame(columns=['type', 'name', 'label', 'required', 'choice_filter', 'calculation', 'constraint', 'default', 'appearance', 'relevance'])
+
+    # default fields
+    survey_dpd['type'] = ['start', 'end', 'deviceid', 'phonenumber', 'username', 'calculate', 'calculate', 'caseid']
+    survey_dpd['name'] = ['starttime', 'endtime', 'deviceid', 'devicephonenum', 'username', 'device_info', 'duration', 'caseid']
+    survey_dpd['calculation'] = ['', '', '', '', '', 'device-info()', 'duration()', '']
+    
+    # UID
+    survey_dpd = survey_dpd.append({'type': 'text',
+                                    'name': 'UID',
+                                    'label': 'Masukkan UID (3 karakter) yang sama dengan UID SMS',
+                                    'required': 'yes',
+                                    'constraint': f"string-length(.) = 3 and regex(., '^({list_uid})$')",
+                                    'constraint message': 'UID tidak terdaftar'
+                                    }, ignore_index=True)    
+
+    # Caleg DPD I
+    survey_dpd = survey_dpd.append({'type': 'begin_group',
+                                  'name': 'CALEG',
+                                  'label': 'PEROLEHAN SUARA CALON LEGISLATIF DPD I',
+                                 }, ignore_index=True)
+    data_dpd_1= [
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 1-15).", "", "", "", ""),
+        ("integer", "CALONDPD_1", "1. AA ADE KADARISMAN, S.Sos., M.T.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_2", "2. AANYA RINA CASMAYANTI, S.E.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_3", "3. ABAS ABDUL JALIL", "yes", 0, "", ""),
+        ("integer", "CALONDPD_4", "4. H. ACENG HM FIKRI, S.Ag.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_5", "5. H. ADIL MAKMUR SANTOSA, S.Pd., M.Si.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_6", "6. Dr. AEP SAEPUDIN MUHTAR, M.Sos.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_7", "7. AGITA NURFIANTI, S.Psi.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_8", "8. A IRWAN BOLA", "yes", 0, "", ""),
+        ("integer", "CALONDPD_9", "9. AJI SAPTAJI, S.H.I., M.E.Sy.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_10", "10. ALFIANSYAH KOMENG", "yes", 0, "", ""),
+        ("integer", "CALONDPD_11", "11. K.H. AMANG SYAFRUDIN, M.M.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_12", "12. AMBU USDEK KANIAWATI, S.Sos.", "yes", 0, "", ""),
+        ("integer", "CALONDPD_13", "13. ANDRI PERKASA KANTAPRAWIRA, S.I.P., M.M", "yes", 0, "", ""),
+        ("integer", "CALONDPD_14", "14. ANNIDA ALLIVIA", "yes", 0, "", ""),
+        ("integer", "CALONDPD_15", "15. O OGI SOS", "yes", 0, "", "")
+    ]
+
+    data_dpd_2= [
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 16-30).", "", "", "", ""),
+        ("integer",	"CALONDPD_16", "16. ARIF RAHMAN HIDAYAT", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_17", "17. A. TAUPIK HIDAYAT", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_18", "18. K.H. A WAWAN GHOZALI", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_19", "19. BIBEN FIKRIANA, S.Kep., Ners., M.Kep.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_20", "20. BUDIYANTO, S.Pi.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_21", "21. BUDIYONO, S.P.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_22", "22. DEDE AMAR", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_23", "23. DEDI RUDIANSYAH, S.T.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_24", "24. DENDA ALAMSYAH, S.T.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_25", "25. DENI RUSYNIANDI, S.Ag.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_26", "26. DIAN RAHADIAN", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_27", "27. DJUMONO", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_28", "28. EDI KUSDIANA, S.A.P., M.M.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_29", "29. Ir. ELAN HERYANTO", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_30", "30. Dra. Ir. Hj. ENI SUMARNI, M.Kes.", "yes", 0, "", "")
+    ]
+
+    data_dpd_3= [
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 31-45).", "", "", "", ""),
+        ("integer",	"CALONDPD_31", "31. ERNAWATY TAMPUBOLON, S.T., M.Th.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_32", "32. Dr. HAIDAN S.Pd.I., S.H., M.Ag.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_33", "33. HENDRIK KURNIAWAN, S.Pd.I", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_34", "34. Dr. Hj. IFA FAIZAH ROHMAH, M.Pd.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_35", "35. IMAM SOLAHUDIN, S.T., S.Ag., M.Si.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_36", "36. IMAM SUGIARTO, S.H.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_37", "37. JAHENOS SARAGIH, S.Th., M.Th., M.M", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_38", "38. JAJANG KURNIA, S.Sos., M.Si.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_39", "39. JIHAN FAHIRA", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_40", "40. MUHAMAD DAWAM", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_41", "41. MUHAMMAD MURTADLOILLAH", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_42", "42. MUHAMMAD YAMIN, M.H.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_43", "43. MULYADI ELHAN ZAKARIA", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_44", "44. RIA SUGIAT, S.H.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_45", "45. RIFKI KARTINI", "yes", 0, "", "")
+    ]
+
+    data_dpd_4= [
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 46-54).", "", "", "", ""),
+        ("integer",	"CALONDPD_46", "46. ROBBY MAULANA ZULKARNAEN", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_47", "47. RUSDI HIDAYAT", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_48", "48. Dr. SITTI HIKMAWATTY, S.ST., M.Pd.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_49", "49. Dr. Drs. SONNY HERSONA GW, M.M", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_50", "50. Drs. H. SURATTO SISWODIHARJO", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_51", "51. Dr. SUROYO", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_52", "52. TEDY GIANTARA, S.T.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_53", "53. WAWAN DEDE AMUNG SUTARYA", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_54", "54. YUNITA DIAN SUWANDARI, S.T., M.M., M.T.", "yes", 0, "", "")
+    ]
+
+    # Combine all the data
+    list_data_dpd = [data_dpd_1, data_dpd_2, data_dpd_3, data_dpd_4]
+    combined_data = []
+    for i, data_dpd in enumerate(list_data_dpd):
+        combined_data += [("begin group", f"DPD_{i+1}", f"PEROLEHAN SUARA CALEG DPD I", "", "", "field-list", "")] + data_dpd + [("end group", f"DPD_{i+1}", "", "", "", "", "")]
+    tmp = pd.DataFrame(combined_data, columns=["type", "name", "label", "required", "default", "appearance", "relevance"])
+
+    survey_dpd = pd.concat([survey_dpd, tmp])
+
+    # Invalid Votes
+    survey_dpd = survey_dpd.append({'type': 'integer',
+                                  'name': 'TIDAK_SAH',
+                                  'label': 'Jumlah Suara Tidak Sah',
+                                  'required': 'yes',
+                                  'default': 0,
+                                 }, ignore_index=True) 
+
+    survey_dpd = survey_dpd.append({'type': 'end_group',
+                                  'name': 'CALEG',
+                                 }, ignore_index=True) 
+
+    # Upload images
+    survey_dpd = survey_dpd.append({'type': 'begin_group',
+                                  'name': 'upload',
+                                  'label': 'Bagian untuk mengunggah/upload foto formulir C1',
+                                 }, ignore_index=True) 
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 6)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 6)]):
+        survey_dpd = survey_dpd.append({'type': 'image',
+                                      'name': n,
+                                      'label': l,
+                                      'required': 'yes',
+                                     }, ignore_index=True)
+    survey_dpd = survey_dpd.append({'type': 'end_group',
+                                  'name': 'upload',
+                                 }, ignore_index=True) 
+
+    # Save to an Excel file
+    with pd.ExcelWriter(f'{local_disk}/xlsform_dpd.xlsx', engine='openpyxl') as writer:
+        survey_dpr.to_excel(writer, index=False, sheet_name='survey')
+        
+    # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    
+    # Create a DataFrame for the settings
+    settings_df = pd.DataFrame({'form_title': ['QuickCount DPD I'], 
+                                'form_id': ['qc_dpd_pks_jabar']
+                               })
+    
+    # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+    # Save settings to an Excel file
+    with pd.ExcelWriter(f'{local_disk}/xlsform_dpd.xlsx', engine='openpyxl', mode='a') as writer:
+        settings_df.to_excel(writer, index=False, sheet_name='settings')
+
 
 
 
@@ -690,21 +888,6 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                     'name': 'DAPIL_SET',
                                     'calculation': calculation
                                     }, ignore_index=True)
-
-    # survey_jabar = survey_jabar.append({'type': 'begin_group',
-    #                               'name': 'parpol',
-    #                               'label': 'Masukkan total suara masing-masing partai.',
-    #                              }, ignore_index=True) 
-    # for (n, l) in zip([f'PARPOL_{i}' for i in range(1,19)], list_parpol):
-    #     survey_jabar = survey_jabar.append({'type': 'integer',
-    #                                   'name': n,
-    #                                   'label': l,
-    #                                   'required': 'yes',
-    #                                   'default': 0
-    #                                  }, ignore_index=True)
-    # survey_jabar = survey_jabar.append({'type': 'end_group',
-    #                               'name': 'parpol',
-    #                              }, ignore_index=True) 
 
     # Upload images
     survey_jabar = survey_jabar.append({'type': 'begin_group',
@@ -918,6 +1101,21 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                   'name': 'CALEG',
                                  }, ignore_index=True) 
 
+    # Upload images
+    survey_jabar = survey_jabar.append({'type': 'begin_group',
+                                  'name': 'upload',
+                                  'label': 'Bagian untuk mengunggah/upload foto formulir C1',
+                                 }, ignore_index=True) 
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 7)]):
+        survey_jabar = survey_jabar.append({'type': 'image',
+                                      'name': n,
+                                      'label': l,
+                                      'required': 'yes',
+                                     }, ignore_index=True)
+    survey_jabar = survey_jabar.append({'type': 'end_group',
+                                  'name': 'upload',
+                                 }, ignore_index=True) 
+
     # Save to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_jabar.xlsx', engine='openpyxl') as writer:
         survey_jabar.to_excel(writer, index=False, sheet_name='survey')
@@ -1006,19 +1204,29 @@ def scto_process_pilpres(data):
         data_bubble = res_bubble.json()
         data_bubble = data_bubble['response']['results'][0]
 
+        # Get existing validator
+        if 'Validator Pilpres' in data_bubble:
+            validator = data_bubble['Validator Pilpres']
+        else:
+            validator = None
+
         # C1-Form attachments
         c1_a4 = data['formulir_c1_a4']
         c1_plano = data['formulir_c1_plano']
+
+        # Selfie attachment
+        selfie = data['selfie']
 
         # OCR C1-Form
         try:
             attachment_url = data['formulir_c1_a4']
             # Build SCTO connection
             scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
-            ai_votes = read_form(scto, attachment_url)
+            ai_votes, ai_invalid = read_form(scto, attachment_url)
         except Exception as e:
             print(f'Process: scto_process endpoint\t Keyword: {e}\n')
             ai_votes = [0] * 3
+            ai_invalid = 0
 
         # Check if SMS data exists
         sms = data_bubble['SMS-1']
@@ -1030,7 +1238,7 @@ def scto_process_pilpres(data):
             status = 'SCTO Only'
 
         # Completeness
-        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SCTO-2'] and data_bubble['SCTO-3']:
+        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SMS-3'] and data_bubble['SCTO-2'] and data_bubble['SCTO-3'] and data_bubble['SCTO-4']:
             complete = True
         else:
             complete = False
@@ -1070,8 +1278,12 @@ def scto_process_pilpres(data):
             'GPS Status': gps_status,
             'Status Pilpres': status,
             'Survey Link 1': link,
+            'SCTO-1 AI Votes': ai_votes,
+            'SCTO-1 AI Invalid': ai_invalid,
             'SCTO-1 C1 A4': c1_a4,
-            'SCTO-1 C1 Plano': c1_plano
+            'SCTO-1 C1 Plano': c1_plano,
+            'SCTO-1 Selfie': selfie,
+            'Validator Pilpres': validator
         }
 
         # Load the JSON file into a dictionary
@@ -1119,10 +1331,10 @@ def scto_process_dpr(data):
         # Caleg
         dapil = int(dapil)
         n_caleg = {1: 7, 2: 10, 3: 9, 4: 6, 5: 9, 6: 6, 7: 10, 8: 9, 9: 8, 10: 7, 11: 10}
-        vote_caleg = {f'DPR DP{dapil}_C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
+        vote_caleg = {f'DPR DP{dapil} C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
-        c1_parpol = {f'SCTO-2 C1_{parpol[p]}': data[f'PLANO_{parpol[p]}'] for p in list_parpol}
+        c1_parpol = {f'SCTO-2 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}
 
         # Check if SMS data exists
         sms = data_bubble['SMS-2']
@@ -1134,7 +1346,7 @@ def scto_process_dpr(data):
             status = 'SCTO Only'
         
         # Completeness
-        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SCTO-1'] and data_bubble['SCTO-3']:
+        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SMS-3'] and data_bubble['SCTO-1'] and data_bubble['SCTO-3'] and data_bubble['SCTO-4']:
             complete = True
         else:
             complete = False
@@ -1173,7 +1385,78 @@ def scto_process_dpr(data):
 
 
 # ================================================================================================================
-# Functions to process SCTO data (DPRd-jawa Barat)
+# Functions to process SCTO data (DPD I)
+
+def scto_process_dpd(data):
+
+    try:
+
+        # UID
+        uid = data['UID']
+
+        # SCTO Timestamp
+        std_datetime = datetime.strptime(data['SubmissionDate'], "%b %d, %Y %I:%M:%S %p")
+        std_datetime = std_datetime + timedelta(hours=7)
+
+        # Retrieve data with this UID from Bubble database
+        filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid}]
+        filter_json = json.dumps(filter_params)
+        params = {"constraints": filter_json}
+        res_bubble = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
+        data_bubble = res_bubble.json()
+        data_bubble = data_bubble['response']['results'][0]
+
+        # Caleg
+        vote_caleg = {f'Vote DPD {ic}' : data[f'CALONDPD_{ic}'] for ic in range(1, 55)}
+
+        # Invalid Votes
+        invalid_dpd = data['TIDAK_SAH']
+
+        # C1-Form attachments
+        c1_caleg = {f'SCTO-3 C1-{i}': data[f'A4_{i}'] for i in range(1,6)}
+        
+        # Completeness
+        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SMS-3'] and data_bubble['SCTO-1'] and data_bubble['SCTO-2'] and data_bubble['SCTO-4']:
+            complete = True
+        else:
+            complete = False
+
+        # Survey Link
+        key = data['KEY'].split('uuid:')[-1]
+        link = f"https://{SCTO_SERVER_NAME}.surveycto.com/view/submission.html?uuid=uuid%3A{key}"
+
+        # Payload
+        payload = {
+            'Active': True,
+            'Complete': complete,
+            'SCTO-3': True,
+            'SCTO-3 Timestamp': std_datetime,
+            'Status DPD I': 'Not Verified',
+            'Survey Link 3': link,
+            'Vote DPD Invalid': invalid_dpd
+        }
+        payload.update(vote_caleg)
+        payload.update(c1_caleg)
+
+        # Load the JSON file into a dictionary
+        with open(f'{local_disk}/uid.json', 'r') as json_file:
+            uid_dict = json.load(json_file)
+
+        # Forward data to Bubble Votes database
+        _id = uid_dict[uid.upper()]
+        out = requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
+        print(out)
+
+    except Exception as e:
+        with print_lock:
+            print(f'Process: scto_process_dpr\t Keyword: {e}')
+
+
+
+
+
+# ================================================================================================================
+# Functions to process SCTO data (DPRD-jawa Barat)
 
 def scto_process_jabar(data):
 
@@ -1200,13 +1483,13 @@ def scto_process_jabar(data):
         # Caleg
         dapil = int(dapil)
         n_caleg = {1: 8, 2: 10, 3: 4, 4: 6, 5: 8, 6: 11, 7: 3, 8: 11, 9: 7, 10: 8, 11: 10, 12: 12, 13: 8, 14: 6, 15: 7}
-        vote_caleg = {f'Jabar DP{dapil}_C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
+        vote_caleg = {f'Jabar DP{dapil} C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
-        c1_parpol = {f'SCTO-3 C1_{parpol[p]}': data[f'PLANO_{parpol[p]}'] for p in list_parpol}
+        c1_parpol = {f'SCTO-4 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}
 
         # Check if SMS data exists
-        sms = data_bubble['SMS-2']
+        sms = data_bubble['SMS-3']
 
         # If SMS data exists, check if they are consistent
         if sms:
@@ -1215,7 +1498,7 @@ def scto_process_jabar(data):
             status = 'SCTO Only'
         
         # Completeness
-        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SCTO-1'] and data_bubble['SCTO-2']:
+        if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SMS-3'] and data_bubble['SCTO-1'] and data_bubble['SCTO-2'] and data_bubble['SCTO-3']:
             complete = True
         else:
             complete = False
@@ -1228,10 +1511,10 @@ def scto_process_jabar(data):
         payload = {
             'Active': True,
             'Complete': complete,
-            'SCTO-3': True,
-            'SCTO-3 Timestamp': std_datetime,
+            'SCTO-4': True,
+            'SCTO-4 Timestamp': std_datetime,
             'Status DPRD Jabar': status,
-            'Survey Link 3': link,
+            'Survey Link 4': link,
         }
         payload.update(vote_caleg)
         payload.update(c1_parpol)
