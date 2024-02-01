@@ -12,6 +12,7 @@ import pandas as pd
 import concurrent.futures
 from fastapi import Request
 from typing import Optional
+from datetime import datetime
 from dotenv import load_dotenv
 from pysurveycto import SurveyCTOObject
 from datetime import datetime, timedelta
@@ -691,14 +692,11 @@ def scto_data(
     input_time: datetime = Form(...), 
     ):
 
-    #####################
-    print(f'\nInput Time: {input_time}')
-    #####################
-
     # Calculate the oldest completion date based on the current time
     date_obj = input_time - timedelta(seconds=301)
 
     ################# PILPRES #################
+    print(f'\nCollect Pilpres: {input_time}\t Current Time {datetime.now()}')
     try:
         scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)        
         # Retrieve data from SCTO
@@ -713,6 +711,7 @@ def scto_data(
         print(f'Process: scto_pilpres endpoint\t Keyword: {e}\n')
 
     ################# DPR-RI #################
+    print(f'\nCollect DPR-RI: {input_time}\t Current Time {datetime.now()}')
     try:
         scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)        
         # Retrieve data from SCTO
@@ -727,6 +726,7 @@ def scto_data(
         print(f'Process: scto_dpr endpoint\t Keyword: {e}\n')
 
     ################# DPD I #################
+    print(f'\nCollect DPD-I: {input_time}\t Current Time {datetime.now()}')
     try:
         scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
         # Retrieve data from SCTO
@@ -741,6 +741,7 @@ def scto_data(
         print(f'Process: scto_dpd endpoint\t Keyword: {e}\n')
 
     ################# DPRD Provinsi Jawa Barat #################
+    print(f'\nCollect DPRD Jabar: {input_time}\t Current Time {datetime.now()}')
     try:
         scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
         # Retrieve data from SCTO
