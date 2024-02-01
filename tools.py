@@ -72,21 +72,18 @@ parpol = {'PKB': 'PKB',
 # Auxiliary Functions
 
 # Rename regions
-list_provinsi = list(region_data.keys())
 def rename_region(data):
-    # provinsi
-    reference = list_provinsi
-    provinsi = find_closest_string(data[0], reference)
+    provinsi = 'Jawa Barat'
     # kabupaten/kota
     reference = list(region_data[provinsi].keys())
-    kabkota = find_closest_string(data[1], reference)       
+    kabkota = find_closest_string(data[0], reference)       
     # kecamatan
     reference = list(region_data[provinsi][kabkota].keys())
-    kecamatan = find_closest_string(data[2], reference) 
+    kecamatan = find_closest_string(data[1], reference) 
     # kelurahan
     reference = list(region_data[provinsi][kabkota][kecamatan])
-    kelurahan = find_closest_string(data[3], reference)
-    return provinsi, kabkota, kecamatan, kelurahan
+    kelurahan = find_closest_string(data[2], reference)
+    return kabkota, kecamatan, kelurahan
 
 def preprocess_text(text):
     # Remove spaces and punctuation, convert to lowercase
@@ -669,7 +666,7 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
 
 
 # ================================================================================================================
-# Function to generate SCTO xlsform DPR RI
+# Function to generate SCTO xlsform DPD I
 
 def create_xlsform_dpd():
 
@@ -811,7 +808,7 @@ def create_xlsform_dpd():
 
     # Save to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_dpd.xlsx', engine='openpyxl') as writer:
-        survey_dpr.to_excel(writer, index=False, sheet_name='survey')
+        survey_dpd.to_excel(writer, index=False, sheet_name='survey')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     
@@ -1154,12 +1151,12 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     # Create a DataFrame
-    choices_dpr = pd.DataFrame(data, columns=['value', 'label'])
-    choices_dpr['list_name'] = 'KOTA_KAB'  # Assign the same list name to all choices
+    choices_jabar = pd.DataFrame(data, columns=['value', 'label'])
+    choices_jabar['list_name'] = 'KOTA_KAB'  # Assign the same list name to all choices
 
     # Save choices to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_jabar.xlsx', engine='openpyxl', mode='a') as writer:
-        choices_dpr.to_excel(writer, index=False, sheet_name='choices')
+        choices_jabar.to_excel(writer, index=False, sheet_name='choices')
         
     # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     
