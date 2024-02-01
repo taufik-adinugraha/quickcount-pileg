@@ -594,7 +594,8 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 7)]):
+    pages = ['(PKB, Gerindra, PDI-P, Golkar)', '(Nasdem, Buruh, Gelora, PKS)', '(PKN, Hanura, Garuda, PAN)', '(PBB, Demokrat, PSI, Perindo)', '(PPP & Ummat)', '(Suara Tidak Sah)']
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
         survey_dpr = survey_dpr.append({'type': 'image',
                                       'name': n,
                                       'label': l,
@@ -796,7 +797,9 @@ def create_xlsform_dpd():
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 6)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 6)]):
+    
+    pages = ['(Caleg 1-15)', '(Caleg 16-30)', '(Caleg 31-45)', '(Caleg 46-54)', '(Suara Tidak Sah)']
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 6)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
         survey_dpd = survey_dpd.append({'type': 'image',
                                       'name': n,
                                       'label': l,
@@ -1088,7 +1091,8 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+1}' for i in range(1, 7)]):
+    pages = ['(PKB, Gerindra, PDI-P, Golkar)', '(Nasdem, Buruh, Gelora, PKS)', '(PKN, Hanura, Garuda, PAN)', '(PBB, Demokrat, PSI, Perindo)', '(PPP & Ummat)', '(Suara Tidak Sah)']
+    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
         survey_jabar = survey_jabar.append({'type': 'image',
                                       'name': n,
                                       'label': l,
@@ -1193,15 +1197,15 @@ def scto_process_pilpres(data):
             validator = None
 
         # C1-Form attachments
-        c1_a4 = data['formulir_c1_a4']
-        c1_plano = data['formulir_c1_plano']
+        c1_a4 = data['pilpres_c1_a4']
+        c1_plano = data['pilpres_c1_plano']
 
         # Selfie attachment
         selfie = data['selfie']
 
         # OCR C1-Form
         try:
-            attachment_url = data['formulir_c1_a4']
+            attachment_url = data['pilpres_c1_a4']
             # Build SCTO connection
             scto = SurveyCTOObject(SCTO_SERVER_NAME, SCTO_USER_NAME, SCTO_PASSWORD)
             ai_votes, ai_invalid = read_form(scto, attachment_url)
@@ -1313,7 +1317,7 @@ def scto_process_dpr(data):
         # Caleg
         dapil = int(dapil)
         n_caleg = {1: 7, 2: 10, 3: 9, 4: 6, 5: 9, 6: 6, 7: 10, 8: 9, 9: 8, 10: 7, 11: 10}
-        vote_caleg = {f'DPR DP{dapil} C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
+        vote_caleg = {f'DPR DP{dapil} C{ic}' : int(data[f'CALEG{dapil}_{ic}']) for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
         c1_parpol = {f'SCTO-2 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}
@@ -1389,10 +1393,10 @@ def scto_process_dpd(data):
         data_bubble = data_bubble['response']['results'][0]
 
         # Caleg
-        vote_caleg = {f'Vote DPD {ic}' : data[f'CALONDPD_{ic}'] for ic in range(1, 55)}
+        vote_caleg = {f'Vote DPD {ic}' : int(data[f'CALONDPD_{ic}']) for ic in range(1, 55)}
 
         # Invalid Votes
-        invalid_dpd = data['TIDAK_SAH']
+        invalid_dpd = int(data['TIDAK_SAH'])
 
         # C1-Form attachments
         c1_caleg = {f'SCTO-3 C1-{i}': data[f'A4_{i}'] for i in range(1,6)}
@@ -1465,7 +1469,7 @@ def scto_process_jabar(data):
         # Caleg
         dapil = int(dapil)
         n_caleg = {1: 8, 2: 10, 3: 4, 4: 6, 5: 8, 6: 11, 7: 3, 8: 11, 9: 7, 10: 8, 11: 10, 12: 12, 13: 8, 14: 6, 15: 7}
-        vote_caleg = {f'Jabar DP{dapil} C{ic}' : data[f'CALEG{dapil}_{ic}'] for ic in range(1, n_caleg[dapil]+1)}
+        vote_caleg = {f'Jabar DP{dapil} C{ic}' : int(data[f'CALEG{dapil}_{ic}']) for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
         c1_parpol = {f'SCTO-4 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}

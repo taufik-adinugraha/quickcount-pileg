@@ -43,10 +43,10 @@ NUSA_PASSWORD = os.environ.get('NUSA_PASSWORD')
 headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
 
 # SMS Formats
-format_pilpres = 'KK#UID#pilpres#capres1#capres2#capres3#tidaksah'
-format_dpr = 'KK#UID#dpr#parpol1#parpol2#...#parpol18#tidaksah'
-format_jabar = 'KK#UID#jabar#parpol1#parpol2#...#parpol18#tidaksah'
-format_universal = '\nUntuk pilpres:\n{format_pilpres}\nUntuk DPR-RI:\n{format_dpr}\nUntuk DPRD Jabar:\n{format_jabar}'
+format_pilpres = 'KK#UID#pilpres#01#02#03#TDKSAH'
+format_dpr = 'KK#UID#dpr#p1#p2#...#p18#TDKSAH'
+format_jabar = 'KK#UID#jabar#p1#p2#...#p18#TDKSAH'
+format_universal = f'\nUtk pilpres:\n{format_pilpres}\n\nUtk DPR-RI:\n{format_dpr}\n\nUtk DPRD Jabar:\n{format_jabar}'
 
 
 # ================================================================================================================
@@ -137,70 +137,72 @@ for port in range(17, num_endpoints + 17):
                                 total_capres = votes_pilpres.sum()
                                 # Summary
                                 summary = 'Event: pilpres\n' + '\n'.join([f'Paslon-0{i+1}: {votes_pilpres[i]}' for i in range(3)]) + f'\nRusak: {invalid_pilpres}' + f'\nTotal: {total_capres+invalid_pilpres}\n'                                
-                                # Check Error Type 4 (maximum votes)
-                                if total_capres > 300:
-                                    message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
-                                    error_type = 4
+
+                                # # Check Error Type 4 (maximum votes)
+                                # if total_capres > 300:
+                                #     message = summary + '\nJumlah suara melebihi 300, ' + template_error_msg
+                                #     error_type = 4
+                                # else:
+
+                                message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
+                                # Retrieve data with this UID from Bubble database
+                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_json = json.dumps(filter_params)
+                                params = {"constraints": filter_json}
+                                res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
+                                data = res.json()
+                                data = data['response']['results'][0]
+
+                                # Get existing validator
+                                if 'Validator' in data:
+                                    validator = data['Validator']
                                 else:
-                                    message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
-                                    # Retrieve data with this UID from Bubble database
-                                    filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
-                                    filter_json = json.dumps(filter_params)
-                                    params = {"constraints": filter_json}
-                                    res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
-                                    data = res.json()
-                                    data = data['response']['results'][0]
+                                    validator = None
 
-                                    # Get existing validator
-                                    if 'Validator' in data:
-                                        validator = data['Validator']
+                                # Check if SCTO data exists
+                                scto = data['SCTO-1']
+                                if scto:
+                                    if (np.array_equal(votes_pilpres, np.array(data['SCTO-1 AI Votes']).astype(int))) and (invalid_pilpres == int(data['SCTO-1 AI Invalid'])):
+                                        status_pilpres = 'Verified'
+                                        validator = 'System'
                                     else:
-                                        validator = None
+                                        status_pilpres = 'Not Verified'
+                                else:
+                                    status_pilpres = 'SMS Only'
 
-                                    # Check if SCTO data exists
-                                    scto = data['SCTO-1']
-                                    if scto:
-                                        if (np.array_equal(votes_pilpres, np.array(data['SCTO-1 AI Votes']).astype(int))) and (invalid_pilpres == int(data['SCTO-1 AI Invalid'])):
-                                            status_pilpres = 'Verified'
-                                            validator = 'System'
-                                        else:
-                                            status_pilpres = 'Not Verified'
-                                    else:
-                                        status_pilpres = 'SMS Only'
+                                # Completeness
+                                if data['SMS-2'] and data['SMS-3'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
+                                    complete = True
+                                else:
+                                    complete = False
 
-                                    # Completeness
-                                    if data['SMS-2'] and data['SMS-3'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
-                                        complete = True
-                                    else:
-                                        complete = False
+                                # Payload
+                                payload = {
+                                    'Active': True,
+                                    'SMS-1': True,
+                                    'SMS-1 Gateway Port': port,
+                                    'SMS-1 Gateway ID': gateway_number,
+                                    'SMS-1 Sender': originator,
+                                    'SMS-1 Timestamp': receive_date,
+                                    'SMS-1 Votes Pilpres': votes_pilpres,
+                                    'Vote Capres 1': vote_capres_1,
+                                    'Vote Capres 2': vote_capres_2,
+                                    'Vote Capres 3': vote_capres_3,
+                                    'SMS-1 Invalid Pilpres': invalid_pilpres,
+                                    'Complete': complete,
+                                    'Status Pilpres': status_pilpres,
+                                    'Validator': validator
+                                }
 
-                                    # Payload
-                                    payload = {
-                                        'Active': True,
-                                        'SMS-1': True,
-                                        'SMS-1 Gateway Port': port,
-                                        'SMS-1 Gateway ID': gateway_number,
-                                        'SMS-1 Sender': originator,
-                                        'SMS-1 Timestamp': receive_date,
-                                        'SMS-1 Votes Pilpres': votes_pilpres,
-                                        'Vote Capres 1': vote_capres_1,
-                                        'Vote Capres 2': vote_capres_2,
-                                        'Vote Capres 3': vote_capres_3,
-                                        'SMS-1 Invalid Pilpres': invalid_pilpres,
-                                        'Complete': complete,
-                                        'Status Pilpres': status_pilpres,
-                                        'Validator': validator
-                                    }
+                                raw_sms_status = 'Accepted'
 
-                                    raw_sms_status = 'Accepted'
+                                # Load the JSON file into a dictionary
+                                with open(f'{local_disk}/uid.json', 'r') as json_file:
+                                    uid_dict = json.load(json_file)
 
-                                    # Load the JSON file into a dictionary
-                                    with open(f'{local_disk}/uid.json', 'r') as json_file:
-                                        uid_dict = json.load(json_file)
-
-                                    # Forward data to Bubble database
-                                    _id = uid_dict[uid.upper()]
-                                    requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
+                                # Forward data to Bubble database
+                                _id = uid_dict[uid.upper()]
+                                requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
 
 
                             except Exception as e:
@@ -237,74 +239,76 @@ for port in range(17, num_endpoints + 17):
                                 # Total Votes
                                 total_parpol_dpr = votes_parpol_dpr.sum()
                                 # Summary
-                                summary = f'Event: DPR-RI\n' + f'Suara Sah: {total_parpol_dpr}' + f'\nSuara Tidak Sah: {invalid_parpol_dpr}'
-                                # Check Error Type 4 (maximum votes)
-                                if total_parpol_dpr + invalid_parpol_dpr > 300:
-                                    message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
-                                    error_type = 4
+                                summary = f'Event: DPR-RI\n' + f'Suara Sah: {total_parpol_dpr}' + f'\nSuara Tidak Sah: {invalid_parpol_dpr}\n'
+
+                                # # Check Error Type 4 (maximum votes)
+                                # if total_parpol_dpr + invalid_parpol_dpr > 300:
+                                #     message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
+                                #     error_type = 4
+                                # else:
+
+                                message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
+                                # Retrieve data with this UID from Bubble database
+                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_json = json.dumps(filter_params)
+                                params = {"constraints": filter_json}
+                                res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
+                                data = res.json()
+                                data = data['response']['results'][0]
+
+                                # Check if SCTO data exists
+                                scto = data['SCTO-2']
+                                if scto:
+                                    status_dpr = 'Not Verified'
                                 else:
-                                    message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
-                                    # Retrieve data with this UID from Bubble database
-                                    filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
-                                    filter_json = json.dumps(filter_params)
-                                    params = {"constraints": filter_json}
-                                    res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
-                                    data = res.json()
-                                    data = data['response']['results'][0]
+                                    status_dpr = 'SMS Only'
 
-                                    # Check if SCTO data exists
-                                    scto = data['SCTO-2']
-                                    if scto:
-                                        status_dpr = 'Not Verified'
-                                    else:
-                                        status_dpr = 'SMS Only'
+                                # Completeness
+                                if data['SMS-1'] and data['SMS-3'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
+                                    complete = True
+                                else:
+                                    complete = False
 
-                                    # Completeness
-                                    if data['SMS-1'] and data['SMS-3'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
-                                        complete = True
-                                    else:
-                                        complete = False
+                                # Payload
+                                payload = {
+                                    'Active': True,
+                                    'SMS-2': True,
+                                    'SMS-2 Gateway Port': port,
+                                    'SMS-2 Gateway ID': gateway_number,
+                                    'SMS-2 Sender': originator,
+                                    'SMS-2 Timestamp': receive_date,
+                                    'Vote Parpol DPR 1': vote_parpol_dpr_1,
+                                    'Vote Parpol DPR 2': vote_parpol_dpr_2,
+                                    'Vote Parpol DPR 3': vote_parpol_dpr_3,
+                                    'Vote Parpol DPR 4': vote_parpol_dpr_4,
+                                    'Vote Parpol DPR 5': vote_parpol_dpr_5,
+                                    'Vote Parpol DPR 6': vote_parpol_dpr_6,
+                                    'Vote Parpol DPR 7': vote_parpol_dpr_7,
+                                    'Vote Parpol DPR 8': vote_parpol_dpr_8,
+                                    'Vote Parpol DPR 9': vote_parpol_dpr_9,
+                                    'Vote Parpol DPR 10': vote_parpol_dpr_10,
+                                    'Vote Parpol DPR 11': vote_parpol_dpr_11,
+                                    'Vote Parpol DPR 12': vote_parpol_dpr_12,
+                                    'Vote Parpol DPR 13': vote_parpol_dpr_13,
+                                    'Vote Parpol DPR 14': vote_parpol_dpr_14,
+                                    'Vote Parpol DPR 15': vote_parpol_dpr_15,
+                                    'Vote Parpol DPR 16': vote_parpol_dpr_16,
+                                    'Vote Parpol DPR 17': vote_parpol_dpr_17,
+                                    'Vote Parpol DPR 18': vote_parpol_dpr_18,
+                                    'SMS-2 Invalid DPR-RI': invalid_parpol_dpr,
+                                    'Complete': complete,
+                                    'Status DPR RI': status_dpr,
+                                }
 
-                                    # Payload
-                                    payload = {
-                                        'Active': True,
-                                        'SMS-2': True,
-                                        'SMS-2 Gateway Port': port,
-                                        'SMS-2 Gateway ID': gateway_number,
-                                        'SMS-2 Sender': originator,
-                                        'SMS-2 Timestamp': receive_date,
-                                        'Vote Parpol DPR 1': vote_parpol_dpr_1,
-                                        'Vote Parpol DPR 2': vote_parpol_dpr_2,
-                                        'Vote Parpol DPR 3': vote_parpol_dpr_3,
-                                        'Vote Parpol DPR 4': vote_parpol_dpr_4,
-                                        'Vote Parpol DPR 5': vote_parpol_dpr_5,
-                                        'Vote Parpol DPR 6': vote_parpol_dpr_6,
-                                        'Vote Parpol DPR 7': vote_parpol_dpr_7,
-                                        'Vote Parpol DPR 8': vote_parpol_dpr_8,
-                                        'Vote Parpol DPR 9': vote_parpol_dpr_9,
-                                        'Vote Parpol DPR 11': vote_parpol_dpr_10,
-                                        'Vote Parpol DPR 11': vote_parpol_dpr_11,
-                                        'Vote Parpol DPR 12': vote_parpol_dpr_12,
-                                        'Vote Parpol DPR 13': vote_parpol_dpr_13,
-                                        'Vote Parpol DPR 14': vote_parpol_dpr_14,
-                                        'Vote Parpol DPR 15': vote_parpol_dpr_15,
-                                        'Vote Parpol DPR 16': vote_parpol_dpr_16,
-                                        'Vote Parpol DPR 17': vote_parpol_dpr_17,
-                                        'Vote Parpol DPR 18': vote_parpol_dpr_18,
-                                        'SMS-2 Invalid DPR-RI': invalid_parpol_dpr,
-                                        'Complete': complete,
-                                        'Status DPR RI': status_dpr,
-                                    }
+                                raw_sms_status = 'Accepted'
 
-                                    raw_sms_status = 'Accepted'
+                                # Load the JSON file into a dictionary
+                                with open(f'{local_disk}/uid.json', 'r') as json_file:
+                                    uid_dict = json.load(json_file)
 
-                                    # Load the JSON file into a dictionary
-                                    with open(f'{local_disk}/uid.json', 'r') as json_file:
-                                        uid_dict = json.load(json_file)
-
-                                    # Forward data to Bubble database
-                                    _id = uid_dict[uid.upper()]
-                                    requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
+                                # Forward data to Bubble database
+                                _id = uid_dict[uid.upper()]
+                                requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
 
                             except Exception as e:
                                 error_type = 3
@@ -340,74 +344,76 @@ for port in range(17, num_endpoints + 17):
                                 # Total Votes
                                 total_parpol_jabar = votes_parpol_jabar.sum()
                                 # Summary
-                                summary = f'Event: DPRD Jabar\n' + f'Suara Sah: {total_parpol_jabar}' + f'\nSuara Tidak Sah: {invalid_parpol_jabar}'
-                                # Check Error Type 4 (maximum votes)
-                                if total_parpol_jabar + invalid_parpol_jabar > 300:
-                                    message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
-                                    error_type = 4
+                                summary = f'Event: DPRD Jabar\n' + f'Suara Sah: {total_parpol_jabar}' + f'\nSuara Tidak Sah: {invalid_parpol_jabar}\n'
+
+                                # # Check Error Type 4 (maximum votes)
+                                # if total_parpol_jabar + invalid_parpol_jabar > 300:
+                                #     message = summary + 'Jumlah suara melebihi 300, ' + template_error_msg
+                                #     error_type = 4
+                                # else:
+
+                                message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
+                                # Retrieve data with this UID from Bubble database
+                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_json = json.dumps(filter_params)
+                                params = {"constraints": filter_json}
+                                res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
+                                data = res.json()
+                                data = data['response']['results'][0]
+
+                                # Check if SCTO data exists
+                                scto = data['SCTO-4']
+                                if scto:
+                                    status_jabar = 'Not Verified'
                                 else:
-                                    message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
-                                    # Retrieve data with this UID from Bubble database
-                                    filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
-                                    filter_json = json.dumps(filter_params)
-                                    params = {"constraints": filter_json}
-                                    res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
-                                    data = res.json()
-                                    data = data['response']['results'][0]
+                                    status_jabar = 'SMS Only'
 
-                                    # Check if SCTO data exists
-                                    scto = data['SCTO-4']
-                                    if scto:
-                                        status_jabar = 'Not Verified'
-                                    else:
-                                        status_jabar = 'SMS Only'
+                                # Completeness
+                                if data['SMS-1'] and data['SMS-2'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
+                                    complete = True
+                                else:
+                                    complete = False
 
-                                    # Completeness
-                                    if data['SMS-1'] and data['SMS-2'] and data['SCTO-1'] and data['SCTO-2'] and data['SCTO-3'] and data['SCTO-4']:
-                                        complete = True
-                                    else:
-                                        complete = False
+                                # Payload
+                                payload = {
+                                    'Active': True,
+                                    'SMS-3': True,
+                                    'SMS-3 Gateway Port': port,
+                                    'SMS-3 Gateway ID': gateway_number,
+                                    'SMS-3 Sender': originator,
+                                    'SMS-3 Timestamp': receive_date,
+                                    'Vote Parpol Jabar 1': vote_parpol_jabar_1,
+                                    'Vote Parpol Jabar 2': vote_parpol_jabar_2,
+                                    'Vote Parpol Jabar 3': vote_parpol_jabar_3,
+                                    'Vote Parpol Jabar 4': vote_parpol_jabar_4,
+                                    'Vote Parpol Jabar 5': vote_parpol_jabar_5,
+                                    'Vote Parpol Jabar 6': vote_parpol_jabar_6,
+                                    'Vote Parpol Jabar 7': vote_parpol_jabar_7,
+                                    'Vote Parpol Jabar 8': vote_parpol_jabar_8,
+                                    'Vote Parpol Jabar 9': vote_parpol_jabar_9,
+                                    'Vote Parpol Jabar 10': vote_parpol_jabar_10,
+                                    'Vote Parpol Jabar 11': vote_parpol_jabar_11,
+                                    'Vote Parpol Jabar 12': vote_parpol_jabar_12,
+                                    'Vote Parpol Jabar 13': vote_parpol_jabar_13,
+                                    'Vote Parpol Jabar 14': vote_parpol_jabar_14,
+                                    'Vote Parpol Jabar 15': vote_parpol_jabar_15,
+                                    'Vote Parpol Jabar 16': vote_parpol_jabar_16,
+                                    'Vote Parpol Jabar 17': vote_parpol_jabar_17,
+                                    'Vote Parpol Jabar 18': vote_parpol_jabar_18,
+                                    'SMS-3 Invalid Jabar': invalid_parpol_jabar,
+                                    'Complete': complete,
+                                    'Status DPRD Jabar': status_jabar,
+                                }
 
-                                    # Payload
-                                    payload = {
-                                        'Active': True,
-                                        'SMS-3': True,
-                                        'SMS-3 Gateway Port': port,
-                                        'SMS-3 Gateway ID': gateway_number,
-                                        'SMS-3 Sender': originator,
-                                        'SMS-3 Timestamp': receive_date,
-                                        'Vote Parpol Jabar 1': vote_parpol_jabar_1,
-                                        'Vote Parpol Jabar 2': vote_parpol_jabar_2,
-                                        'Vote Parpol Jabar 3': vote_parpol_jabar_3,
-                                        'Vote Parpol Jabar 4': vote_parpol_jabar_4,
-                                        'Vote Parpol Jabar 5': vote_parpol_jabar_5,
-                                        'Vote Parpol Jabar 6': vote_parpol_jabar_6,
-                                        'Vote Parpol Jabar 7': vote_parpol_jabar_7,
-                                        'Vote Parpol Jabar 8': vote_parpol_jabar_8,
-                                        'Vote Parpol Jabar 9': vote_parpol_jabar_9,
-                                        'Vote Parpol Jabar 11': vote_parpol_jabar_10,
-                                        'Vote Parpol Jabar 11': vote_parpol_jabar_11,
-                                        'Vote Parpol Jabar 12': vote_parpol_jabar_12,
-                                        'Vote Parpol Jabar 13': vote_parpol_jabar_13,
-                                        'Vote Parpol Jabar 14': vote_parpol_jabar_14,
-                                        'Vote Parpol Jabar 15': vote_parpol_jabar_15,
-                                        'Vote Parpol Jabar 16': vote_parpol_jabar_16,
-                                        'Vote Parpol Jabar 17': vote_parpol_jabar_17,
-                                        'Vote Parpol Jabar 18': vote_parpol_jabar_18,
-                                        'SMS-3 Invalid Jabar': invalid_parpol_jabar,
-                                        'Complete': complete,
-                                        'Status DPRD Jabar': status_jabar,
-                                    }
+                                raw_sms_status = 'Accepted'
 
-                                    raw_sms_status = 'Accepted'
+                                # Load the JSON file into a dictionary
+                                with open(f'{local_disk}/uid.json', 'r') as json_file:
+                                    uid_dict = json.load(json_file)
 
-                                    # Load the JSON file into a dictionary
-                                    with open(f'{local_disk}/uid.json', 'r') as json_file:
-                                        uid_dict = json.load(json_file)
-
-                                    # Forward data to Bubble database
-                                    _id = uid_dict[uid.upper()]
-                                    requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
+                                # Forward data to Bubble database
+                                _id = uid_dict[uid.upper()]
+                                requests.patch(f'{url_bubble}/votes/{_id}', headers=headers, data=payload)
 
                             except Exception as e:
                                 error_type = 3
@@ -417,17 +423,17 @@ for port in range(17, num_endpoints + 17):
                         
                         else:
                             error_type = 3
-                            message = 'Format tidak dikenali.' + format_universal                            
+                            message = 'Format tidak dikenali.\n' + format_universal                            
                     
                     except Exception as e:
                         error_type = 3
-                        message = 'Format tidak dikenali.' + format_universal
+                        message = 'Format tidak dikenali.\n' + format_universal
                         print(f'Error Location: SMS - Error Type 3, keyword: {e}')
 
 
             except Exception as e:
                 error_type = 1
-                message = f'Format tidak dikenali. Kirim ulang dengan format berikut:\n{format}'
+                message = f'Format tidak dikenali. Kirim ulang dengan format berikut:\n{format_universal}'
                 print(f'Error Location: SMS - Error Type 1, keyword: {e}')
 
             # Return the message to the sender via SMS Masking
