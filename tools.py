@@ -720,7 +720,7 @@ def create_xlsform_dpd():
     ]
 
     data_dpd_2= [
-        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 16-30).", "", "", "", ""),
+        ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 16-30).", "", "", "", ""),
         ("integer",	"CALONDPD_16", "16. ARIF RAHMAN HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_17", "17. A. TAUPIK HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_18", "18. K.H. A WAWAN GHOZALI", "yes", 0, "", ""),
@@ -739,7 +739,7 @@ def create_xlsform_dpd():
     ]
 
     data_dpd_3= [
-        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 31-45).", "", "", "", ""),
+        ("note", "NOTE_CALEG3", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 31-45).", "", "", "", ""),
         ("integer",	"CALONDPD_31", "31. ERNAWATY TAMPUBOLON, S.T., M.Th.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_32", "32. Dr. HAIDAN S.Pd.I., S.H., M.Ag.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_33", "33. HENDRIK KURNIAWAN, S.Pd.I", "yes", 0, "", ""),
@@ -758,7 +758,7 @@ def create_xlsform_dpd():
     ]
 
     data_dpd_4= [
-        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 46-54).", "", "", "", ""),
+        ("note", "NOTE_CALEG4", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 46-54).", "", "", "", ""),
         ("integer",	"CALONDPD_46", "46. ROBBY MAULANA ZULKARNAEN", "yes", 0, "", ""),
         ("integer",	"CALONDPD_47", "47. RUSDI HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_48", "48. Dr. SITTI HIKMAWATTY, S.ST., M.Pd.", "yes", 0, "", ""),
@@ -885,21 +885,6 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                     'name': 'DAPIL_SET',
                                     'calculation': calculation
                                     }, ignore_index=True)
-
-    # Upload images
-    survey_jabar = survey_jabar.append({'type': 'begin_group',
-                                  'name': 'upload',
-                                  'label': 'Bagian untuk mengunggah/upload foto formulir C1',
-                                 }, ignore_index=True) 
-    for (n, l) in zip([f'p{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano {list_parpol[i-1]}' for i in range(1, 19)]):
-        survey_jabar = survey_jabar.append({'type': 'image',
-                                      'name': n,
-                                      'label': l,
-                                      'required': 'yes',
-                                     }, ignore_index=True)
-    survey_jabar = survey_jabar.append({'type': 'end_group',
-                                  'name': 'upload',
-                                 }, ignore_index=True) 
 
     # Caleg DPR RI
     survey_jabar = survey_jabar.append({'type': 'begin_group',
