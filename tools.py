@@ -1394,6 +1394,7 @@ def scto_process_dpd(data):
 
         # Caleg
         vote_caleg = {f'Vote DPD {ic}' : int(data[f'CALONDPD_{ic}']) for ic in range(1, 55)}
+        total_vote_dpd = np.sum([int(data[f'CALONDPD_{ic}']) for ic in range(1, 55)])
 
         # Invalid Votes
         invalid_dpd = int(data['TIDAK_SAH'])
@@ -1419,6 +1420,7 @@ def scto_process_dpd(data):
             'SCTO-3 Timestamp': std_datetime,
             'Status DPD I': 'Not Verified',
             'Survey Link 3': link,
+            'Total Valid DPD': total_vote_dpd,
             'Vote DPD Invalid': invalid_dpd
         }
         payload.update(vote_caleg)
