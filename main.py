@@ -137,7 +137,7 @@ for port in range(17, num_endpoints + 17):
                                 # Total Votes
                                 total_capres = votes_pilpres.sum()
                                 # Summary
-                                summary = 'Event: pilpres\n' + '\n'.join([f'Paslon-0{i+1}: {votes_pilpres[i]}' for i in range(3)]) + f'\nRusak: {invalid_pilpres}' + f'\nTotal: {total_capres+invalid_pilpres}\n'                                
+                                summary = 'Event: pilpres\n' + '\n'.join([f'Paslon-0{i+1}: {votes_pilpres[i]}' for i in range(3)]) + f'\nTidak Sah: {invalid_pilpres}' + f'\nTotal: {total_capres+invalid_pilpres}\n'                                
 
                                 # # Check Error Type 4 (maximum votes)
                                 # if total_capres > 300:
@@ -193,7 +193,7 @@ for port in range(17, num_endpoints + 17):
                                     'SMS-1 Invalid Pilpres': invalid_pilpres,
                                     'Complete': complete,
                                     'Status Pilpres': status_pilpres,
-                                    'Validator': validator
+                                    'Validator Pilpres': validator
                                 }
 
                                 raw_sms_status = 'Accepted'
