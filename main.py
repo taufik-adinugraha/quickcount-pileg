@@ -189,7 +189,7 @@ for port in range(17, num_endpoints + 17):
                                     'Vote Capres 1': vote_capres_1,
                                     'Vote Capres 2': vote_capres_2,
                                     'Vote Capres 3': vote_capres_3,
-                                    'Total valid Pilpres': total_capres,
+                                    'Total Valid Pilpres': total_capres,
                                     'SMS-1 Invalid Pilpres': invalid_pilpres,
                                     'Complete': complete,
                                     'Status Pilpres': status_pilpres,
