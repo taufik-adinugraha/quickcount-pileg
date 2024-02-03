@@ -585,6 +585,14 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
 
     survey_dpr = pd.concat([survey_dpr, tmp])
 
+    # Invalid Votes
+    survey_dpr = survey_dpr.append({'type': 'integer',
+                                  'name': 'TIDAK_SAH',
+                                  'label': 'Jumlah Suara Tidak Sah',
+                                  'required': 'yes',
+                                  'default': 0,
+                                 }, ignore_index=True) 
+
     survey_dpr = survey_dpr.append({'type': 'end_group',
                                   'name': 'CALEG',
                                  }, ignore_index=True) 
@@ -895,7 +903,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                   'label': 'PEROLEHAN SUARA CALON LEGISLATIF PKS',
                                  }, ignore_index=True)
     data_dprd_1 = [
-        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 1 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 1 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG1_1",	"1. Hj. SITI MUNTAMAH, S.A.P.", "yes", 0, "", ""),
         ("integer",	"CALEG1_2",	"2. H. YOYOK SWITOHANDOYO, S.T.", "yes", 0, "", ""),
         ("integer",	"CALEG1_3",	"3. H. TEDY RUSMAWAN, A.T., M.M.", "yes", 0, "", ""),
@@ -907,7 +915,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_2 = [
-        ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 2 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 2 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG2_1",	"1. H. JAJANG ROHANA, S.Pd.I.", "yes", 0, "", ""),
         ("integer",	"CALEG2_2",	"2. Hj. SARI SUNDARI, S.Sos., M.M.", "yes", 0, "", ""),
         ("integer",	"CALEG2_3",	"3. TEDI SURAHMAN, S.E.", "yes", 0, "", ""),
@@ -921,7 +929,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_3 = [
-        ("note", "NOTE_CALEG3", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 3 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG3", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 3 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG3_1",	"1. DIDIK AGUS T., M.Pd", "yes", 0, "", ""),
         ("integer",	"CALEG3_2",	"2. BAGJA SETIAWAN, S.Sy", "yes", 0, "", ""),
         ("integer",	"CALEG3_3",	"3. Hj. SRI DEWI ANGGRAINI", "yes", 0, "", ""),
@@ -929,7 +937,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_4 = [
-        ("note", "NOTE_CALEG4", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 4 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG4", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 4 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG4_1",	"1. H. R.K. DADAN SURYA NEGARA, S.P.", "yes", 0, "", ""),
         ("integer",	"CALEG4_2",	"2. H. WILMAN SINGAWINATA", "yes", 0, "", ""),
         ("integer",	"CALEG4_3",	"3. NUR FATMAWATI ANWAR, S.H.", "yes", 0, "", ""),
@@ -939,7 +947,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_5 = [
-        ("note", "NOTE_CALEG5", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 5 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG5", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 5 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG5_1",	"1. Ir. H. YUSUF MAULANA", "yes", 0, "", ""),
         ("integer",	"CALEG5_2",	"2. IZHARUL HAQ", "yes", 0, "", ""),
         ("integer",	"CALEG5_3",	"3. SALSABILA", "yes", 0, "", ""),
@@ -951,7 +959,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_6 = [
-        ("note", "NOTE_CALEG6", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 6 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG6", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 6 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG6_1",	"1. H. FIKRI HUDI OKTIARWAN, S.Sos.", "yes", 0, "", ""),
         ("integer",	"CALEG6_2",	"2. DEDI AROZA, S.Ag., M.Si.", "yes", 0, "", ""),
         ("integer",	"CALEG6_3",	"3. Dra. IIN SUPRIHATIN", "yes", 0, "", ""),
@@ -966,14 +974,14 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_7 = [
-        ("note", "NOTE_CALEG7", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 7 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG7", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 7 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG7_1",	"1. H. IWAN SURYAWAN, S.Sos.", "yes", 0, "", ""),
         ("integer",	"CALEG7_2",	"2. Dra. EUIS SUFI JATININGSIH", "yes", 0, "", ""),
         ("integer",	"CALEG7_3",	"3. Dr. H. NAJAMUDIN, S.Pd., M.Pd.I.", "yes", 0, "", "")
     ]
 
     data_dprd_8 = [
-        ("note", "NOTE_CALEG8", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 8 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG8", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 8 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG8_1",	"1. HERI KOSWARA, S.Ag., M.A.", "yes", 0, "", ""),
         ("integer",	"CALEG8_2",	"2. IIN NUR FATINAH, A.Md.", "yes", 0, "", ""),
         ("integer",	"CALEG8_3",	"3. Ir. ASEP ARWIN KOTSARA, M.Eng.", "yes", 0, "", ""),
@@ -988,7 +996,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_9 = [
-        ("note", "NOTE_CALEG9", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 9 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG9", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 9 Jawa Barat).", "", "", "", ""),
         ("integer", "CALEG9_1", "1. Dr. Hj. CUCU SUGIARTI, S.I.P., M.Pd.", "yes", 0, "", ""),
         ("integer", "CALEG9_2", "2. H. FAIZAL HAFAN FARID, S.E., M.Si.", "yes", 0, "", ""),
         ("integer", "CALEG9_3", "3. M. AZMI ROBBANI", "yes", 0, "", ""),
@@ -999,7 +1007,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_10 = [
-        ("note", "NOTE_CALEG10", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 10 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG10", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 10 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG10_1", "1. Ir. H. ABDUL HADI WIJAYA, M.Sc", "yes", 0, "", ""),
         ("integer",	"CALEG10_2", "2. H. BUDIWANTO, S.Si., M.M.", "yes", 0, "", ""),
         ("integer",	"CALEG10_3", "3. Hj. SITI HINDUN KOMALA, S.Sos.I.", "yes", 0, "", ""),
@@ -1011,7 +1019,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_11 = [
-        ("note", "NOTE_CALEG11", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 11 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG11", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 11 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG11_1", "1. dr. H. ENCEP SUGIANA", "yes", 0, "", ""),
         ("integer",	"CALEG11_2", "2. MOHAMAD AGUNG ANUGRAH, S.E., Ak.", "yes", 0, "", ""),
         ("integer",	"CALEG11_3", "3. RIRIEN MEIDIANA SUMANTRI", "yes", 0, "", ""),
@@ -1025,7 +1033,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_12 = [
-        ("note", "NOTE_CALEG12", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 12 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG12", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 12 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG12_1", "1. H. JUNAEDI, S.T.", "yes", 0, "", ""),
         ("integer",	"CALEG12_2", "2. ROBANI HENDRA PERMANA, S.T.", "yes", 0, "", ""),
         ("integer",	"CALEG12_3", "3. MUMUNG MUNAWAROH, S.Sos.I.", "yes", 0, "", ""),
@@ -1041,7 +1049,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_13 = [
-        ("note", "NOTE_CALEG13", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 13 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG13", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 13 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG13_1", "1. RIJALUDDIN, S.Pd.", "yes", 0, "", ""),
         ("integer",	"CALEG13_2", "2. H. DIDI SUKARDI, S.E.", "yes", 0, "", ""),
         ("integer",	"CALEG13_3", "3. ETIK WIDIATI", "yes", 0, "", ""),
@@ -1053,7 +1061,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_14 = [
-        ("note", "NOTE_CALEG14", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 14 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG14", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 14 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG14_1", "1. H. AHAB SIHABUDIN, S.H.I.", "yes", 0, "", ""),
         ("integer",	"CALEG14_2", "2. KARNOTO, S.Kep., M.Si.", "yes", 0, "", ""),
         ("integer",	"CALEG14_3", "3. Hj. YAYAH ROKAYAH, S.Kom.", "yes", 0, "", ""),
@@ -1063,7 +1071,7 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     ]
 
     data_dprd_15 = [
-        ("note", "NOTE_CALEG15", "Masukkan jumlah suara setiap calon legislatif DPR-RI PKS (DAPIL 15 Jawa Barat).", "", "", "", ""),
+        ("note", "NOTE_CALEG15", "Masukkan jumlah suara setiap calon legislatif DPRD dari PKS (DAPIL 15 Jawa Barat).", "", "", "", ""),
         ("integer",	"CALEG15_1", "1. Drs. K.H. TETEP ABDULATIP", "yes", 0, "", ""),
         ("integer",	"CALEG15_2", "2. DEDE MUHAMAD MUHARAM", "yes", 0, "", ""),
         ("integer",	"CALEG15_3", "3. LANI SURYANI, S.Pd.", "yes", 0, "", ""),
@@ -1081,6 +1089,14 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
     tmp = pd.DataFrame(combined_data, columns=["type", "name", "label", "required", "default", "appearance", "relevance"])
 
     survey_jabar = pd.concat([survey_jabar, tmp])
+
+    # Invalid Votes
+    survey_jabar = survey_jabar.append({'type': 'integer',
+                                  'name': 'TIDAK_SAH',
+                                  'label': 'Jumlah Suara Tidak Sah',
+                                  'required': 'yes',
+                                  'default': 0,
+                                 }, ignore_index=True) 
 
     survey_jabar = survey_jabar.append({'type': 'end_group',
                                   'name': 'CALEG',
