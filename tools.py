@@ -602,13 +602,17 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    pages = ['(PKB, Gerindra, PDI-P, Golkar)', '(Nasdem, Buruh, Gelora, PKS)', '(PKN, Hanura, Garuda, PAN)', '(PBB, Demokrat, PSI, Perindo)', '(PPP & Ummat)', '(Suara Tidak Sah)']
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
+    for (n, l) in zip([f'P_{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(1, 19)]):
         survey_dpr = survey_dpr.append({'type': 'image',
                                       'name': n,
                                       'label': l,
                                       'required': 'yes',
                                      }, ignore_index=True)
+    survey_dpr = survey_dpr.append({'type': 'image',
+                                'name': 'P_19',
+                                'label': 'Foto Formulir C1-Plano (Suara Tidak Sah)',
+                                'required': 'yes',
+                                }, ignore_index=True)
     survey_dpr = survey_dpr.append({'type': 'end_group',
                                   'name': 'upload',
                                  }, ignore_index=True) 
@@ -1107,13 +1111,17 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    pages = ['(PKB, Gerindra, PDI-P, Golkar)', '(Nasdem, Buruh, Gelora, PKS)', '(PKN, Hanura, Garuda, PAN)', '(PBB, Demokrat, PSI, Perindo)', '(PPP & Ummat)', '(Suara Tidak Sah)']
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 7)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
+    for (n, l) in zip([f'P_{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(1, 19)]):
         survey_jabar = survey_jabar.append({'type': 'image',
                                       'name': n,
                                       'label': l,
                                       'required': 'yes',
                                      }, ignore_index=True)
+    survey_jabar = survey_jabar.append({'type': 'image',
+                                'name': 'P_19',
+                                'label': 'Foto Formulir C1-Plano (Suara Tidak Sah)',
+                                'required': 'yes',
+                                }, ignore_index=True)
     survey_jabar = survey_jabar.append({'type': 'end_group',
                                   'name': 'upload',
                                  }, ignore_index=True) 
@@ -1336,7 +1344,7 @@ def scto_process_dpr(data):
         vote_caleg = {f'DPR DP{dapil} C{ic}' : int(data[f'CALEG{dapil}_{ic}']) for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
-        c1_parpol = {f'SCTO-2 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}
+        c1_parpol = {f'SCTO-2 C1-{i}': data[f'P_{i}'] for i in range(1,20)}
 
         # Check if SMS data exists
         sms = data_bubble['SMS-2']
@@ -1490,7 +1498,7 @@ def scto_process_jabar(data):
         vote_caleg = {f'Jabar DP{dapil} C{ic}' : int(data[f'CALEG{dapil}_{ic}']) for ic in range(1, n_caleg[dapil]+1)}
 
         # C1-Form attachments
-        c1_parpol = {f'SCTO-4 C1-{i}': data[f'A4_{i}'] for i in range(1,7)}
+        c1_parpol = {f'SCTO-4 C1-{i}': data[f'P_{i}'] for i in range(1,20)}
 
         # Check if SMS data exists
         sms = data_bubble['SMS-3']
