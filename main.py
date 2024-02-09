@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore", module="google.oauth2")
 import os
 import io
 import json
+import time
 import tools
 import zipfile
 import requests
@@ -602,48 +603,62 @@ async def generate_xlsform(
     # Save the target file after renaming regions
     df.to_excel(f'{local_disk}/target.xlsx', index=False)
 
-    # Generate Text for API input
-    data = '\n'.join([
-        f'{{"UID": "{uid}", '
-        f'"Active": false, '
-        f'"Complete": false, '
-        f'"Dapil DPR RI": "{dapil_dprri}", '
-        f'"Dapil DPRD Jawa Barat": "{dapil_dprd}", '
-        f'"SMS-1": false, '
-        f'"SMS-2": false, '
-        f'"SCTO-1": false, '
-        f'"SCTO-2": false, '        
-        f'"SCTO-3": false, '
-        f'"Status Pilpres": "Empty", '
-        f'"Status DPR RI": "Empty", '
-        f'"Status DPRD Jabar": "Empty", '
-        f'"Korwil": "{korwil}", '
-        f'"Kab/Kota": "{kab_kota}", '
-        f'"Kecamatan": "{kecamatan}", '
-        f'"Kelurahan": "{kelurahan}", '
-        f'"Kab/Kota Ori": "{kab_kota_ori}", '
-        f'"Kecamatan Ori": "{kecamatan_ori}", '
-        f'"Kelurahan Ori": "{kelurahan_ori}"}}'
-        for uid, dapil_dprri, dapil_dprd, korwil, kab_kota, kecamatan, kelurahan, kab_kota_ori, kecamatan_ori, kelurahan_ori in zip(
-            df['UID'],
-            df['Dapil DPR RI'],
-            df['Dapil DPRD Jawa Barat'],
-            df['Korwil'],
-            df['Kab/Kota'],
-            df['Kecamatan'],
-            df['Kelurahan'],
-            df['Kab/Kota Ori'],
-            df['Kecamatan Ori'],
-            df['Kelurahan Ori']
-        )
-    ])
+    # Break into batches
+    n_batches = int(np.ceil(len(df) / 100))
 
-    # Populate votes table in bulk
-    headers = {
-        'Authorization': f'Bearer {BUBBLE_API_KEY}', 
-        'Content-Type': 'text/plain'
-        }
-    requests.post(f'{url_bubble}/Votes/bulk', headers=headers, data=data)
+    for batch in range(n_batches):
+        start = batch * 100
+        if batch+1 == n_batches:
+            end = len(df)
+        else:
+            end = start + 100
+
+        tdf = df.loc[start:end, :]
+
+        # Generate Text for API input
+        data = '\n'.join([
+            f'{{"UID": "{uid}", '
+            f'"Active": false, '
+            f'"Complete": false, '
+            f'"Dapil DPR RI": "{dapil_dprri}", '
+            f'"Dapil DPRD Jawa Barat": "{dapil_dprd}", '
+            f'"SMS-1": false, '
+            f'"SMS-2": false, '
+            f'"SCTO-1": false, '
+            f'"SCTO-2": false, '        
+            f'"SCTO-3": false, '
+            f'"Status Pilpres": "Empty", '
+            f'"Status DPR RI": "Empty", '
+            f'"Status DPRD Jabar": "Empty", '
+            f'"Korwil": "{korwil}", '
+            f'"Kab/Kota": "{kab_kota}", '
+            f'"Kecamatan": "{kecamatan}", '
+            f'"Kelurahan": "{kelurahan}", '
+            f'"Kab/Kota Ori": "{kab_kota_ori}", '
+            f'"Kecamatan Ori": "{kecamatan_ori}", '
+            f'"Kelurahan Ori": "{kelurahan_ori}"}}'
+            for uid, dapil_dprri, dapil_dprd, korwil, kab_kota, kecamatan, kelurahan, kab_kota_ori, kecamatan_ori, kelurahan_ori in zip(
+                tdf['UID'],
+                tdf['Dapil DPR RI'],
+                tdf['Dapil DPRD Jawa Barat'],
+                tdf['Korwil'],
+                tdf['Kab/Kota'],
+                tdf['Kecamatan'],
+                tdf['Kelurahan'],
+                tdf['Kab/Kota Ori'],
+                tdf['Kecamatan Ori'],
+                tdf['Kelurahan Ori']
+            )
+        ])
+
+        # Populate votes table in bulk
+        headers = {
+            'Authorization': f'Bearer {BUBBLE_API_KEY}', 
+            'Content-Type': 'text/plain'
+            }
+        requests.post(f'{url_bubble}/Votes/bulk', headers=headers, data=data)
+
+        time.sleep(3)
 
     # Get UIDs and store as json
     headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}

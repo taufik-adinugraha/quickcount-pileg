@@ -76,13 +76,13 @@ def rename_region(data):
     provinsi = 'Jawa Barat'
     # kabupaten/kota
     reference = list(region_data[provinsi].keys())
-    kabkota = find_closest_string(data[0], reference)       
+    kabkota = find_closest_string(data[0], reference, 'Kab/Kota')       
     # kecamatan
     reference = list(region_data[provinsi][kabkota].keys())
-    kecamatan = find_closest_string(data[1], reference) 
+    kecamatan = find_closest_string(data[1], reference, 'Kecamatan') 
     # kelurahan
     reference = list(region_data[provinsi][kabkota][kecamatan])
-    kelurahan = find_closest_string(data[2], reference)
+    kelurahan = find_closest_string(data[2], reference, 'Kelurahan')
     return kabkota, kecamatan, kelurahan
 
 def preprocess_text(text):
@@ -102,12 +102,18 @@ def compare_with_list(string1, string2_list):
         scores.append(score)
     return scores
 
-def find_closest_string(string1, string_list):
+def find_closest_string(string1, string_list, region):
+    if region == 'Kab/Kota':
+        first_string = string1.split(' ')[0].lower()
+        if first_string != 'kota':
+            if first_string not in ['kab.', 'kabupaten', 'kab']:
+                string1 = 'Kab. ' + string1
     preprocessed_string_list = [preprocess_text(s) for s in string_list]
     preprocessed_target = preprocess_text(string1)
     scores = compare_with_list(preprocessed_target, preprocessed_string_list)
     ss = [len([i for i in list(s2) if i not in list(preprocessed_target)]) for s2 in preprocessed_string_list]
-    scores = np.array(scores) - np.array(ss)
+    tt = [np.sum([preprocessed_target.count(t1) for t1 in list(t2)])/len(preprocessed_target) for t2 in preprocessed_string_list]
+    scores = np.array(scores) - np.array(ss) - np.array(tt)
     closest_index = np.argmax(scores)
     return string_list[closest_index]
 
@@ -326,11 +332,12 @@ def create_xlsform_pilpres():
             nested_target.setdefault(kab_kota, [])
         if kecamatan is not None and kab_kota in nested_target:
             nested_target[kab_kota].append(kecamatan)
+        if kelurahan is not None and kab_kota in nested_target and kecamatan in nested_target[kab_kota]:
+            nested_target[kab_kota][kecamatan].append(kelurahan)
+
 
     # Create a DataFrame for choices
     choices_pilpres = pd.DataFrame(columns=['list_name', 'name', 'label', 'filter_kabkota', 'filter_kecamatan'])
-
-    prov = 'Jawa Barat'
 
     # Add kabupaten_kota choices
     kab_kota = list(nested_target.keys())
@@ -352,7 +359,7 @@ def create_xlsform_pilpres():
 
         # Add kelurahan choices
         for kec in kecamatan:
-            kelurahan = region_data[prov][kk][kec]
+            kelurahan = nested_target[kk][kec]
             kelurahan = sorted(kelurahan)
             choices_pilpres = choices_pilpres.append(pd.DataFrame({'list_name': 'list_kelurahan', 
                                                             'name': ['_'.join(i.split(' ')) for i in kelurahan],
