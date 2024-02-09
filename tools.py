@@ -331,7 +331,7 @@ def create_xlsform_pilpres():
         if kab_kota is not None:
             nested_target.setdefault(kab_kota, [])
         if kecamatan is not None and kab_kota in nested_target:
-            nested_target[kab_kota].append(kecamatan)
+            nested_target[kab_kota].setdefault(kecamatan, [])
         if kelurahan is not None and kab_kota in nested_target and kecamatan in nested_target[kab_kota]:
             nested_target[kab_kota][kecamatan].append(kelurahan)
 
