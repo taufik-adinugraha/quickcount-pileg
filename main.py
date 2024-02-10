@@ -679,19 +679,19 @@ async def generate_xlsform(
     tools.create_xlsform_dpr()
     tools.create_xlsform_dpd()
     tools.create_xlsform_jabar()
-    xlsform_paths = [
-        f'{local_disk}/xlsform_pilpres.xlsx',
-        f'{local_disk}/xlsform_dpr.xlsx',
-        f'{local_disk}/xlsform_dpd.xlsx',
-        f'{local_disk}/xlsform_jabar.xlsx'
-    ]
+    # xlsform_paths = [
+    #     f'{local_disk}/xlsform_pilpres.xlsx',
+    #     f'{local_disk}/xlsform_dpr.xlsx',
+    #     f'{local_disk}/xlsform_dpd.xlsx',
+    #     f'{local_disk}/xlsform_jabar.xlsx'
+    # ]
 
-    responses = []
-    for path in xlsform_paths:
-        filename = os.path.basename(path)
-        responses.append(FileResponse(path, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=filename))
+    # responses = []
+    # for path in xlsform_paths:
+    #     filename = os.path.basename(path)
+    #     responses.append(FileResponse(path, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=filename))
 
-    return responses
+    # return responses
 
     # def create_zip_file(paths, output_filename):
     #     with zipfile.ZipFile(output_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
@@ -738,6 +738,46 @@ async def generate_xlsform(
 
     # return response
 
+
+# Download XLSFORM Pilpres
+@app.get("/download_xlsform_pilpres")
+def download_xlsform_pilpres():
+    def file_generator():
+            with open(f'{local_disk}/xlsform_pilpres.xlsx', 'rb') as file_content:
+                yield from file_content
+    response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_pilpres.xlsx"
+    return response
+
+# Download XLSFORM DPR-RI
+@app.get("/download_xlsform_dpr")
+def download_xlsform_dpr():
+    def file_generator():
+            with open(f'{local_disk}/xlsform_dpr.xlsx', 'rb') as file_content:
+                yield from file_content
+    response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_dpr.xlsx"
+    return response
+
+# Download XLSFORM DPD I
+@app.get("/download_xlsform_dpd")
+def download_xlsform_dpd():
+    def file_generator():
+            with open(f'{local_disk}/xlsform_dpd.xlsx', 'rb') as file_content:
+                yield from file_content
+    response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_dpd.xlsx"
+    return response
+
+# Download XLSFORM DPRD Jabar
+@app.get("/download_xlsform_jabar")
+def download_xlsform_jabar():
+    def file_generator():
+            with open(f'{local_disk}/xlsform_jabar.xlsx', 'rb') as file_content:
+                yield from file_content
+    response = StreamingResponse(file_generator(), media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response.headers["Content-Disposition"] = f"attachment; filename=xlsform_jabar.xlsx"
+    return response
 
 
 # ================================================================================================================
