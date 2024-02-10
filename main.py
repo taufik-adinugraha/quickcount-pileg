@@ -659,6 +659,7 @@ async def generate_xlsform(
         time.sleep(3)
 
     # Get UIDs and store as json
+    headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
     res = requests.get(url_getUID, headers=headers)
     out = res.json()['response']
     uid_dict = {uid:id_ for (uid, id_) in zip(out['UID'], out['id_'])}
