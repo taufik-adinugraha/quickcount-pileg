@@ -17,7 +17,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from pysurveycto import SurveyCTOObject
 from datetime import datetime, timedelta
-from fastapi import Form, FastAPI, UploadFile
+from fastapi import Form, FastAPI, UploadFile, Response
 from fastapi.responses import StreamingResponse, FileResponse
 
 
@@ -679,6 +679,9 @@ async def generate_xlsform(
     tools.create_xlsform_dpr()
     tools.create_xlsform_dpd()
     tools.create_xlsform_jabar()
+
+    return Response(status_code=204)
+
     # xlsform_paths = [
     #     f'{local_disk}/xlsform_pilpres.xlsx',
     #     f'{local_disk}/xlsform_dpr.xlsx',
