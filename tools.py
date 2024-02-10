@@ -326,7 +326,7 @@ def create_xlsform_pilpres():
     # Create a nested dictionary
     nested_target = {}
     for row in target_data.itertuples(index=False):
-        kab_kota, kecamatan = row[4:6]
+        kab_kota, kecamatan, kelurahan = row[4:7]
         # Check for None values and initialize nested dictionaries
         if kab_kota is not None:
             nested_target.setdefault(kab_kota, {})
