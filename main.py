@@ -660,9 +660,12 @@ async def generate_xlsform(
 
     # Get UIDs and store as json
     headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
-    res = requests.get(url_getUID, headers=headers)
-    out = res.json()['response']
-    uid_dict = {uid:id_ for (uid, id_) in zip(out['UID'], out['id_'])}
+    uid_dict = {}
+    for uid_start in range(1, len(df), 50):
+        params = {'start': uid_start, 'end': uid_start+50}
+        res = requests.get(url_getUID, headers=headers, params=params)
+        out = res.json()['response']
+        uid_dict.update(zip(out['UID'], out['id_']))
 
     # headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
     # res = requests.get(f'{url_bubble}/Votes', headers=headers)
