@@ -615,17 +615,12 @@ if((${KOTA_KAB}=165) or (${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_11",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip([f'P_{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(1, 19)]):
+    for (n, l) in zip([f'P_{i}' for i in range(1, 20)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(19)]):
         survey_dpr = survey_dpr.append({'type': 'image',
                                       'name': n,
                                       'label': l,
                                       'required': 'yes',
                                      }, ignore_index=True)
-    survey_dpr = survey_dpr.append({'type': 'image',
-                                'name': 'P_19',
-                                'label': 'Foto Formulir C1-Plano (Suara Tidak Sah)',
-                                'required': 'yes',
-                                }, ignore_index=True)
     survey_dpr = survey_dpr.append({'type': 'end_group',
                                   'name': 'upload',
                                  }, ignore_index=True) 
@@ -1124,17 +1119,12 @@ if((${KOTA_KAB}=166) or (${KOTA_KAB}=186),"Jawa_Barat_15",
                                   'name': 'upload',
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
-    for (n, l) in zip([f'P_{i}' for i in range(1, 19)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(1, 19)]):
+    for (n, l) in zip([f'P_{i}' for i in range(1, 20)], [f'Foto Formulir C1-Plano ({list_parpol[i]})' for i in range(19)]):
         survey_jabar = survey_jabar.append({'type': 'image',
                                       'name': n,
                                       'label': l,
                                       'required': 'yes',
                                      }, ignore_index=True)
-    survey_jabar = survey_jabar.append({'type': 'image',
-                                'name': 'P_19',
-                                'label': 'Foto Formulir C1-Plano (Suara Tidak Sah)',
-                                'required': 'yes',
-                                }, ignore_index=True)
     survey_jabar = survey_jabar.append({'type': 'end_group',
                                   'name': 'upload',
                                  }, ignore_index=True) 
