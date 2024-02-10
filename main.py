@@ -695,6 +695,8 @@ async def generate_xlsform(
         with io.BytesIO() as buffer:
             with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for content, filename in files:
+                    if isinstance(content, str):
+                        content = content.encode("utf-8")
                     zip_file.writestr(filename, content)
             buffer.seek(0)
             yield from buffer.getvalue()
