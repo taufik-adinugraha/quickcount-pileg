@@ -688,15 +688,18 @@ async def generate_xlsform(
 
     def file_generator(paths):
         for path in paths:
+            filename = os.path.basename(path)
             with open(path, "rb") as file:
-                yield file.read(), os.path.basename(path)
+                while True:
+                    chunk = file.read(8192)  # Adjust chunk size as needed
+                    if not chunk:
+                        break
+                    yield chunk, filename
 
     def zip_generator(files):
         with io.BytesIO() as buffer:
             with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for content, filename in files:
-                    if isinstance(content, str):
-                        content = content.encode("utf-8")
                     zip_file.writestr(filename, content)
             buffer.seek(0)
             yield from buffer.getvalue()
