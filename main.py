@@ -33,6 +33,7 @@ app = FastAPI()
 # Global Variables
 url_send_sms = os.environ.get('url_send_sms')
 url_bubble = os.environ.get('url_bubble')
+url_getUID = os.environ.get('url_getUID')
 local_disk = os.environ.get('local_disk')
 BUBBLE_API_KEY = os.environ.get('BUBBLE_API_KEY')
 SCTO_SERVER_NAME = os.environ.get('SCTO_SERVER_NAME')
@@ -604,15 +605,12 @@ async def generate_xlsform(
     df.to_excel(f'{local_disk}/target.xlsx', index=False)
 
     # Break into batches
-    n_batches = int(np.ceil(len(df) / 100))
+    batch_size = 100
+    n_batches = int(np.ceil(len(df) / batch_size))
 
     for batch in range(n_batches):
-        start = batch * 100
-        if batch+1 == n_batches:
-            end = len(df)
-        else:
-            end = start + 100
-
+        start = batch * batch_size
+        end = min((batch + 1) * batch_size, len(df)) - 1 
         tdf = df.loc[start:end, :]
 
         # Generate Text for API input
@@ -661,9 +659,14 @@ async def generate_xlsform(
         time.sleep(3)
 
     # Get UIDs and store as json
-    headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
-    res = requests.get(f'{url_bubble}/Votes', headers=headers)
-    uid_dict = {i['UID']:i['_id'] for i in res.json()['response']['results']}
+    res = requests.get(url_getUID, headers=headers)
+    out = res.json()['response']
+    uid_dict = {uid:id_ for (uid, id_) in zip(out['UID'], out['id_'])}
+
+    # headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
+    # res = requests.get(f'{url_bubble}/Votes', headers=headers)
+    # uid_dict = {i['UID']:i['_id'] for i in res.json()['response']['results']}
+
     with open(f'{local_disk}/uid.json', 'w') as json_file:
         json.dump(uid_dict, json_file)
 
