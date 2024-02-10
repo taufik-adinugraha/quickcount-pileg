@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 from pysurveycto import SurveyCTOObject
 from datetime import datetime, timedelta
 from fastapi import Form, FastAPI, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 
 
 # ================================================================================================================
@@ -686,28 +686,37 @@ async def generate_xlsform(
         f'{local_disk}/xlsform_jabar.xlsx'
     ]
 
-    def file_generator(paths):
-        for path in paths:
-            filename = os.path.basename(path)
-            with open(path, "rb") as file:
-                while True:
-                    chunk = file.read(8192)  # Adjust chunk size as needed
-                    if not chunk:
-                        break
-                    yield chunk, filename
+    def create_zip_file(paths, output_filename):
+        with zipfile.ZipFile(output_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            for path in paths:
+                zip_file.write(path, arcname=os.path.basename(path))
 
-    def zip_generator(files):
-        with io.BytesIO() as buffer:
-            with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-                for content, filename in files:
-                    zip_file.writestr(filename, content)
-            buffer.seek(0)
-            yield from buffer.getvalue()
+    zip_filename = "xlsforms.zip"
+    create_zip_file(xlsform_paths, zip_filename)
+    return FileResponse(zip_filename, media_type='application/zip', filename='xlsforms.zip')
 
-    response = StreamingResponse(zip_generator(file_generator(xlsform_paths)), media_type='application/zip')
-    response.headers["Content-Disposition"] = "attachment; filename=xlsforms.zip"
+    # def file_generator(paths):
+    #     for path in paths:
+    #         filename = os.path.basename(path)
+    #         with open(path, "rb") as file:
+    #             while True:
+    #                 chunk = file.read(8192)  # Adjust chunk size as needed
+    #                 if not chunk:
+    #                     break
+    #                 yield chunk, filename
 
-    return response
+    # def zip_generator(files):
+    #     with io.BytesIO() as buffer:
+    #         with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+    #             for content, filename in files:
+    #                 zip_file.writestr(filename, content)
+    #         buffer.seek(0)
+    #         yield from buffer.getvalue()
+
+    # response = StreamingResponse(zip_generator(file_generator(xlsform_paths)), media_type='application/zip')
+    # response.headers["Content-Disposition"] = "attachment; filename=xlsforms.zip"
+
+    # return response
 
     # def file_generator(paths):
     #     with io.BytesIO() as buffer:
