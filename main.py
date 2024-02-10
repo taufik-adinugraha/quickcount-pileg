@@ -687,17 +687,35 @@ async def generate_xlsform(
     ]
 
     def file_generator(paths):
-        with io.BytesIO() as buffer:
-            with zipfile.ZipFile(buffer, 'w') as zip_file:
-                for path in paths:
-                    zip_file.write(path, arcname=path.split('/')[-1])
-            buffer.seek(0)
-            yield from buffer
+        for path in paths:
+            with open(path, "rb") as file:
+                yield file.read(), os.path.basename(path)
 
-    response = StreamingResponse(file_generator(xlsform_paths), media_type='application/zip')
+    def zip_generator(files):
+        with io.BytesIO() as buffer:
+            with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+                for content, filename in files:
+                    zip_file.writestr(filename, content)
+            buffer.seek(0)
+            yield from buffer.getvalue()
+
+    response = StreamingResponse(zip_generator(file_generator(xlsform_paths)), media_type='application/zip')
     response.headers["Content-Disposition"] = "attachment; filename=xlsforms.zip"
 
     return response
+
+    # def file_generator(paths):
+    #     with io.BytesIO() as buffer:
+    #         with zipfile.ZipFile(buffer, 'w') as zip_file:
+    #             for path in paths:
+    #                 zip_file.write(path, arcname=path.split('/')[-1])
+    #         buffer.seek(0)
+    #         yield from buffer
+
+    # response = StreamingResponse(file_generator(xlsform_paths), media_type='application/zip')
+    # response.headers["Content-Disposition"] = "attachment; filename=xlsforms.zip"
+
+    # return response
 
 
 
