@@ -48,7 +48,7 @@ headers = {'Authorization': f'Bearer {BUBBLE_API_KEY}'}
 
 # Parpol
 list_parpol = ['PKB', 'GERINDRA', 'PDI-P', 'GOLKAR', 'NASDEM', 'PARTAI BURUH', 'PARTAI GELORA', 'PKS', 'PKN', 'PARTAI HANURA', 'PARTAI GARUDA', 'PAN', 'PBB', 
-                'DEMOKRAT', 'PSI', 'PERINDO', 'PPP', 'PARTAI UMMAT']
+                'DEMOKRAT', 'PSI', 'PERINDO', 'PPP', 'PARTAI UMMAT', 'TIDAK SAH']
 parpol = {'PKB': 'PKB', 
           'GERINDRA': 'GERINDRA', 
           'PDI-P': 'PDI', 
