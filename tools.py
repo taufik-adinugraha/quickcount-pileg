@@ -271,12 +271,18 @@ def create_xlsform_pilpres():
                                 'required': 'yes',
                                 'choice_filter': 'filter_kabkota=${selected_kabkota}',
                                 }, ignore_index=True)
-    survey_pilpres = survey_pilpres.append({'type': 'select_one list_kelurahan',
-                                'name': 'selected_kelurahan',
-                                'label': 'Pilih Kelurahan',
+    survey_pilpres = survey_pilpres.append({'type': 'text',
+                                'name': 'kelurahan',
+                                'label': 'Tulis Kelurahan',
                                 'required': 'yes',
-                                'choice_filter': 'filter_kabkota=${selected_kabkota} and filter_kecamatan=${selected_kecamatan}',
                                 }, ignore_index=True)
+
+    # survey_pilpres = survey_pilpres.append({'type': 'select_one list_kelurahan',
+    #                             'name': 'selected_kelurahan',
+    #                             'label': 'Pilih Kelurahan',
+    #                             'required': 'yes',
+    #                             'choice_filter': 'filter_kabkota=${selected_kabkota} and filter_kecamatan=${selected_kecamatan}',
+    #                             }, ignore_index=True)
 
     # Address
     for (n, l) in zip(['no_tps', 'alamat', 'rt', 'rw'], ['No. TPS', 'Alamat', 'RT', 'RW']):
@@ -357,16 +363,16 @@ def create_xlsform_pilpres():
                                                         'filter_kabkota': '_'.join(kk.split(' '))
                                                     }))
 
-        # Add kelurahan choices
-        for kec in kecamatan:
-            kelurahan = nested_target[kk][kec]
-            kelurahan = sorted(kelurahan)
-            choices_pilpres = choices_pilpres.append(pd.DataFrame({'list_name': 'list_kelurahan', 
-                                                            'name': ['_'.join(i.split(' ')) for i in kelurahan],
-                                                            'label': kelurahan,
-                                                            'filter_kabkota': '_'.join(kk.split(' ')),                                                           
-                                                            'filter_kecamatan': '_'.join(kec.split(' '))
-                                                        }))
+        # # Add kelurahan choices
+        # for kec in kecamatan:
+        #     kelurahan = nested_target[kk][kec]
+        #     kelurahan = sorted(kelurahan)
+        #     choices_pilpres = choices_pilpres.append(pd.DataFrame({'list_name': 'list_kelurahan', 
+        #                                                     'name': ['_'.join(i.split(' ')) for i in kelurahan],
+        #                                                     'label': kelurahan,
+        #                                                     'filter_kabkota': '_'.join(kk.split(' ')),                                                           
+        #                                                     'filter_kecamatan': '_'.join(kec.split(' '))
+        #                                                 }))
 
     # Save choices to an Excel file
     with pd.ExcelWriter(f'{local_disk}/xlsform_pilpres.xlsx', engine='openpyxl', mode='a') as writer:
@@ -1268,8 +1274,12 @@ def scto_process_pilpres(data):
         key = data['KEY'].split('uuid:')[-1]
         link = f"https://{SCTO_SERVER_NAME}.surveycto.com/view/submission.html?uuid=uuid%3A{key}"
 
+        # Rename kelurahan
+        reference = list(region_data['Jawa Barat'][data_bubble['Kab/Kota']][data_bubble['Kecamatan']])
+        scto_kelurahan = find_closest_string(data['kelurahan'], reference, 'Kelurahan')
+
         # Update GPS status
-        if (data_bubble['Kab/Kota']==loc['Kab/Kota']) and (data_bubble['Kecamatan']==loc['Kecamatan']) and (data_bubble['Kelurahan']==loc['Kelurahan']):
+        if (data_bubble['Kab/Kota']==loc['Kab/Kota']) and (data_bubble['Kecamatan']==loc['Kecamatan']) and (scto_kelurahan==loc['Kelurahan']):
             gps_status = 'Verified'
         else:
             gps_status = 'Not Verified'
@@ -1288,7 +1298,7 @@ def scto_process_pilpres(data):
             'SCTO-1 Timestamp': std_datetime,
             'SCTO-1 Kab/Kota': data['selected_kabkota'].replace('_', ' '),
             'SCTO-1 Kecamatan': data['selected_kecamatan'].replace('_', ' '),
-            'SCTO-1 Kelurahan': data['selected_kelurahan'].replace('_', ' '),
+            'SCTO-1 Kelurahan': scto_kelurahan,
             'GPS Kab/Kota': loc['Kab/Kota'],
             'GPS Kecamatan': loc['Kecamatan'],
             'GPS Kelurahan': loc['Kelurahan'],
