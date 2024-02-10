@@ -686,14 +686,21 @@ async def generate_xlsform(
         f'{local_disk}/xlsform_jabar.xlsx'
     ]
 
-    def create_zip_file(paths, output_filename):
-        with zipfile.ZipFile(output_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            for path in paths:
-                zip_file.write(path, arcname=os.path.basename(path))
+    responses = []
+    for path in xlsform_paths:
+        filename = os.path.basename(path)
+        responses.append(FileResponse(path, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=filename))
 
-    zip_filename = "xlsforms.zip"
-    create_zip_file(xlsform_paths, zip_filename)
-    return FileResponse(zip_filename, media_type='application/zip', filename='xlsforms.zip')
+    return responses
+
+    # def create_zip_file(paths, output_filename):
+    #     with zipfile.ZipFile(output_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+    #         for path in paths:
+    #             zip_file.write(path, arcname=os.path.basename(path))
+
+    # zip_filename = "xlsforms.zip"
+    # create_zip_file(xlsform_paths, zip_filename)
+    # return FileResponse(zip_filename, media_type='application/zip', filename='xlsforms.zip')
 
     # def file_generator(paths):
     #     for path in paths:
