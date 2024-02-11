@@ -722,7 +722,7 @@ def create_xlsform_dpd():
                                   'label': 'PEROLEHAN SUARA CALON LEGISLATIF DPD I',
                                  }, ignore_index=True)
     data_dpd_1= [
-        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 1-15).", "", "", "", ""),
+        ("note", "NOTE_CALEG1", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 1-12).", "", "", "", ""),
         ("integer", "CALONDPD_1", "1. AA ADE KADARISMAN, S.Sos., M.T.", "yes", 0, "", ""),
         ("integer", "CALONDPD_2", "2. AANYA RINA CASMAYANTI, S.E.", "yes", 0, "", ""),
         ("integer", "CALONDPD_3", "3. ABAS ABDUL JALIL", "yes", 0, "", ""),
@@ -734,14 +734,14 @@ def create_xlsform_dpd():
         ("integer", "CALONDPD_9", "9. AJI SAPTAJI, S.H.I., M.E.Sy.", "yes", 0, "", ""),
         ("integer", "CALONDPD_10", "10. ALFIANSYAH KOMENG", "yes", 0, "", ""),
         ("integer", "CALONDPD_11", "11. K.H. AMANG SYAFRUDIN, M.M.", "yes", 0, "", ""),
-        ("integer", "CALONDPD_12", "12. AMBU USDEK KANIAWATI, S.Sos.", "yes", 0, "", ""),
-        ("integer", "CALONDPD_13", "13. ANDRI PERKASA KANTAPRAWIRA, S.I.P., M.M", "yes", 0, "", ""),
-        ("integer", "CALONDPD_14", "14. ANNIDA ALLIVIA", "yes", 0, "", ""),
-        ("integer", "CALONDPD_15", "15. O OGI SOS", "yes", 0, "", "")
+        ("integer", "CALONDPD_12", "12. AMBU USDEK KANIAWATI, S.Sos.", "yes", 0, "", "")
     ]
 
     data_dpd_2= [
-        ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 16-30).", "", "", "", ""),
+        ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 13-24).", "", "", "", ""),
+        ("integer", "CALONDPD_13", "13. ANDRI PERKASA KANTAPRAWIRA, S.I.P., M.M", "yes", 0, "", ""),
+        ("integer", "CALONDPD_14", "14. ANNIDA ALLIVIA", "yes", 0, "", ""),
+        ("integer", "CALONDPD_15", "15. O OGI SOS", "yes", 0, "", "")
         ("integer",	"CALONDPD_16", "16. ARIF RAHMAN HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_17", "17. A. TAUPIK HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_18", "18. K.H. A WAWAN GHOZALI", "yes", 0, "", ""),
@@ -750,23 +750,27 @@ def create_xlsform_dpd():
         ("integer",	"CALONDPD_21", "21. BUDIYONO, S.P.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_22", "22. DEDE AMAR", "yes", 0, "", ""),
         ("integer",	"CALONDPD_23", "23. DEDI RUDIANSYAH, S.T.", "yes", 0, "", ""),
-        ("integer",	"CALONDPD_24", "24. DENDA ALAMSYAH, S.T.", "yes", 0, "", ""),
+        ("integer",	"CALONDPD_24", "24. DENDA ALAMSYAH, S.T.", "yes", 0, "", "")
+    ]
+
+    data_dpd_3= [
+        ("note", "NOTE_CALEG3", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 25-36).", "", "", "", ""),
         ("integer",	"CALONDPD_25", "25. DENI RUSYNIANDI, S.Ag.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_26", "26. DIAN RAHADIAN", "yes", 0, "", ""),
         ("integer",	"CALONDPD_27", "27. DJUMONO", "yes", 0, "", ""),
         ("integer",	"CALONDPD_28", "28. EDI KUSDIANA, S.A.P., M.M.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_29", "29. Ir. ELAN HERYANTO", "yes", 0, "", ""),
         ("integer",	"CALONDPD_30", "30. Dra. Ir. Hj. ENI SUMARNI, M.Kes.", "yes", 0, "", "")
-    ]
-
-    data_dpd_3= [
-        ("note", "NOTE_CALEG3", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 31-45).", "", "", "", ""),
         ("integer",	"CALONDPD_31", "31. ERNAWATY TAMPUBOLON, S.T., M.Th.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_32", "32. Dr. HAIDAN S.Pd.I., S.H., M.Ag.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_33", "33. HENDRIK KURNIAWAN, S.Pd.I", "yes", 0, "", ""),
         ("integer",	"CALONDPD_34", "34. Dr. Hj. IFA FAIZAH ROHMAH, M.Pd.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_35", "35. IMAM SOLAHUDIN, S.T., S.Ag., M.Si.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_36", "36. IMAM SUGIARTO, S.H.", "yes", 0, "", ""),
+    ]
+
+    data_dpd_4= [
+        ("note", "NOTE_CALEG4", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 37-48).", "", "", "", ""),
         ("integer",	"CALONDPD_37", "37. JAHENOS SARAGIH, S.Th., M.Th., M.M", "yes", 0, "", ""),
         ("integer",	"CALONDPD_38", "38. JAJANG KURNIA, S.Sos., M.Si.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_39", "39. JIHAN FAHIRA", "yes", 0, "", ""),
@@ -776,23 +780,23 @@ def create_xlsform_dpd():
         ("integer",	"CALONDPD_43", "43. MULYADI ELHAN ZAKARIA", "yes", 0, "", ""),
         ("integer",	"CALONDPD_44", "44. RIA SUGIAT, S.H.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_45", "45. RIFKI KARTINI", "yes", 0, "", "")
-    ]
-
-    data_dpd_4= [
-        ("note", "NOTE_CALEG4", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 46-54).", "", "", "", ""),
         ("integer",	"CALONDPD_46", "46. ROBBY MAULANA ZULKARNAEN", "yes", 0, "", ""),
         ("integer",	"CALONDPD_47", "47. RUSDI HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_48", "48. Dr. SITTI HIKMAWATTY, S.ST., M.Pd.", "yes", 0, "", ""),
+    ]
+
+    data_dpd_5= [
+        ("note", "NOTE_CALEG5", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 49-54).", "", "", "", ""),
         ("integer",	"CALONDPD_49", "49. Dr. Drs. SONNY HERSONA GW, M.M", "yes", 0, "", ""),
         ("integer",	"CALONDPD_50", "50. Drs. H. SURATTO SISWODIHARJO", "yes", 0, "", ""),
         ("integer",	"CALONDPD_51", "51. Dr. SUROYO", "yes", 0, "", ""),
         ("integer",	"CALONDPD_52", "52. TEDY GIANTARA, S.T.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_53", "53. WAWAN DEDE AMUNG SUTARYA", "yes", 0, "", ""),
-        ("integer",	"CALONDPD_54", "54. YUNITA DIAN SUWANDARI, S.T., M.M., M.T.", "yes", 0, "", "")
+        ("integer",	"CALONDPD_54", "54. YUNITA DIAN SUWANDARI, S.T., M.M., M.T.", "yes", 0, "", "")        
     ]
 
     # Combine all the data
-    list_data_dpd = [data_dpd_1, data_dpd_2, data_dpd_3, data_dpd_4]
+    list_data_dpd = [data_dpd_1, data_dpd_2, data_dpd_3, data_dpd_4, data_dpd_5]
     combined_data = []
     for i, data_dpd in enumerate(list_data_dpd):
         combined_data += [("begin group", f"DPD_{i+1}", f"PEROLEHAN SUARA CALEG DPD I", "", "", "field-list", "")] + data_dpd + [("end group", f"DPD_{i+1}", "", "", "", "", "")]
@@ -818,8 +822,8 @@ def create_xlsform_dpd():
                                   'label': 'Bagian untuk mengunggah/upload foto formulir C1',
                                  }, ignore_index=True) 
     
-    pages = ['(Caleg 1-15)', '(Caleg 16-30)', '(Caleg 31-45)', '(Caleg 46-54)', '(Suara Tidak Sah)']
-    for (n, l) in zip([f'A4_{i}' for i in range(1, 6)], [f'Foto Formulir C1-A4 Halaman {i+2} {page}' for i, page in enumerate(pages)]):
+    pages = ['(Caleg 1-12)', '(Caleg 13-24)', '(Caleg 25-36)', '(Caleg 37-48)', '(Caleg 49-54)', '(Suara Tidak Sah)']
+    for (n, l) in zip([f'C1_{i}' for i in range(1, 7)], [f'Foto Formulir C1 {page}' for page in pages]):
         survey_dpd = survey_dpd.append({'type': 'image',
                                       'name': n,
                                       'label': l,
@@ -1431,7 +1435,7 @@ def scto_process_dpd(data):
         invalid_dpd = int(data['TIDAK_SAH'])
 
         # C1-Form attachments
-        c1_caleg = {f'SCTO-3 C1-{i}': data[f'A4_{i}'] for i in range(1,6)}
+        c1_caleg = {f'SCTO-3 C1-{i}': data[f'C1_{i}'] for i in range(1,7)}
         
         # Completeness
         if data_bubble['SMS-1'] and data_bubble['SMS-2'] and data_bubble['SMS-3'] and data_bubble['SCTO-1'] and data_bubble['SCTO-2'] and data_bubble['SCTO-4']:
