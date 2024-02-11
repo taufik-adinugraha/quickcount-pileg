@@ -149,7 +149,7 @@ for port in range(17, num_endpoints + 17):
 
                                 message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
                                 # Retrieve data with this UID from Bubble database
-                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_params = [{"key": "UID", "constraint_type": "equals", "value": uid.upper()}]
                                 filter_json = json.dumps(filter_params)
                                 params = {"constraints": filter_json}
                                 res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
@@ -253,7 +253,7 @@ for port in range(17, num_endpoints + 17):
 
                                 message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
                                 # Retrieve data with this UID from Bubble database
-                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_params = [{"key": "UID", "constraint_type": "equals", "value": uid.upper()}]
                                 filter_json = json.dumps(filter_params)
                                 params = {"constraints": filter_json}
                                 res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
@@ -359,7 +359,7 @@ for port in range(17, num_endpoints + 17):
 
                                 message = summary + 'Berhasil diterima. Utk koreksi, kirim ulang dgn format yg sama.'
                                 # Retrieve data with this UID from Bubble database
-                                filter_params = [{"key": "UID", "constraint_type": "text contains", "value": uid.upper()}]
+                                filter_params = [{"key": "UID", "constraint_type": "equals", "value": uid.upper()}]
                                 filter_json = json.dumps(filter_params)
                                 params = {"constraints": filter_json}
                                 res = requests.get(f'{url_bubble}/Votes', headers=headers, params=params)
@@ -461,7 +461,7 @@ for port in range(17, num_endpoints + 17):
             }
 
             # Retrieve data with this SIM Number from Bubble database (GatewayCheck)
-            filter_params = [{"key": "Gateway ID", "constraint_type": "text contains", "value": gateway_number}]
+            filter_params = [{"key": "Gateway ID", "constraint_type": "equals", "value": gateway_number}]
             filter_json = json.dumps(filter_params)
             params = {"constraints": filter_json}
             res = requests.get(f'{url_bubble}/GatewayCheck', headers=headers, params=params)
