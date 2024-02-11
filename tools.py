@@ -741,7 +741,7 @@ def create_xlsform_dpd():
         ("note", "NOTE_CALEG2", "Masukkan jumlah suara setiap calon legislatif DPD-I (Nomor 13-24).", "", "", "", ""),
         ("integer", "CALONDPD_13", "13. ANDRI PERKASA KANTAPRAWIRA, S.I.P., M.M", "yes", 0, "", ""),
         ("integer", "CALONDPD_14", "14. ANNIDA ALLIVIA", "yes", 0, "", ""),
-        ("integer", "CALONDPD_15", "15. O OGI SOS", "yes", 0, "", "")
+        ("integer", "CALONDPD_15", "15. O OGI SOS", "yes", 0, "", ""),
         ("integer",	"CALONDPD_16", "16. ARIF RAHMAN HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_17", "17. A. TAUPIK HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_18", "18. K.H. A WAWAN GHOZALI", "yes", 0, "", ""),
@@ -760,7 +760,7 @@ def create_xlsform_dpd():
         ("integer",	"CALONDPD_27", "27. DJUMONO", "yes", 0, "", ""),
         ("integer",	"CALONDPD_28", "28. EDI KUSDIANA, S.A.P., M.M.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_29", "29. Ir. ELAN HERYANTO", "yes", 0, "", ""),
-        ("integer",	"CALONDPD_30", "30. Dra. Ir. Hj. ENI SUMARNI, M.Kes.", "yes", 0, "", "")
+        ("integer",	"CALONDPD_30", "30. Dra. Ir. Hj. ENI SUMARNI, M.Kes.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_31", "31. ERNAWATY TAMPUBOLON, S.T., M.Th.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_32", "32. Dr. HAIDAN S.Pd.I., S.H., M.Ag.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_33", "33. HENDRIK KURNIAWAN, S.Pd.I", "yes", 0, "", ""),
@@ -779,7 +779,7 @@ def create_xlsform_dpd():
         ("integer",	"CALONDPD_42", "42. MUHAMMAD YAMIN, M.H.", "yes", 0, "", ""),
         ("integer",	"CALONDPD_43", "43. MULYADI ELHAN ZAKARIA", "yes", 0, "", ""),
         ("integer",	"CALONDPD_44", "44. RIA SUGIAT, S.H.", "yes", 0, "", ""),
-        ("integer",	"CALONDPD_45", "45. RIFKI KARTINI", "yes", 0, "", "")
+        ("integer",	"CALONDPD_45", "45. RIFKI KARTINI", "yes", 0, "", ""),
         ("integer",	"CALONDPD_46", "46. ROBBY MAULANA ZULKARNAEN", "yes", 0, "", ""),
         ("integer",	"CALONDPD_47", "47. RUSDI HIDAYAT", "yes", 0, "", ""),
         ("integer",	"CALONDPD_48", "48. Dr. SITTI HIKMAWATTY, S.ST., M.Pd.", "yes", 0, "", ""),
