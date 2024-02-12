@@ -101,8 +101,8 @@ for port in range(17, num_endpoints + 17):
             json.dump(raw_data, json_file)
             json_file.write('\n')  # Add a newline to separate the JSON objects
 
-        # Split message
-        info = msg.lower().split('#')
+        # Split message and remove spaces
+        info = [part.strip() for part in msg.lower().split('#')]
 
         # Default Values
         error_type = None
